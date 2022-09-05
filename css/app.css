@@ -212,6 +212,9 @@
 .grey {
   color: var(--color-grey);
 }
+.pinky {
+  color: #ff3c8f;
+}
 .i-cloud:before {
   content: "\e659";
 }

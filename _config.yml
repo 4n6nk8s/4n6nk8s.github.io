@@ -71,6 +71,7 @@ category_map:
   RHCSA : Linux
   Forensics: Forensics
   Kubernetes: Kubernetes 
+  CyberDefenders: CyberDefenders
 tag_map:
 
 # Metadata elements

@@ -2510,89 +2510,11 @@ main >.inner {
   top: -10%;
   left: -10%;
 }
-.social .item.github::before {
-  background-color: #191717;
+.social .item.::before {
+  background-color: ;
 }
-.social .item.github i {
-  color: #191717;
-}
-.social .item.google::before {
-  background-color: oogl;
-}
-.social .item.google i {
-  color: oogl;
-}
-.social .item.twitter::before {
-  background-color: #00aff0;
-}
-.social .item.twitter i {
-  color: #00aff0;
-}
-.social .item.zhihu::before {
-  background-color: #1e88e5;
-}
-.social .item.zhihu i {
-  color: #1e88e5;
-}
-.social .item.music::before {
-  background-color: #e60026;
-}
-.social .item.music i {
-  color: #e60026;
-}
-.social .item.weibo::before {
-  background-color: #ea716e;
-}
-.social .item.weibo i {
-  color: #ea716e;
-}
-.social .item.about::before {
-  background-color: #3b5998;
-}
-.social .item.about i {
-  color: #3b5998;
-}
-.social .item.email::before {
-  background-color: #55acd5;
-}
-.social .item.email i {
-  color: #55acd5;
-}
-.social .item.facebook::before {
-  background-color: aceboo;
-}
-.social .item.facebook i {
-  color: aceboo;
-}
-.social .item.stackoverflow::before {
-  background-color: tack-overflo;
-}
-.social .item.stackoverflow i {
-  color: tack-overflo;
-}
-.social .item.youtube::before {
-  background-color: outub;
-}
-.social .item.youtube i {
-  color: outub;
-}
-.social .item.instagram::before {
-  background-color: nstagra;
-}
-.social .item.instagram i {
-  color: nstagra;
-}
-.social .item.skype::before {
-  background-color: kyp;
-}
-.social .item.skype i {
-  color: kyp;
-}
-.social .item.douban::before {
-  background-color: ouba;
-}
-.social .item.douban i {
-  color: ouba;
+.social .item. i {
+  color: ;
 }
 .social .item:focus i,
 .social .item:hover i {

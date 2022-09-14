@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 4n6 & k8seploy
+title: 4n6 & k8s
 subtitle: ''
 description: ''
 keywords:
@@ -69,7 +69,7 @@ index_generator:
 default_category: uncategorized
 category_map:
   RHCSA : Linux
-  Forensics: Forensics
+  Writeups: Writeups
   Kubernetes: Kubernetes 
   CyberDefenders: CyberDefenders
 tag_map:

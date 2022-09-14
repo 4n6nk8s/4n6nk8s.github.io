@@ -1,6 +1,7 @@
 ---
 title: CyberDefenders Writeup AfricanFalls
-date: 2022-09-06 11:29:37
+date: 2022-09-9 00:20:27
+
 tags:
 cover: https://cyberdefenders.org/media/terraform/AfricanFalls/a2.png
 categories:

@@ -2510,11 +2510,23 @@ main >.inner {
   top: -10%;
   left: -10%;
 }
-.social .item.::before {
-  background-color: ;
+.social .item.Adam::before {
+  background-color: #1e88e5;
 }
-.social .item. i {
-  color: ;
+.social .item.Adam i {
+  color: #1e88e5;
+}
+.social .item.Raf²::before {
+  background-color: #e60026;
+}
+.social .item.Raf² i {
+  color: #e60026;
+}
+.social .item.soteria::before {
+  background-color: #ffffff;
+}
+.social .item.soteria i {
+  color: #ffffff;
 }
 .social .item:focus i,
 .social .item:hover i {

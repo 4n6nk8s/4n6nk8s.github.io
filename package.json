@@ -16,6 +16,7 @@
     "hexo-algoliasearch": "^0.3.2",
     "hexo-autoprefixer": "^2.0.0",
     "hexo-deployer-git": "^3.0.0",
+    "hexo-feed": "^1.1.1",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-index": "^2.0.0",
@@ -25,6 +26,7 @@
     "hexo-renderer-multi-markdown-it": "^0.1.5",
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
+    "hexo-symbols-count-time": "^0.7.1",
     "hexo-theme-landscape": "^0.0.3",
     "markdown-it-container": "^3.0.0"
   }

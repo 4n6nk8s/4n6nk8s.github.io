@@ -6,28 +6,28 @@ date: 2022-09-15 13:55:57
 - site: Anas Cherni - n0s
   url: https://anas-cherni.me/
   desc: Professional Web pentester
-  image: https://scontent.ftun15-1.fna.fbcdn.net/v/t39.30808-6/242471939_3128782844019783_5998275402650105053_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=VCNZ0QL2iX8AX_nlv5g&_nc_ht=scontent.ftun15-1.fna&oh=00_AT9fpxaQo-MpE2AQH4wwSYrnOgoGFbKmWAhY_tHjjlNDcA&oe=63281017
+  image: https://media.licdn.com/dms/image/C4D03AQF9Nc58-THTtg/profile-displayphoto-shrink_800_800/0/1663873833507?e=1686182400&v=beta&t=YuU2iXHnwWyK6in6nercVN9NgFPn5n8HDCTLNOhWkLU
   color: "#2296fd"
 - site: Yassine Belkhadem - F1r3Cr4CK3r5
   desc: CTF write ups | Web3 | Web Attacks | UI/UX
   url: https://www.yassinebelkhadem.ninja/
-  image: https://www.yassinebelkhadem.ninja/_next/image?url=%2Fassets%2FLeftSection.png&w=640&q=75
+  image: https://media.licdn.com/dms/image/C5603AQHEm0AAAYFLMw/profile-displayphoto-shrink_800_800/0/1635092972861?e=1686182400&v=beta&t=SZ9CDP07O_W5ZcOeNkTXrewT4Lf_J9QPCgIA4ZMOCic
   color: "#de2336"
 - site: Med Ali Ouachani - IR0NBYTE
   desc: Competetive Programmer | Reverse Engineer
   url: https://ironbyte.me/
-  image: https://media-exp1.licdn.com/dms/image/C4E03AQEgcwaXqt9Hyw/profile-displayphoto-shrink_800_800/0/1649604013112?e=1668643200&v=beta&t=1LZEymvjNswuqsNm2t9qbDaEVvQEynYEDcvbFDSN1cE
+  image: https://media.licdn.com/dms/image/D4D03AQFOKVL6P8MiGw/profile-displayphoto-shrink_800_800/0/1671909496742?e=1686182400&v=beta&t=IxZV4QtI8CPaF2IGieaPI7o0lafIe1pS6lLmL2LstW4
   color: "#02bf1b"
 - site: Rania Midaoui - Mida0ui
   desc: Binary Exploitation | SysAdmin | OSINT | MISC
   url: https://www.linkedin.com/in/rania-midaoui-b0163a1bb/
-  image: https://media-exp1.licdn.com/dms/image/C4D03AQHOP8zn9x9nKw/profile-displayphoto-shrink_800_800/0/1643659005590?e=1668643200&v=beta&t=FV5YWMygs2bbclfvgFIUtPgjIedq8tGiKWxopxK2_yU
+  image: https://media.licdn.com/dms/image/C4D03AQHOP8zn9x9nKw/profile-displayphoto-shrink_800_800/0/1643659005590?e=1686182400&v=beta&t=Ub5xJZEwwWFXVAK1L66vMOIkLJVvzZrEfuUq3DrrTKs
   color: "#ff0378"
   
-- site: Iyed Mejri | t0m7r00z
-  desc: Web Exploitation | PWN | REV 
-  url: https://github.com/t0m7r00z
-  image: https://avatars.githubusercontent.com/u/64170866?v=4
+- site: NieMand 
+  desc: Web3 Developer | DevOps & Infra Guru
+  url: https://www.hmlndr.me
+  image: https://pbs.twimg.com/profile_images/1607462313182756867/WHEAVH9d_400x400.jpg
   color: "#de2336"
 
 - site: Yassine Belarbi | SSONEDE
@@ -39,12 +39,12 @@ date: 2022-09-15 13:55:57
 - site: Med Mongi Saidane | M0ngi
   desc: Hacker.
   url: https://github.com/M0ngi
-  image: https://scontent.ftun15-1.fna.fbcdn.net/v/t39.30808-6/272126469_1871818466353387_5788356545780499613_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UTTuLiA2BdAAX-ZYx-C&tn=-jHp7zmU3X9VykkR&_nc_ht=scontent.ftun15-1.fna&oh=00_AT_PVcSWhN6viQZSgT0MRWutsSc4NTndgC_aVkeFEDI01g&oe=6328E9D7
+  image: https://media.licdn.com/dms/image/D4E03AQEklYO57f843w/profile-displayphoto-shrink_800_800/0/1664393057972?e=1686182400&v=beta&t=ZAeL2hzTA0N0C8UaWP_3HcLj88-z_znuRjuoYYNJ2Wc
   color: "#3c4a44"
 
 - site: Med Ayadi | Ayadinou
   desc: Reverse Engineering | DevOps | SysAdmin
   url: https://github.com/ayadi-mohamed
-  image: https://scontent.ftun15-1.fna.fbcdn.net/v/t39.30808-6/273387852_1363032534147214_632905765907977397_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=pn2jqN_eRpwAX80yl3L&_nc_ht=scontent.ftun15-1.fna&oh=00_AT-OT5-RJSJTXwVltSPuEmTvbR_enIl7I2yU2P73Jnpgug&oe=632736A7
+  image: https://media.licdn.com/dms/image/D4D03AQEpsqzJb3o_Gg/profile-displayphoto-shrink_800_800/0/1676400655063?e=1686182400&v=beta&t=7vObbcwT35iidkbmbMZyE-tOI7VY8dmvi0VvJ5Rkcc8
   color: "#c300ff"
 {% endlinks %}

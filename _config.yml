@@ -107,6 +107,6 @@ theme: shoka
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type:    git
-  repo:    https://github.com/4n6nk8s/4n6nk8s.github.io #e.g. https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+  repo:    git@github.com:4n6nk8s/4n6nk8s.github.io.git #e.g. https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
   branch:  main        #branch name, default is 'master'
   message: deploy        #commit message, defaul

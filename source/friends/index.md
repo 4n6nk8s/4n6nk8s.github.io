@@ -16,7 +16,7 @@ date: 2022-09-15 13:55:57
 - site: Med Ali Ouachani - IR0NBYTE
   desc: Competetive Programmer | Reverse Engineer
   url: https://ironbyte.me/
-  image: https://media.licdn.com/dms/image/D4D03AQFOKVL6P8MiGw/profile-displayphoto-shrink_800_800/0/1671909496742?e=1686182400&v=beta&t=IxZV4QtI8CPaF2IGieaPI7o0lafIe1pS6lLmL2LstW4
+  image: https://media.licdn.com/dms/image/D4D03AQG3hq57kZBxLw/profile-displayphoto-shrink_800_800/0/1682755955732?e=1687996800&v=beta&t=bRuVUl381IJ8GOGAINyg5jlC1n-ZtDAvv6dmhXNohc0
   color: "#02bf1b"
 - site: Rania Midaoui - Mida0ui
   desc: Binary Exploitation | SysAdmin | OSINT | MISC

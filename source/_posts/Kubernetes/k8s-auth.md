@@ -1,8 +1,8 @@
 ---
-title: SSO-based authentication 
+title: SSO-based authentication mechanism for multi-clusters
 date: 2023-04-28 11:29:37
 tags:
-cover: https://kruschecompany.com/wp-content/uploads/2019/08/01-1280x595.png
+cover: https://i0.wp.com/cms.pingsafe.com/wp-content/uploads/2022/12/KSPM.png?fit=927%2C600&ssl=1
 categories:
 - [Kubernetes]
 #https://miro.medium.com/max/1400/0*E6s0y6uIDi9X68XB.png

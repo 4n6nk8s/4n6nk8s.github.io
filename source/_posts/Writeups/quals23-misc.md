@@ -19,6 +19,8 @@ Flag format: Securinets{Secrect}
 
 Author: **Raf²**
 
+Binary: [Download](https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/rafhide)
+
 This is a python version of what the binary can do : 
 
 ```python

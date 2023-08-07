@@ -25,16 +25,62 @@
 
   
 
-<link rel="canonical" href="http://example.com/2023/08/06/Writeups/quals23-misc/">
+<link rel="canonical" href="http://example.com/2023/08/06/Writeups/quals23/">
 
 
-<meta name="description" content="# Raf Hide  # Description:  My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you he">
+<meta name="description" content="# The CTF Securinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Securinets Quals CTF 23 Misc Challenges Writeup">
-<meta property="og:url" content="http://example.com/2023/08/06/Writeups/quals23-misc/index.html">
+<meta property="og:title" content="Securinets Quals CTF 23 Forensics &amp; Misc Challenges Writeup">
+<meta property="og:url" content="http://example.com/2023/08/06/Writeups/quals23/index.html">
 <meta property="og:site_name" content="4n6 &amp; k8s">
-<meta property="og:description" content="# Raf Hide  # Description:  My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you he">
+<meta property="og:description" content="# The CTF Securinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/eYBMvzh.jpg">
+<meta property="og:image" content="https://i.imgur.com/lAWQkqM.png">
+<meta property="og:image" content="https://i.imgur.com/y6i9bfK.png">
+<meta property="og:image" content="https://i.imgur.com/E1oNXEo.png">
+<meta property="og:image" content="https://i.imgur.com/geAQL42.png">
+<meta property="og:image" content="https://i.imgur.com/1J4A8Bx.png">
+<meta property="og:image" content="https://i.imgur.com/bH5fHr5.png">
+<meta property="og:image" content="https://i.imgur.com/6T7zVMC.png">
+<meta property="og:image" content="https://i.imgur.com/zalrPXh.png">
+<meta property="og:image" content="https://i.imgur.com/1Sfnhxu.png">
+<meta property="og:image" content="https://i.imgur.com/4x79Dni.png">
+<meta property="og:image" content="https://i.imgur.com/mfM1duI.png">
+<meta property="og:image" content="https://i.imgur.com/8ATiHDP.png">
+<meta property="og:image" content="https://i.imgur.com/GnecotB.png">
+<meta property="og:image" content="https://i.imgur.com/wIfONXj.png">
+<meta property="og:image" content="https://i.imgur.com/0QqjpLl.png">
+<meta property="og:image" content="https://i.imgur.com/W7p1CnE.png">
+<meta property="og:image" content="https://i.imgur.com/7kXO7nj.png">
+<meta property="og:image" content="http://example.com/2023/08/06/Writeups/quals23/images/https://d33wubrfki0l68.cloudfront.net/2475489eaf20163ec0f54ddc1d92aa8d4c87c96b/e7c81/images/docs/components-of-kubernetes.svg">
+<meta property="og:image" content="https://i.imgur.com/XEB64Su.png">
+<meta property="og:image" content="https://i.imgur.com/SanopKU.png">
+<meta property="og:image" content="https://i.imgur.com/c1mV0ef.png">
+<meta property="og:image" content="https://i.imgur.com/fu0HEsS.png">
+<meta property="og:image" content="https://i.imgur.com/jDkGJef.png">
+<meta property="og:image" content="https://i.imgur.com/Opesxe5.png">
+<meta property="og:image" content="https://i.imgur.com/tzWSbjW.png">
+<meta property="og:image" content="https://i.imgur.com/GONLlyG.png">
+<meta property="og:image" content="https://i.imgur.com/Qx1z5zy.png">
+<meta property="og:image" content="https://i.imgur.com/AgJlPlG.png">
+<meta property="og:image" content="https://i.imgur.com/MGjHNpu.png">
+<meta property="og:image" content="https://i.imgur.com/8KCPq36.png">
+<meta property="og:image" content="https://i.imgur.com/NGRW8VU.png">
+<meta property="og:image" content="https://i.imgur.com/wWzkTjZ.png">
+<meta property="og:image" content="https://i.imgur.com/t8T8lYY.png">
+<meta property="og:image" content="https://i.imgur.com/gAJWn0m.png">
+<meta property="og:image" content="https://i.imgur.com/hoZj5DU.png">
+<meta property="og:image" content="https://i.imgur.com/LH8W47T.png">
+<meta property="og:image" content="https://i.imgur.com/6JWtrGQ.png">
+<meta property="og:image" content="https://i.imgur.com/ReEeaE9.png">
+<meta property="og:image" content="https://i.imgur.com/NW9lTab.png">
+<meta property="og:image" content="https://i.imgur.com/VMADEqo.png">
+<meta property="og:image" content="https://i.imgur.com/X1drpyr.png">
+<meta property="og:image" content="https://i.imgur.com/ynNyJqX.png">
+<meta property="og:image" content="https://i.imgur.com/FxNDjWP.png">
+<meta property="og:image" content="https://i.imgur.com/Mhm1M63.png">
+<meta property="og:image" content="https://i.imgur.com/3tK5T2J.png">
 <meta property="og:image" content="https://i.imgur.com/QRKzGoO.png">
 <meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/video-gif.gif">
 <meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/000.png">
@@ -69,14 +115,14 @@
 <meta property="og:image" content="https://i.imgur.com/XmWhATI.png">
 <meta property="og:image" content="https://i.imgur.com/lTGDuFS.png">
 <meta property="article:published_time" content="2023-08-06T18:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-07T11:13:35.357Z">
+<meta property="article:modified_time" content="2023-08-07T11:55:23.337Z">
 <meta property="article:author" content="Raf² &amp; Adam">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/QRKzGoO.png">
+<meta name="twitter:image" content="https://i.imgur.com/eYBMvzh.jpg">
 
 
   <title>
-Securinets Quals CTF 23 Misc Challenges Writeup - Writeups |
+Securinets Quals CTF 23 Forensics & Misc Challenges Writeup - Writeups |
 Raf² & Adam = 4n6 & k8s</title>
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -104,7 +150,7 @@ Raf² & Adam = 4n6 & k8s</title>
         <div id="brand">
           <div class="pjax">
           
-  <h1 itemprop="name headline">Securinets Quals CTF 23 Misc Challenges Writeup
+  <h1 itemprop="name headline">Securinets Quals CTF 23 Forensics & Misc Challenges Writeup
   </h1>
   
 <div class="meta">
@@ -145,7 +191,7 @@ Raf² & Adam = 4n6 & k8s</title>
 
       </div>
       <div id="imgs" class="pjax">
-          <img src="https://i.imgur.com/7DVuoG0.png">
+          <img src="https://i.imgur.com/a72bPDt.png">
       </div>
     </header>
     <div id="waves">
@@ -175,7 +221,7 @@ Raf² & Adam = 4n6 & k8s</title>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/06/Writeups/quals23-misc/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/06/Writeups/quals23/">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/tobi.jpg">
@@ -190,9 +236,281 @@ Raf² & Adam = 4n6 & k8s</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <h1 id="raf-hide"><a class="markdownIt-Anchor" href="#raf-hide">#</a> Raf Hide</h1>
-<p><img data-src="https://i.imgur.com/QRKzGoO.png" alt=""></p>
+    <h1 id="the-ctf"><a class="markdownIt-Anchor" href="#the-ctf">#</a> The CTF</h1>
+<p>Securinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.</p>
+<p>We present four challenging tasks, two forensics involving Containerization and Kubernetes, Hiberfil.sys, Restore Point, and Crypto-currency Wallet, and two Misc involving Steganography and Reverse Engineering a set-top-box firmware and analyzing its memory dump.</p>
+<p>Congratulations to SKSD, r3kapig, Hexagon for earning the top 3 spots in the CTF, and we deliver a special apperciation to the Securinets masterminds for their hard work and dedication to make this event a huge success, and we hope to see you all in the finals.</p>
+<p>Scoreboard:</p>
+<p><img data-src="https://i.imgur.com/eYBMvzh.jpg" alt=""></p>
+<h1 id="the-betrayers"><a class="markdownIt-Anchor" href="#the-betrayers">#</a> The Betrayers</h1>
+<p><img data-src="https://i.imgur.com/lAWQkqM.png" alt=""></p>
 <h3 id="description"><a class="markdownIt-Anchor" href="#description">#</a> Description:</h3>
+<p>An IT company provides a critical service to customers. One day, the service is attacked by DDoS. The Attack is originated from within the company’s internal network, and that each compromised host was sending a large number of requests to the server.</p>
+<p>The attack occurred shortly after the company installed a new patch to one of its software programs. Every new version should be hosted by a special web server with DNS record in the private network but this time the new version is hosted by the Technical Director server!!!</p>
+<p>The Technical Director is in trouble and he said that is not the attacker!</p>
+<p>The strange thing is that the program is deleted directly after the blue team figure out the attack!</p>
+<p>We need to get a release from that version and figure out how the attack occur!</p>
+<blockquote>
+<p>The binary expect to do DDoS attack on specifc IP. In this challenge we changed the IP and the rate of send requests</p>
+</blockquote>
+<p>Author: <strong>Raf²</strong></p>
+<p>File: <span class="exturl" data-url="aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xUU5VbmQ0Q0VYWHJxQUM5Y252bFVFLUFXLWFlV0RzemQvdmlldz91c3A9c2hhcmluZw==">Download</span></p>
+<h3 id="write-up"><a class="markdownIt-Anchor" href="#write-up">#</a> Write-up</h3>
+<p>Ok Let’s figure out what is happen. We get the disk image of the Technical Director system. The system that host the new program patch. (It must not be this one)</p>
+<p>Let’s start figure out what softwares are installed and check the history of the system.</p>
+<p>Oh as expected there is a mail software. It’s thunderbird. We will check it later.<br>
+<img data-src="https://i.imgur.com/y6i9bfK.png" alt=""></p>
+<p>Let’s Check the browsing history of the system and check what is going on here! We found Edge only here!</p>
+<p>Go to  <code>C:\Users\Kong Office\AppData\Local\Edge\UserData\Default</code>  and check the  <code>History</code>  database</p>
+<p><img data-src="https://i.imgur.com/E1oNXEo.png" alt=""></p>
+<p>After checking every single link and search. we found searchs about whatsapp desktop how to install it and official whatsapp download website is visited.</p>
+<p><img data-src="https://i.imgur.com/geAQL42.png" alt=""></p>
+<p>Thunderbird is installed for sure. But still no clue for whatsapp for now. Let’s see what we have on the inbox now! It’s time to check the mails! To check the inbox you can go to  <code>C:\Users\Kong Office\AppData\Roaming\Thunderbird\Profiles\0ppw4tlt.default-release\ImapMail\imap.gmail.com</code>  and investigate the  <code>INBOX</code>  file</p>
+<p><img data-src="https://i.imgur.com/1J4A8Bx.png" alt=""></p>
+<p>You can open the file using any text editor to check the mails but it’s the worst way. you’ll find the attachements encoded to base 64 and many trashy details</p>
+<p>You’ll get an ugly view like this if you open it with vscode.<br>
+<img data-src="https://i.imgur.com/bH5fHr5.png" alt=""></p>
+<p>But you can choose any thunderbird inbox viewer available in the internet. I tried a random one and i got a better exeperience to understand what happen.</p>
+<p><img data-src="https://i.imgur.com/6T7zVMC.png" alt=""></p>
+<p>Let’s summerize what we found. One mail telling that the kubernetes cluster is updgraded successfully from the platform engineer, another one from a system adminstration telling the Technical Director about the security updates. Another one from  <code>Securinets INSAT</code>  asking for sponsorship to the National Cyber Security Congress! And the suspicision one is from a dummy mail  <code>4n6nk8s@gmail.com</code> . In this mail we found a clue!<br>
+A stranger tell the Technical Director about deploying a malicious binary and send a mega link! Ahhh Protected one</p>
+<p><img data-src="https://i.imgur.com/zalrPXh.png" alt=""></p>
+<p>The link lead you to a wordlist that have strong and secure passwords. The mail talks about subsystem!! What a subsystem? Is it a  <code>WSL</code>  ??</p>
+<p><img data-src="https://i.imgur.com/1Sfnhxu.png" alt=""></p>
+<p>and here we finished mail browser history and mail investigation. still the whatsapp thing! Where is whatsapp hide his data?? good question. Checking AppData don’t help us. We didn’t find any WhatsApp directory!</p>
+<p>After googling we found that there is some whatsapp version can store his data inside  <code>%AppData%\Local\Packages</code> . Let’s check that folder and Bingoo!! We found whatsapp directory! WhatsApp was installed here! Let’s see what we can do here!</p>
+<p><img data-src="https://i.imgur.com/4x79Dni.png" alt=""></p>
+<p>You can find some conversation inside  <code>messages.db</code>  file. It might be encrypted and it might be decrypted. Let’s try to open this database and see what we can find here!</p>
+<p><img data-src="https://i.imgur.com/mfM1duI.png" alt=""></p>
+<p>I am chocked!! Two employees were behind all this!!<br>
+Two employees hate the director and they want to be in a trouble!</p>
+<p>The attackers talks about encryption and subsystem password and they are shocked because the system is windows! and yes the mega decryption key is shared in this discussion. They send the mail to the director to make it in trouble!!</p>
+<p><img data-src="https://i.imgur.com/8ATiHDP.png" alt=""></p>
+<p>Let’s download that wordlist and check the powershell history commands! I am sure there is something there. Because I found Hyber-V directory in random place while investigating. The history is stored in  <code>%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history. txt</code></p>
+<p><img data-src="https://i.imgur.com/GnecotB.png" alt=""></p>
+<p>Yeah! Everything is cleared now! subsytem, subsystem! They are talking about WSL. WSL is installed here! and it used to host the malicious program! But what they does mean by encryption and the password. Mmmmm I guess we will face some cracking in the few next minutes!</p>
+<p>Let’s check WSL now! Where is windows store the WSL? Just check  <code>%userprofile%\AppData\Local\Packages</code></p>
+<p><img data-src="https://i.imgur.com/wIfONXj.png" alt=""></p>
+<p>Let’s mount this vhdx disk now in our Linux/WSL and check the files in this system. You can use  <code>libguestfs-tools</code>  to achieve this.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s:~$ sudo apt-get install libguestfs-tools</span><br></pre></td></tr></table></figure>
+<p>Then, you can mount now the wsl disk image:<br>
+<img data-src="https://i.imgur.com/0QqjpLl.png" alt=""></p>
+<p>We found a user named  <code>Kong</code>  and have a home directory. Let’s check his files and bash history!</p>
+<p><img data-src="https://i.imgur.com/W7p1CnE.png" alt=""></p>
+<p>Let’s start with  <code>.bash_history</code>  first. It’s my number one rule!<br>
+<img data-src="https://i.imgur.com/7kXO7nj.png" alt=""></p>
+<p>Wow! The attacker configure wsl.conf then install docker! Mmm He configure it to be boot with systemd!<br>
+Then he installed something called kind, After that he download  <code>kubectl</code> ! Kubectl??? Ah It’s  <code>Kubernetes</code>  time!</p>
+<p>But what is kind? Searching on it. I found that kind is Kubernetes inside Docker. It’s a lightweight kubernetes cluster.</p>
+<p>There is 3 yaml files. For sure there are worth to check! Let’s see what is inside these files!</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### k-config.yaml content ####</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Cluster</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">kind.x-k8s.io/v1alpha4</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line">  <span class="attr">podSubnet:</span> <span class="string">&quot;10.244.0.0/16&quot;</span></span><br><span class="line">  <span class="attr">serviceSubnet:</span> <span class="string">&quot;10.96.0.0/12&quot;</span></span><br><span class="line">  <span class="comment"># the default CNI will not be installed</span></span><br><span class="line">  <span class="attr">disableDefaultCNI:</span> <span class="literal">false</span></span><br><span class="line">           </span><br><span class="line"><span class="attr">nodes:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">role:</span> <span class="string">control-plane</span></span><br><span class="line">  <span class="comment"># add a mount from /path/to/my/files on the host to /files on the node</span></span><br><span class="line">  <span class="attr">extraMounts:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span> <span class="string">/etc/crio/crio.conf</span></span><br><span class="line">    <span class="attr">containerPath:</span> <span class="string">/etc/crio/crio.conf</span></span><br><span class="line">    <span class="comment"># optional: if set, the mount is read-only.</span></span><br><span class="line">    <span class="comment"># default false</span></span><br><span class="line">    <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># default false</span></span><br><span class="line">    <span class="attr">selinuxRelabel:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span> <span class="string">/etc/kubernetes</span></span><br><span class="line">    <span class="attr">containerPath:</span> <span class="string">/etc/kubernetes</span></span><br><span class="line">    <span class="comment"># optional: if set, the mount is read-only.</span></span><br><span class="line">    <span class="comment"># default false</span></span><br><span class="line">    <span class="attr">readOnly:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># default false</span></span><br><span class="line">    <span class="attr">selinuxRelabel:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span> <span class="string">/var/lib/netcd</span></span><br><span class="line">    <span class="attr">containerPath:</span> <span class="string">/var/lib/etcd</span></span><br><span class="line">    <span class="comment"># optional: if set, the mount is read-only.</span></span><br><span class="line">    <span class="comment"># default false</span></span><br><span class="line">    <span class="attr">readOnly:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># default false</span></span><br><span class="line">    <span class="attr">selinuxRelabel:</span> <span class="literal">false</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">role:</span> <span class="string">worker</span></span><br><span class="line">  <span class="attr">kubeadmConfigPatches:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">|</span></span><br><span class="line"><span class="string">    kind: JoinConfiguration</span></span><br><span class="line"><span class="string">    nodeRegistration:</span></span><br><span class="line"><span class="string">      kubeletExtraArgs:</span></span><br><span class="line"><span class="string">        node-labels: &quot;app-type=web-app&quot;</span></span><br><span class="line"><span class="string"></span>  <span class="attr">extraPortMappings:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">30999</span></span><br><span class="line">    <span class="attr">hostPort:</span> <span class="number">80</span></span><br><span class="line">    <span class="comment"># optional: set the bind address on the host</span></span><br><span class="line">    <span class="comment"># 0.0.0.0 is the current default</span></span><br><span class="line">    <span class="attr">listenAddress:</span> <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line">    <span class="comment"># optional: set the protocol to one of TCP, UDP, SCTP.</span></span><br><span class="line">    <span class="comment"># TCP is the default</span></span><br><span class="line">    <span class="attr">protocol:</span> <span class="string">TCP</span></span><br></pre></td></tr></table></figure>
+<p>It’s a kind cluster configuration file!! This fiel is used to declare the specification of your cluster! And as you see  <code>/etc/kubernetes</code>  and  <code>/var/lib/etcd</code>  are mounted. We have 2-node cluster and a  <code>extraPortMappings</code>  to expose a service. In addition there is node-labels on the worker-node</p>
+<blockquote>
+<p>This challenge requires some kubernetes knowledge. You must be familiar with the basics of the kubernetes. Like nodes, deployements, pods, services, etc…</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### content deploy.yaml ###</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">update-app</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">update-app</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">update-app</span></span><br><span class="line">  <span class="attr">strategy:</span> &#123;&#125;</span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">update-app</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">imagePullSecrets:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">regcred</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">image:</span> <span class="string">medrafk8s/kubersex</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">update-app</span></span><br><span class="line">        <span class="attr">resources:</span></span><br><span class="line">          <span class="attr">requests:</span></span><br><span class="line">            <span class="attr">memory:</span> <span class="string">&quot;64Mi&quot;</span></span><br><span class="line">            <span class="attr">cpu:</span> <span class="string">&quot;250m&quot;</span></span><br><span class="line">          <span class="attr">limits:</span></span><br><span class="line">            <span class="attr">memory:</span> <span class="string">&quot;128Mi&quot;</span></span><br><span class="line">            <span class="attr">cpu:</span> <span class="string">&quot;500m&quot;</span></span><br><span class="line">      <span class="attr">affinity:</span></span><br><span class="line">        <span class="attr">nodeAffinity:</span></span><br><span class="line">            <span class="attr">requiredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">                <span class="attr">nodeSelectorTerms:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="attr">matchExpressions:</span></span><br><span class="line">                    <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">app-type</span></span><br><span class="line">                      <span class="attr">operator:</span> <span class="string">In</span></span><br><span class="line">                      <span class="attr">values:</span></span><br><span class="line">                      <span class="bullet">-</span> <span class="string">web-app</span></span><br><span class="line">                      <span class="bullet">-</span> <span class="string">front-end</span></span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>This is a deployment manifest that pull a private image  <code>medrafk8s/kubersex</code>  using the imagePullSecrets fields! The nodeAffinity is used for some scheduling specification. In this example the deployment will be deployed in node with labels  <code>app-type=web-app</code></p>
+<p>Let’s summerize now! The attacker installed Kind to deploy the web app that hosts the malicious inside a kubernetes cluster!</p>
+<p>So our objective is to recover the webapp that contains the malicious binary! But how can we restore that container! It’s a private container! What we should to do?</p>
+<p>To get the private container we need to get the pull secret. The credential that allow us to pull the container image! The credential are stored inside a  <code>secret</code>  (Kubernetes Object).</p>
+<p>According to the bash history we have this commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">USER=XXXXXXXXXXXXXXXXXXXX</span><br><span class="line">PASSWORD=XXXXXXXXXXXXXXXXXXX</span><br><span class="line">SERVER=XXXXXXXXXXXXXXXXXX</span><br><span class="line">kubectl create secret docker-registry regcred --docker-server=<span class="variable">$SERVER</span> --docker-username=<span class="variable">$USER</span> --docker-password=<span class="variable">$PASSWORD</span></span><br><span class="line">kubectl get secrets</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The attacker store the credential inside environement and create a pull secret using  <code>kubectl</code>  command</p>
+</blockquote>
+<p>The only way to get the credential is to extract the secret from the  <code>etcd</code> . But We have a problem! The etcd is protected!</p>
+<p>Let’s Back to the bash history you’ll find that the attacker edit a  <code>kube-apiserver.yaml</code>  and  <code>enc.yaml</code> .</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### enc.yaml ###</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apiserver.config.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">EncryptionConfiguration</span></span><br><span class="line"><span class="attr">resources:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">resources:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">secrets</span></span><br><span class="line">    <span class="attr">providers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">identity:</span> &#123;&#125;</span><br><span class="line">      <span class="bullet">-</span> <span class="attr">secretbox:</span></span><br><span class="line">          <span class="attr">keys:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">key1</span></span><br><span class="line">              <span class="attr">secret:</span> <span class="string">&lt;BASE64</span> <span class="string">ENCODED&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Let’s talk a little about the  <code>Encryption Configuration</code>  in Kubernetes.</p>
+<p><img data-src="./images/https://d33wubrfki0l68.cloudfront.net/2475489eaf20163ec0f54ddc1d92aa8d4c87c96b/e7c81/images/docs/components-of-kubernetes.svg" alt=""></p>
+<p>As known. Etcd is a distributed key-value store that is used by Kubernetes to store and retrieve the configuration data for the cluster. The Kubernetes API server interacts with etcd to read and write configuration data, such as the current state of the cluster and the desired state. The etcd data store serves as the single source of truth for the Kubernetes cluster’s configuration data, and the API server ensures that this data is always up to date and consistent across the cluster.</p>
+<p>The API server accepts an argument  <code>--encryption-provider-config</code>  that controls how API data is encrypted in etcd. In other words, API server can store the data inside etcd but not in plain text! It’s encrypted to secure the data inside the database! for more details check this <span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvdGFza3MvYWRtaW5pc3Rlci1jbHVzdGVyL2VuY3J5cHQtZGF0YS8=">link</span></p>
+<p>So our mission now is to find the secret value of the  <code>EncryptionConfiguration</code>  to use it after restoring the etcd by setting up a new api server that can read the encrypted data from the  <code>etcd</code> .</p>
+<p><img data-src="https://i.imgur.com/XEB64Su.png" alt=""></p>
+<p>Getting back to the whatsapp discussion. The attacker use the same password for the encryption key and subsystem password!</p>
+<p>Bingo!! Crack time! We know that the encryption key must be 32 bytes. So this information will help us filtering the downloaded wordlist!</p>
+<p>Linux stores user passwords hashes in  <code>/etc/shadow</code> . Great, we have the hash and the wordlist! Let’s do it!</p>
+<p><img data-src="https://i.imgur.com/SanopKU.png" alt=""></p>
+<p>Let’s start filter out the passwords with 32 characters from the wordlist using grep and tail to pick from the bottom:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -E <span class="string">&#x27;^.&#123;32&#125;$&#x27;</span> passwords.txt | <span class="built_in">tail</span> -n 100000 &gt; pass.txt</span><br></pre></td></tr></table></figure>
+<p>Now it’s time to extract the user information from  <code>/etc/shadow</code>  and  <code>/etc/password</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep kong etc/passwd &gt; passwd.txt</span><br><span class="line">grep kong etc/shadow &gt; shadow.txt</span><br></pre></td></tr></table></figure>
+<p>Before start cracking using  <code>John The Ripper</code> . We need to combine the passwd and shadow into a format that john can read.  <code>unshadow</code>  can do this work!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unshadow passwd.txt shadow.txt &gt; crack-me.txt</span><br></pre></td></tr></table></figure>
+<p>Now our hash is ready for crack. Let’s use john with  <code>--format=crypt</code>  to specify that we are trying to crack yescrypt hash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john --wordlist=pass.txt crack-me.txt --format=crypt</span><br></pre></td></tr></table></figure>
+<p>After some minutes we got the password!! The password is :  <code>@a*Hd~u32@q1Db/LUiOFxC*W2THm5p*V</code></p>
+<p><img data-src="https://i.imgur.com/c1mV0ef.png" alt=""></p>
+<p>Now it’s time to resotre the  <code>etcd</code> . Restoring a Kubernetes cluster in case of a disaster can be accomplished using etcd snapshots. However, the process of restoring an etcd snapshot is not straightforward and requires expertise. Actually in kubernetes etcd can take snapshot automatically. So we will count on that.</p>
+<p>In this case i will use Kind to generate a lightweight cluster. In case you will use your own cluster you must to know that restoring etcd can lead you to lost your cluster data. So be careful!</p>
+<p>To keep it simple I’ll use the same configuration as  <code>k-config.yaml</code> .</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster --config=k-config.yaml</span><br><span class="line">Creating cluster <span class="string">&quot;kind&quot;</span> ...</span><br><span class="line"> ✓ Ensuring node image (kindest/node:v1.25.3) 🖼</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">kubectl cluster-info --context kind-kind</span><br><span class="line"></span><br><span class="line">Have a <span class="built_in">nice</span> day! 👋</span><br></pre></td></tr></table></figure>
+<p>In Kind each node will be represented as a container</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s:~$ docker ps</span><br><span class="line">CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS</span><br><span class="line">  NAMES</span><br><span class="line">eba4afe51855   kindest/node:v1.25.3   <span class="string">&quot;/usr/local/bin/entr…&quot;</span>   2 minutes ago   Up 2 minutes   127.0.0.1:43323-&gt;6443/tcp   kind-control-plane</span><br><span class="line">13d7b697ba1f   kindest/node:v1.25.3   <span class="string">&quot;/usr/local/bin/entr…&quot;</span>   2 minutes ago   Up 2 minutes   0.0.0.0:80-&gt;30999/tcp       kind-worker</span><br></pre></td></tr></table></figure>
+<p>After making sure that the api-server works correctly we need to add the  <code>Encryption Configuration</code>  to make sure that the api server can read the encrypted data after restoring etcd.</p>
+<p>Go and put this file on  <code>/etc/kubernetes/enc/enc.yaml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apiserver.config.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">EncryptionConfiguration</span></span><br><span class="line"><span class="attr">resources:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">resources:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">secrets</span></span><br><span class="line">    <span class="attr">providers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">identity:</span> &#123;&#125;</span><br><span class="line">      <span class="bullet">-</span> <span class="attr">secretbox:</span></span><br><span class="line">          <span class="attr">keys:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">key1</span></span><br><span class="line">              <span class="attr">secret:</span> <span class="string">QGEqSGR+dTMyQHExRGIvTFVpT0Z4QypXMlRIbTVwKlY=</span></span><br></pre></td></tr></table></figure>
+<p>Then go to  <code>/etc/kubernetes/manifests/api-server.yaml</code>  to add these lines.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint:</span> <span class="number">172.18</span><span class="number">.0</span><span class="number">.2</span><span class="string">:6443</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">component:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">tier:</span> <span class="string">control-plane</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--encryption-provider-config=/etc/kubernetes/enc/enc.yaml</span>  <span class="comment"># &lt;-- add this line</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">enc</span>                           <span class="comment"># &lt;-- add this line</span></span><br><span class="line">      <span class="attr">mountPath:</span> <span class="string">/etc/kubernetes/enc</span>      <span class="comment"># &lt;-- add this line</span></span><br><span class="line">      <span class="attr">readonly:</span> <span class="literal">true</span>                      <span class="comment"># &lt;-- add this line</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">enc</span>                             <span class="comment"># &lt;-- add this line</span></span><br><span class="line">    <span class="attr">hostPath:</span>                             <span class="comment"># &lt;-- add this line</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/kubernetes/enc</span>           <span class="comment"># &lt;-- add this line</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span>             <span class="comment"># &lt;-- add this line</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p>After changing the manifest the api-server will be stopped and down. If you did it corretly, you need to wait a few seconds until the api-server works again!</p>
+<p>After configuring the api-server correctly let’s take the content  <code>/var/lib/netcd</code>  and try to use the  <code>db</code>  as our snapshot that we want to restore it!</p>
+<p><img data-src="https://i.imgur.com/fu0HEsS.png" alt=""></p>
+<p>I suggest to copy  <code>db</code>  inside the control-plane node (in this case container). I will copy it to one of the extraMounts of kind.</p>
+<p>Now let’s open a shell inside the control-plane container:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it kind-control-plane bash</span><br></pre></td></tr></table></figure>
+<p>Now we need to use an utility called etcdctl that will help us to interact with the etcd server.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update </span><br><span class="line">apt install etcd-client</span><br></pre></td></tr></table></figure>
+<p>After install it succesfully. An important thing it must be done. Don’t skip this step! you must export an env variable to make etcdctl behave as we need!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ETCDTL_API=3</span><br></pre></td></tr></table></figure>
+<p>now it’s time to use this utility! There is a resotre command in this utility that allow us to restore the backup or the snapshot</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">etcdctl --endpoints=https://[etcd-server] \</span><br><span class="line">--cacert=&lt;path-to-ca-certification&gt; \</span><br><span class="line">--cert=&lt;path-to-etcd-server-cert&gt; \</span><br><span class="line">--key=&lt;path-to-etcd-server-key&gt; \</span><br><span class="line">--data-dir &lt;path-to-restored-data&gt; \ </span><br><span class="line">snapshot restore &lt;path-to-snapshot&gt;</span><br></pre></td></tr></table></figure>
+<p>You need to fill this arguments with your own. you can get theses information from  <code>/etc/kubernetes/manifests/etcd.yaml</code></p>
+<p>In my case the command it will be like this:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ETCDTL_API=3 etcdctl --endpoints=https://[127.0.0.1:2379] \</span><br><span class="line">--cacert=/etc/kubernetes/pki/etcd/ca.crt \</span><br><span class="line">--cert=/etc/kubernetes/pki/etcd/server.crt \</span><br><span class="line">--key=/etc/kubernetes/pki/etcd/server.key \</span><br><span class="line">--data-dir /var/lib/etcd-backup \</span><br><span class="line">snapshot restore ./db</span><br></pre></td></tr></table></figure>
+<p>You migth get an error or warning about hash stuff after running this command. Skip it! Let’s check if  <code>/var/lib/etcd-backup</code>  directory is created and if it contains  <code>member</code>  directory!</p>
+<p>If you got it! Then you are on the right way! Now it’s time to do the crazy thing! Let’s replace our new data placed in  <code>/var/lib/etcd-backup/member/snap</code>  to the original etcd database!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /var/lib/etcd-backup/member/snap/db /var/lib/etcd/member/snap/</span><br></pre></td></tr></table></figure>
+<p>Just wait few seconds! and try a kubectl command!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br><span class="line">NAME                  STATUS     ROLES           AGE   VERSION</span><br><span class="line">kind-control-plane    NotReady   &lt;none&gt;          51m   v1.25.3</span><br><span class="line">kind-worker           NotReady   &lt;none&gt;          51m   v1.25.3</span><br><span class="line">quals-control-plane   Ready      control-plane   26h   v1.25.3</span><br><span class="line">quals-worker          Ready      &lt;none&gt;          26h   v1.25.3</span><br></pre></td></tr></table></figure>
+<p>Bingo! It works fine! but as you see here we have nodes naming issues cause of the data of the etcd!</p>
+<p>Let’s check if we have a secret object or not!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get secrets</span><br><span class="line">NAME      TYPE                             DATA   AGE</span><br><span class="line">regcred   kubernetes.io/dockerconfigjson   1      26h</span><br></pre></td></tr></table></figure>
+<p>And Yes!!! We got our secret! Let’s now inspect the data inside it!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> kubectl get secret regcred -o jsonpath=<span class="string">&#x27;&#123;.data.\.dockerconfigjson&#125;&#x27;</span> | <span class="built_in">base64</span> -d</span><br><span class="line">&#123;<span class="string">&quot;auths&quot;</span>:&#123;<span class="string">&quot;docker.io&quot;</span>:&#123;<span class="string">&quot;username&quot;</span>:<span class="string">&quot;medrafk8s&quot;</span>,<span class="string">&quot;password&quot;</span>:<span class="string">&quot;dckr_pat_MLkRjYtjdk7dwT80W_dx3VTuac8&quot;</span>,<span class="string">&quot;auth&quot;</span>:<span class="string">&quot;bWVkcmFmazhzOmRja3JfcGF0X01Ma1JqWXRqZGs3ZHdUODBXX2R4M1ZUdWFjOA==&quot;</span>&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>And finally! The registry is  <code>docker.io</code> , the username is  <code>medrafk8s</code>  and the password is  <code>dckr_pat_MLkRjYtjdk7dwT80W_dx3VTuac8</code></p>
+<p>With this creds we can pull the container that host the malicious binary and analyse his traffic! Let’s do it!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s:~$ docker login docker.io -u medrafk8s -p dckr_pat_MLkRjYtjdk7dwT80W_dx3VTuac8</span><br><span class="line">WARNING! Using --password via the CLI is insecure. Use --password-stdin.</span><br><span class="line">Login Succeeded</span><br></pre></td></tr></table></figure>
+<p>Let’s pull this image now!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s:~$ docker pull medrafk8s/kubersex</span><br><span class="line">Using default tag: latest</span><br><span class="line">latest: Pulling from medrafk8s/kubersex</span><br><span class="line">c158987b0551: Pull complete</span><br><span class="line">1e35f6679fab: Pull complete</span><br><span class="line">cb9626c74200: Pull complete</span><br><span class="line">b6334b6ace34: Pull complete</span><br><span class="line">f1d1c9928c82: Pull complete</span><br><span class="line">9b6f639ec6ea: Pull complete</span><br><span class="line">ee68d3549ec8: Downloading [=======&gt;                                           ]  1.813MB/11.49MB</span><br><span class="line">4caa31e6cbc5: Download complete</span><br><span class="line">a1434f597582: Waiting</span><br></pre></td></tr></table></figure>
+<p>The 1st i used to do when I pull a container image in forensics challenges is to check the layers of the image!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s:~$ docker <span class="built_in">history</span> medrafk8s/kubersex</span><br><span class="line">IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT</span><br><span class="line">77a3b3f4c35c   13 minutes ago   /bin/sh -c <span class="comment">#(nop)  CMD [&quot;nginx&quot; &quot;-g&quot; &quot;daemon…   0B</span></span><br><span class="line">0b383b70426b   13 minutes ago   /bin/sh -c <span class="built_in">rm</span> Serial-Key.txt                    0B</span><br><span class="line">b6ca15406c7d   13 minutes ago   /bin/sh -c <span class="comment">#(nop)  EXPOSE 80                    0B</span></span><br><span class="line">64eaf6945cd1   13 minutes ago   /bin/sh -c <span class="comment">#(nop) COPY file:ed75fc1a725ff91b…   20B</span></span><br><span class="line">748d1b219207   13 minutes ago   /bin/sh -c <span class="comment">#(nop) COPY dir:48e5409ee398a470a…   5.4MB</span></span><br><span class="line">4937520ae206   6 weeks ago      /bin/sh -c <span class="built_in">set</span> -x     &amp;&amp; apkArch=<span class="string">&quot;<span class="subst">$(cat /etc…   29.6MB</span></span></span><br><span class="line"><span class="subst"><span class="string">&lt;missing&gt;      6 weeks ago      /bin/sh -c #(nop)</span>  ENV NJS_VERSION=0.7.12       0B</span></span><br><span class="line"><span class="string">&lt;missing&gt;      6 weeks ago      /bin/sh -c #(nop)  CMD [&quot;</span>nginx<span class="string">&quot; &quot;</span>-g<span class="string">&quot; &quot;</span>daemon…   0B</span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop)  STOPSIGNAL SIGQUIT           0B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop)  EXPOSE 80                    0B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop)  ENTRYPOINT [&quot;/docker-entr…   0B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop) COPY file:e57eef017a414ca7…   4.62kB</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop) COPY file:36429cfeeb299f99…   3.01kB</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop) COPY file:d4375883ed5db364…   276B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop) COPY file:5c18272734349488…   2.12kB</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop) COPY file:7b307b62e82255f0…   1.62kB</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="built_in">set</span> -x     &amp;&amp; addgroup -g 101 -S …   4.74MB</span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop)  ENV PKG_RELEASE=1            0B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop)  ENV NGINX_VERSION=1.25.1     0B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop)  LABEL maintainer=NGINX Do…   0B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop)  CMD [&quot;/bin/sh&quot;]              0B</span></span><br><span class="line">&lt;missing&gt;      6 weeks ago      /bin/sh -c <span class="comment">#(nop) ADD file:828b07e74c184e7f2…   7.05MB</span></span><br></pre></td></tr></table></figure>
+<p>This is a webserver! Something important is here. No one can ignore the  <code>Serial-Key.txt</code>  file<br>
+We will get it later! Let’s run the web app now</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s:~$ sudo docker run --name kubersex -p 81:80 medrafk8s/kubersex</span><br><span class="line">/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration</span><br><span class="line">/docker-entrypoint.sh: Looking <span class="keyword">for</span> shell scripts <span class="keyword">in</span> /docker-entrypoint.d/</span><br><span class="line">/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh</span><br><span class="line">10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf</span><br><span class="line">10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 <span class="keyword">in</span> /etc/nginx/conf.d/default.conf</span><br><span class="line">/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh</span><br><span class="line">/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh</span><br><span class="line">/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh</span><br><span class="line">/docker-entrypoint.sh: Configuration complete; ready <span class="keyword">for</span> start up</span><br><span class="line">2023/08/02 17:37:52 [notice] 1<span class="comment">#1: using the &quot;epoll&quot; event method</span></span><br><span class="line">2023/08/02 17:37:52 [notice] 1<span class="comment">#1: nginx/1.25.1</span></span><br><span class="line">2023/08/02 17:37:52 [notice] 1<span class="comment">#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4)</span></span><br></pre></td></tr></table></figure>
+<p>Mmm there is a Download button! Press it and you will get a binary! Bingo! This is the malicious release!</p>
+<p><img data-src="https://i.imgur.com/jDkGJef.png" alt="The web app"></p>
+<p>After checking the binary and run it, we found that the binary requires a serial key! Let’s recover that file!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s:~$ docker save medrafk8s/medraf &gt; image.tar </span><br><span class="line">raf@4n6nk8s:~$ tar -xf image.tar </span><br><span class="line">raf@4n6nk8s:~$ <span class="built_in">cd</span> aae4861ba6bde0fbe820ba547bbe794c7c7e9c8be14c8972a6691eaa584161bc</span><br><span class="line">raf@4n6nk8s:~$ tar -xf layer.tar &amp;&amp; <span class="built_in">ls</span></span><br><span class="line">Serial-Key.txt  VERSION  json  layer.tar</span><br></pre></td></tr></table></figure>
+<p>And this is the content of the file !</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">I will put the serial key in the container image in case you forget! YOU FOOOOL YOU USED TO FORGET IT! GO AND DESTROY THE SERVICE WITH THE BOSS HOST!</span><br><span class="line"></span><br><span class="line">KEY:</span><br><span class="line">KFTV-RCFL-VC5W-HX3X</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>At this point you can reverse the binary and get the flag! or patch the binary to change a IP server with your choice! In this step reversing is the main idea so i put a public IP of a reachable server to make the binary send packets when players decice to run it !</p>
+</blockquote>
+<p>Let’s continue:</p>
+<p>Run the binary again and insert that key! It seems the binary works! I bet this is the responsible binary for the DDoS attack! So, I will check the behavior of this binary and open Wireshark while this one is running!</p>
+<p><img data-src="https://i.imgur.com/Opesxe5.png" alt="Record Traffic with Wireshark"></p>
+<p>Mmmm this is http flow! Let’s check the requests!</p>
+<p><img data-src="https://i.imgur.com/tzWSbjW.png" alt="We got the flag!"></p>
+<p>Binggo we got the flag! The flag is on the http header</p>
+<p>FLAG:  <code>Securinets&#123;c03cefb79791e431011d0f86de9dd83aee67aebcec946bfefad00cd4807fc9c3&#125;</code></p>
+<h1 id="jackpot"><a class="markdownIt-Anchor" href="#jackpot">#</a> Jackpot</h1>
+<p><img data-src="https://i.imgur.com/GONLlyG.png" alt=""></p>
+<p>We were able to find a left-behind cranky old cartel laptop in hibernation state. We believe that this device can help us retrieve the cartel’s crypto-currency wallet and withdraw their future gains.</p>
+<p>We know that the cartel uses an intranet to communicate their news within couple of blocks in the city undergrounds.</p>
+<p>Provided this intellisense, can you win us the jackpot? Wrap your finding in Securinets as indicated below.</p>
+<p drug-enforcement-administration-for-the-win-style="">Flag format: Securinets</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9hZG1pZGEwdWk=">adm &amp; mida0ui</span></p>
+<h2 id="attachment"><a class="markdownIt-Anchor" href="#attachment">#</a> Attachment</h2>
+<p>Given a disk image,  <code>disk.img</code> . The disk image is a raw disk image, and can be investigated using FTK Imager.<br>
+<span class="exturl" data-url="aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xU3M0UVRRaTRYYlJYYlRmeTNGVTBuRGJxZVBGaHVSRkkvdmlldz91c3A9c2hhcmluZw==">https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing</span></p>
+<h2 id="writeup"><a class="markdownIt-Anchor" href="#writeup">#</a> Writeup</h2>
+<p>The disk image is a raw disk image, and can be investigated using FTK Imager. The disk image contains a single partition, which is a Windows XP installation.</p>
+<p>Looking at the root of the disk image, we can see a few interesting files:</p>
+<p><img data-src="https://i.imgur.com/Qx1z5zy.png" alt=""></p>
+<ul>
+<li><code>Documents and Settings</code>  - Contains the user profiles of the system</li>
+<li><code>Program Files</code>  - Contains the installed programs</li>
+<li><code>Windows</code>  - Contains the Windows installation files</li>
+<li><code>pagefile.sys</code>  - The page file of the system, aka swap file, which holds the memory of the system when it is not in use or when it is not enough RAM to hold the memory of the system.</li>
+<li><code>hiberfil.sys</code>  - The hibernation file of the system, which contains the memory of the system when it is hibernated.</li>
+<li><code>System Volume Information</code>  - Contains the shadow copies of the system, which is a backup of the system files. It is used to restore the system in case of a system failure. It is also used by the Windows Backup utility to create a backup of the system. It is also used by the Windows Restore utility to restore the system to a previous state. This folder is present in all disk images, people are usually not interested in it. However, it is very interesting in this case, as it contains a folder named  <code>_restore&#123;xxxxxx&#125;</code> . This folder contains a file named  <code>RPx</code> , this cleary a restore point of the system. We will investigate it later as well.</li>
+</ul>
+<p>and the rest of the stuff that would really find in any Windows disk…</p>
+<p>Let’s start with the fact that the laptop was in hibernation mode, we know for a fact that the hiberfil.sys stores the memory content at hibernation, maybe we can treat it as an actual memory and find the intranet chat!!?</p>
+<p>Googling a bit, I found this (Superuser question)[<span class="exturl" data-url="aHR0cHM6Ly9zdXBlcnVzZXIuY29tL3F1ZXN0aW9ucy82NjA2NDkvaG93LXRvLXJlYWQtd2luZG93cy1oaWJlcm5hdGlvbi1maWxlLWhpYmVyZmlsLXN5cy10by1leHRyYWN0LWRhdGE=">https://superuser.com/questions/660649/how-to-read-windows-hibernation-file-hiberfil-sys-to-extract-data</span>] and it says that if we convert the hiberfile.sys file to a raw image, we can use Volatility to analyze it!</p>
+<p>and this is the command to use, as indicated:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vol -f hiberfil.sys --profile WinXPSP3x86 imagecopy -O hiberfil.raw</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://i.imgur.com/AgJlPlG.png" alt=""></p>
+<p>Cool, we hope now we can use Volatility to analyze the hiberfil.raw file. Let’s start by checking the processes and commands history.</p>
+<p><img data-src="https://i.imgur.com/MGjHNpu.png" alt=""></p>
+<p>Cmdscan now maybe!</p>
+<p><img data-src="https://i.imgur.com/8KCPq36.png" alt=""></p>
+<p>There we go, we can see what they meant by the legacy, old school chat. They were using  <code>msg.exe</code>  to communicate with each other. This is a very old program, and it is used to send messages to other users in the same network. It is very similar to the LAN messenger that we found earlier, but it is a command line program.  <code>msg</code>  can also be used to transmit files as well.</p>
+<p>The chat goes with the description and indicates that our guy got some kind of password that was placed in a certain registry key and permanetly deleted it after.</p>
+<p>Now, let’s further investigate the programs now to build an understanding around this situation</p>
+<p><img data-src="https://i.imgur.com/NGRW8VU.png" alt=""></p>
+<p>We only see Chrome to be the only interesting thing in this disk evidence.</p>
+<p>We know the crypto-currency part might need some searching to know that Metamask the most famous crypto wallet is a browser extension!!</p>
+<p>And yeah, Metamask is being used in Chrome. Metamask is a browser extension that allows you to use Ethereum, Binance Chain, and more. It is a very popular extension, and it is used by a lot of people. Metamask gives you a wallet address, and you can use it to send and receive cryptocurrencies whether in the Ethereum network, BSC network, or custom networks. But an address is only the public key you use to send and receive, we are looking further than that, we want the private one to be able to control the wallet completely.</p>
+<p>Metamask Extension for Chrome</p>
+<p><img data-src="https://i.imgur.com/wWzkTjZ.png" alt=""></p>
+<p>Could there be an active wallet within Metamask? Let’s check it out.</p>
+<p>Usually the extension data is stored within the ‘Local Extension Settings’ folder. And as expected, that folder contains some interesting files.</p>
+<p><img data-src="https://i.imgur.com/t8T8lYY.png" alt=""></p>
+<p>The  <code>Local Extension Settings</code>  folder contains a folder named  <code>nkbihfbeogaeaoehlefnkodbefgpgknn</code> , which is the ID of the Metamask extension. This folder contains a file named 0000xx.ldb, which is a DB file. Let’s check it out.</p>
+<p>According to this <span class="exturl" data-url="aHR0cHM6Ly9ldGhlcmV1bS5zdGFja2V4Y2hhbmdlLmNvbS9xdWVzdGlvbnMvNTI2NTgvd2hlcmUtZG9lcy1tZXRhbWFzay1zdG9yZS10aGUtd2FsbGV0LXNlZWQtZmlsZS1wYXRo">Ethereum Stackexchange question</span>. We could be able to completely control the existing wallet if we have the password. Could the challenge be all about that? and how to get the wallet password?</p>
+<p>Yes it is possible, and we will get back to it later, for now, finding password is the priority!! We know it is a registry key, that was deleted.</p>
+<p>Let’s think how we can RESTORE it xD</p>
+<p>Is it the time, to investigate the  <code>_restore&#123;xxxxxx&#125;</code>  folder? right?</p>
+<p>We can make use of a VM, however (OP: says the disk must not be converted back to vmdk whether by using a different file format or breaking the boot files). This way we can’t use a VM to check the restore point. So, we have to do it manually. My idea is to spin my own Windows XP on VMware, you can get the ISO officially by Microsoft with serial number from the WayBackMachine SP3 and x86 of course. After that we create a dummy restore point and modify its files by copying the RP folders from  <code>System Volume Information</code>  and then we can proceed to perform a restore point to see what is inside. I hope you can understand what I mean here.</p>
+<p>(OP Note: for order I guess I will accept any provided order or make the user follow the order as shown in the leaked chat.)</p>
+<p>Let’s do it.</p>
+<ul>
+<li>Spinning a new Windows XP machine</li>
+</ul>
+<p><img data-src="https://i.imgur.com/gAJWn0m.png" alt=""></p>
+<ul>
+<li>Creating a dummy restore point or just get the disk UUID, anyways we need Windows to create a restore point folder for us, so let’s do it.</li>
+</ul>
+<p><img data-src="https://i.imgur.com/hoZj5DU.png" alt=""></p>
+<ul>
+<li>Copying the RP folders from the Disk image  <code>System Volume Information</code>  to the new VM’s  <code>System Volume Information</code></li>
+</ul>
+<p>Export the restore folder from System Volume Information to your desktop or some folder.</p>
+<p>Adjust these folder options on Windows XP VM</p>
+<p><img data-src="https://i.imgur.com/LH8W47T.png" alt=""></p>
+<p>Then use this command to gain access to the System Volume Information folder</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cacls <span class="string">&quot;C:\System Volume Information&quot;</span> /E /G Administrator:F</span><br></pre></td></tr></table></figure>
+<p>It can be administrator, Everyone or your specific VM username.</p>
+<p><img data-src="https://i.imgur.com/6JWtrGQ.png" alt=""></p>
+<p>Then copy the restore folder contents to the System Volume Information folder</p>
+<p>This is the current dummy restore point we made</p>
+<p><img data-src="https://i.imgur.com/ReEeaE9.png" alt=""></p>
+<p>We add the exported RP5 and RP6 folders from the disk image with them</p>
+<p>In each of the folders there is a  <code>drivetable.txt</code>  file that contains the old disk UUID, we need to replace it with the new one.</p>
+<ul>
+<li>Modifying Disk UUID in the restore point</li>
+</ul>
+<p>You can also modify the  <code>domain.txt</code>  since it contains the old user-id but I believe the Restore point utility can very much detect the change.</p>
+<ul>
+<li>Restoring the system like if it was a real restore point we made.</li>
+</ul>
+<p><img data-src="https://i.imgur.com/NW9lTab.png" alt=""></p>
+<p>We can see a new entry added called “restore_point”, so let’s proceed with it!</p>
+<p>This is the domain thing, hit ‘OK’</p>
+<p><img data-src="https://i.imgur.com/VMADEqo.png" alt=""></p>
+<p>We wait for a quick restart.</p>
+<p><img data-src="https://i.imgur.com/X1drpyr.png" alt=""></p>
+<p>And that’s a success!</p>
+<p>Let’s open the registry now, shall we?</p>
+<p><img data-src="https://i.imgur.com/ynNyJqX.png" alt=""></p>
+<p>And there we go, a key named password containing a string named deleteMe! Bingo!</p>
+<p>At this point, there is only one thing left, let’s get the flag!</p>
+<p>Remember that Ethereum stack exchange question I mentioned earlier? here is the link again, also bring the content of the ldb file’s vault which is near the word “keyring”, you can CTRL+F that in the ldb files and adjust the format if some letters are escaped or encoded because data is never lost, you can also upload the whole file to the <span class="exturl" data-url="aHR0cHM6Ly9tZXRhbWFzay5naXRodWIuaW8vdmF1bHQtZGVjcnlwdG9yLw==">tool</span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ldGhlcmV1bS5zdGFja2V4Y2hhbmdlLmNvbS9xdWVzdGlvbnMvNTI2NTgvd2hlcmUtZG9lcy1tZXRhbWFzay1zdG9yZS10aGUtd2FsbGV0LXNlZWQtZmlsZS1wYXRo">https://ethereum.stackexchange.com/questions/52658/where-does-metamask-store-the-wallet-seed-file-path</span>.</p>
+<p><img data-src="https://i.imgur.com/FxNDjWP.png" alt=""></p>
+<p><img data-src="https://i.imgur.com/Mhm1M63.png" alt=""></p>
+<p>Let’s get our flag now</p>
+<p><img data-src="https://i.imgur.com/3tK5T2J.png" alt=""></p>
+<p>Done, we have some critical information here. The seed phrase! We wrap it in Securinets</p>
+<p><code>Securinets&#123;female-fire-strong-accuse-spring-update-bird-exchange-home-embark-latin-mom&#125;</code></p>
+<p>Thanks for reading, we hope you enjoyed it, and we will be happy to hear your feedback and suggestions.</p>
+<p>GGs <strong>itunderground</strong> for solving this challenge</p>
+<h2 id="idea-and-final-words"><a class="markdownIt-Anchor" href="#idea-and-final-words">#</a> Idea and Final Words</h2>
+<p>Just wanted to use pagefile.sys, hiberfile.sys, the Metamask thing, and Restore points because nobody used them like this in a CTF. So don’t know if that’s a great thing or rather will make players frustrated. Yet, tried to make everything as clear as possible for the players to understand and enjoy the challenge as a whole.</p>
+<h1 id="raf-hide"><a class="markdownIt-Anchor" href="#raf-hide">#</a> Raf Hide</h1>
+<p><img data-src="https://i.imgur.com/QRKzGoO.png" alt=""></p>
+<h3 id="description-2"><a class="markdownIt-Anchor" href="#description-2">#</a> Description:</h3>
 <blockquote Secrect="">
 <p>My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you help me extract the flag?<br>
 Flag format: Securinets</p>
@@ -299,11 +617,11 @@ and 6! = 720 which is possible to deal with it using a python script. Let’s re
 </ul>
 <p>Flag formal: <strong>Securinets{show_name_00UP1234_DOWN1234_YYYYMMDD}</strong></p>
 <p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9hZG1pZGEwdWk=">adm &amp; mida0ui</span></p>
-<h2 id="attachment"><a class="markdownIt-Anchor" href="#attachment">#</a> Attachment</h2>
+<h2 id="attachment-2"><a class="markdownIt-Anchor" href="#attachment-2">#</a> Attachment</h2>
 <p>A file called  <code>dump.bin</code>  was provided in a zip. Weighing 8 MB. Dating back to February the 1st, 2020. 1:07 AM.</p>
 <p>Another file is what seems to be an updated firmware for the device,  <code>Firmware.bin</code>  weighing 4 MB. And dating back to August the 25th, 2020.</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVRHTkFPV0taWmJDelp1Vklta2xBMThJSF9jVXZ0a055P3VzcD1zaGFyaW5n">Download Link</span></p>
-<h1 id="analysis"><a class="markdownIt-Anchor" href="#analysis">#</a> Analysis</h1>
+<h2 id="analysis"><a class="markdownIt-Anchor" href="#analysis">#</a> Analysis</h2>
 <p>A Couch potato is a lazy guy that sits in front of the TV screen, indicating that we are dealing with a console, set-top-box STB or Digital Video Recorder DVR and not a PCI card satellite/Tuner card or a computer. The user mentioned that he was watching his favorite channel when he fall asleep which make it more likely an STB, or a receiver for simplicity.<br>
 This also means that the show name we are looking for was broadcasted in his favorite channel.</p>
 <p>The user also mentioned that the device failed him, which means that the device is not responding to the commands he is sending to it. Kind of talking about a control unit, or that’s clearly a remote control that has some keys malfunctioning, specifically the UP and DOWN arrow keys as we know.</p>
@@ -333,7 +651,7 @@ This also means that the show name we are looking for was broadcasted in his fav
 </ul>
 <h2 id="tools"><a class="markdownIt-Anchor" href="#tools">#</a> Tools</h2>
 <p>HexWorkshop / HxD Editor is a good tool to start with. It is a hex editor that can be used to view and edit files in hexadecimal and binary formats. It is a good tool to start with as it can be used to view the memory dump and search for strings. It can also be used to search for patterns and hex values.</p>
-<h2 id="writeup"><a class="markdownIt-Anchor" href="#writeup">#</a> Writeup</h2>
+<h2 id="writeup-2"><a class="markdownIt-Anchor" href="#writeup-2">#</a> Writeup</h2>
 <p>First, let’s investigate the dump file.</p>
 <p><code>NCRCBootloader</code>  is the start point, which is the bootloader used for these chipsets as indicated in the Hex Editor screen:</p>
 <ul>
@@ -425,7 +743,7 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
 <p>And there it is, the serial number, let’s query the IPTV validity.</p>
 <p><img data-src="https://i.imgur.com/lTGDuFS.png" alt=""></p>
 <p>And the last part of the flag is  <code>20141105</code></p>
-<h1 id="final-words"><a class="markdownIt-Anchor" href="#final-words">#</a> Final Words</h1>
+<h2 id="final-words"><a class="markdownIt-Anchor" href="#final-words">#</a> Final Words</h2>
 <p>Flag: <strong>Securinets{live_rugby_7s_00ff30cf_00ff8877_20141105}</strong></p>
 <p>GGs <strong>th3_r0n1ns</strong> for solving this challenge</p>
 
@@ -439,7 +757,7 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2023-08-07 12:13:35" itemprop="dateModified" datetime="2023-08-07T12:13:35+01:00">2023-08-07</time>
+    <time title="Modified: 2023-08-07 12:55:23" itemprop="dateModified" datetime="2023-08-07T12:55:23+01:00">2023-08-07</time>
   </span>
 </div>
 
@@ -481,14 +799,6 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
 
     </div>
     <div class="item right">
-      
-
-  <a href="/2023/08/06/Writeups/quals23-forensics/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.imgur.com&#x2F;7DVuoG0.png" title="Securinets Quals CTF 23 Forensics Challenges Writeup">
-  <span class="type">Next Post</span>
-  <span class="category"><i class="ic i-flag"></i> Writeups</span>
-  <h3>Securinets Quals CTF 23 Forensics Challenges Writeup</h3>
-  </a>
-
     </div>
 </div>
 
@@ -505,11 +815,11 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="Contents">
-          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#raf-hide"><span class="toc-number">1.</span> <span class="toc-text"> Raf Hide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#description"><span class="toc-number">1.0.1.</span> <span class="toc-text"> Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extract-all-the-frames-using-ffmpeg"><span class="toc-number">1.0.2.</span> <span class="toc-text"> Extract all the frames using ffmpeg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extract-data-from-each-frame-using-our-solver"><span class="toc-number">1.0.3.</span> <span class="toc-text"> Extract data from each frame using our solver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collect-the-pieces-and-recover-the-orginal-image"><span class="toc-number">1.0.4.</span> <span class="toc-text"> collect the pieces and recover the orginal image</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#couch-potato"><span class="toc-number">2.</span> <span class="toc-text"> Couch Potato</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#attachment"><span class="toc-number">2.1.</span> <span class="toc-text"> Attachment</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#analysis"><span class="toc-number">3.</span> <span class="toc-text"> Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#information-gathering"><span class="toc-number">3.1.</span> <span class="toc-text"> Information Gathering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resources"><span class="toc-number">3.2.</span> <span class="toc-text"> Resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tools"><span class="toc-number">3.3.</span> <span class="toc-text"> Tools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#writeup"><span class="toc-number">3.4.</span> <span class="toc-text"> Writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-show"><span class="toc-number">3.4.1.</span> <span class="toc-text"> Finding the show</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-keycodes"><span class="toc-number">3.4.2.</span> <span class="toc-text"> Finding the keycodes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-expiration-date"><span class="toc-number">3.4.3.</span> <span class="toc-text"> Finding the expiration date</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final-words"><span class="toc-number">4.</span> <span class="toc-text"> Final Words</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#the-ctf"><span class="toc-number">1.</span> <span class="toc-text"> The CTF</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#the-betrayers"><span class="toc-number">2.</span> <span class="toc-text"> The Betrayers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#description"><span class="toc-number">2.0.1.</span> <span class="toc-text"> Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#write-up"><span class="toc-number">2.0.2.</span> <span class="toc-text"> Write-up</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#jackpot"><span class="toc-number">3.</span> <span class="toc-text"> Jackpot</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#attachment"><span class="toc-number">3.1.</span> <span class="toc-text"> Attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#writeup"><span class="toc-number">3.2.</span> <span class="toc-text"> Writeup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#idea-and-final-words"><span class="toc-number">3.3.</span> <span class="toc-text"> Idea and Final Words</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#raf-hide"><span class="toc-number">4.</span> <span class="toc-text"> Raf Hide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#description-2"><span class="toc-number">4.0.1.</span> <span class="toc-text"> Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extract-all-the-frames-using-ffmpeg"><span class="toc-number">4.0.2.</span> <span class="toc-text"> Extract all the frames using ffmpeg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extract-data-from-each-frame-using-our-solver"><span class="toc-number">4.0.3.</span> <span class="toc-text"> Extract data from each frame using our solver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collect-the-pieces-and-recover-the-orginal-image"><span class="toc-number">4.0.4.</span> <span class="toc-text"> collect the pieces and recover the orginal image</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#couch-potato"><span class="toc-number">5.</span> <span class="toc-text"> Couch Potato</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#attachment-2"><span class="toc-number">5.1.</span> <span class="toc-text"> Attachment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#analysis"><span class="toc-number">5.2.</span> <span class="toc-text"> Analysis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#information-gathering"><span class="toc-number">5.3.</span> <span class="toc-text"> Information Gathering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resources"><span class="toc-number">5.4.</span> <span class="toc-text"> Resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tools"><span class="toc-number">5.5.</span> <span class="toc-text"> Tools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#writeup-2"><span class="toc-number">5.6.</span> <span class="toc-text"> Writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-show"><span class="toc-number">5.6.1.</span> <span class="toc-text"> Finding the show</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-keycodes"><span class="toc-number">5.6.2.</span> <span class="toc-text"> Finding the keycodes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-expiration-date"><span class="toc-number">5.6.3.</span> <span class="toc-text"> Finding the expiration date</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final-words"><span class="toc-number">5.7.</span> <span class="toc-text"> Final Words</span></a></li></ol></li></ol>
       </div>
       <div class="related panel pjax" data-title="Related">
         <ul>
-          <li><a href="/2022/09/12/Writeups/csaw2022/" rel="bookmark" title="CSAW'2022 Forensics Writeup">CSAW'2022 Forensics Writeup</a></li><li><a href="/2023/03/23/Writeups/ncsc2023/" rel="bookmark" title="NCSC'2023 Writeup Challenges">NCSC'2023 Writeup Challenges</a></li><li><a href="/2023/08/06/Writeups/quals23-forensics/" rel="bookmark" title="Securinets Quals CTF 23 Forensics Challenges Writeup">Securinets Quals CTF 23 Forensics Challenges Writeup</a></li><li class="active"><a href="/2023/08/06/Writeups/quals23-misc/" rel="bookmark" title="Securinets Quals CTF 23 Misc Challenges Writeup">Securinets Quals CTF 23 Misc Challenges Writeup</a></li>
+          <li><a href="/2022/09/12/Writeups/csaw2022/" rel="bookmark" title="CSAW'2022 Forensics Writeup">CSAW'2022 Forensics Writeup</a></li><li><a href="/2023/03/23/Writeups/ncsc2023/" rel="bookmark" title="NCSC'2023 Writeup Challenges">NCSC'2023 Writeup Challenges</a></li><li class="active"><a href="/2023/08/06/Writeups/quals23/" rel="bookmark" title="Securinets Quals CTF 23 Forensics & Misc Challenges Writeup">Securinets Quals CTF 23 Forensics & Misc Challenges Writeup</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="Overview">
@@ -523,7 +833,7 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">15</span>
+        <span class="count">14</span>
         <span class="name">posts</span>
       </a>
     </div>
@@ -579,12 +889,10 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
 
   <ul id="quick">
     <li class="prev pjax">
-        <a href="/2023/06/03/Kubernetes/post/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
     </li>
     <li class="up"><i class="ic i-arrow-up"></i></li>
     <li class="down"><i class="ic i-arrow-down"></i></li>
     <li class="next pjax">
-        <a href="/2023/08/06/Writeups/quals23-forensics/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
     </li>
     <li class="percent"></li>
   </ul>
@@ -621,7 +929,7 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/08/06/Writeups/quals23-misc/',
+    path: '2023/08/06/Writeups/quals23/',
     favicon: {
       show: "（●´3｀●）Goooood",
       hide: "(´Д｀)Booooom"

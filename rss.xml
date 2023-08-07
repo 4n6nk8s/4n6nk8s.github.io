@@ -9,11 +9,17 @@
         <lastBuildDate>Sun, 06 Aug 2023 19:00:00 +0100</lastBuildDate>
         <category>kubernetes</category>
         <item>
-            <guid isPermalink="true">http://example.com/2023/08/06/Writeups/quals23-forensics/</guid>
-            <title>Securinets Quals CTF 23 Forensics Challenges Writeup</title>
-            <link>http://example.com/2023/08/06/Writeups/quals23-forensics/</link>
+            <guid isPermalink="true">http://example.com/2023/08/06/Writeups/quals23/</guid>
+            <title>Securinets Quals CTF 23 Forensics &amp; Misc Challenges Writeup</title>
+            <link>http://example.com/2023/08/06/Writeups/quals23/</link>
             <pubDate>Sun, 06 Aug 2023 19:00:00 +0100</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;the-betrayers&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-betrayers&#34;&gt;#&lt;/a&gt; The Betrayers&lt;/h1&gt;
+            <description><![CDATA[ &lt;h1 id=&#34;the-ctf&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-ctf&#34;&gt;#&lt;/a&gt; The CTF&lt;/h1&gt;
+&lt;p&gt;Securinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.&lt;/p&gt;
+&lt;p&gt;We present four challenging tasks, two forensics involving Containerization and Kubernetes, Hiberfil.sys, Restore Point, and Crypto-currency Wallet, and two Misc involving Steganography and Reverse Engineering a set-top-box firmware and analyzing its memory dump.&lt;/p&gt;
+&lt;p&gt;Congratulations to SKSD, r3kapig, Hexagon for earning the top 3 spots in the CTF, and we deliver a special apperciation to the Securinets masterminds for their hard work and dedication to make this event a huge success, and we hope to see you all in the finals.&lt;/p&gt;
+&lt;p&gt;Scoreboard:&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://i.imgur.com/eYBMvzh.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;the-betrayers&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-betrayers&#34;&gt;#&lt;/a&gt; The Betrayers&lt;/h1&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://i.imgur.com/lAWQkqM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;description&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#description&#34;&gt;#&lt;/a&gt; Description:&lt;/h3&gt;
 &lt;p&gt;An IT company provides a critical service to customers. One day, the service is attacked by DDoS. The Attack is originated from within the company’s internal network, and that each compromised host was sending a large number of requests to the server.&lt;/p&gt;
@@ -184,7 +190,7 @@ We will get it later! Let’s run the web app now&lt;/p&gt;
 &lt;h2 id=&#34;attachment&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#attachment&#34;&gt;#&lt;/a&gt; Attachment&lt;/h2&gt;
 &lt;p&gt;Given a disk image,  &lt;code&gt;disk.img&lt;/code&gt; . The disk image is a raw disk image, and can be investigated using FTK Imager.&lt;br&gt;
 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xU3M0UVRRaTRYYlJYYlRmeTNGVTBuRGJxZVBGaHVSRkkvdmlldz91c3A9c2hhcmluZw==&#34;&gt;https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing&lt;/span&gt;&lt;/p&gt;
-&lt;h1 id=&#34;writeup&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#writeup&#34;&gt;#&lt;/a&gt; Writeup&lt;/h1&gt;
+&lt;h2 id=&#34;writeup&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#writeup&#34;&gt;#&lt;/a&gt; Writeup&lt;/h2&gt;
 &lt;p&gt;The disk image is a raw disk image, and can be investigated using FTK Imager. The disk image contains a single partition, which is a Windows XP installation.&lt;/p&gt;
 &lt;p&gt;Looking at the root of the disk image, we can see a few interesting files:&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://i.imgur.com/Qx1z5zy.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -277,18 +283,11 @@ We will get it later! Let’s run the web app now&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Securinets&amp;#123;female-fire-strong-accuse-spring-update-bird-exchange-home-embark-latin-mom&amp;#125;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Thanks for reading, we hope you enjoyed it, and we will be happy to hear your feedback and suggestions.&lt;/p&gt;
 &lt;p&gt;GGs &lt;strong&gt;itunderground&lt;/strong&gt; for solving this challenge&lt;/p&gt;
-&lt;h1 id=&#34;idea-and-final-words&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#idea-and-final-words&#34;&gt;#&lt;/a&gt; Idea and Final Words&lt;/h1&gt;
+&lt;h2 id=&#34;idea-and-final-words&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#idea-and-final-words&#34;&gt;#&lt;/a&gt; Idea and Final Words&lt;/h2&gt;
 &lt;p&gt;Just wanted to use pagefile.sys, hiberfile.sys, the Metamask thing, and Restore points because nobody used them like this in a CTF. So don’t know if that’s a great thing or rather will make players frustrated. Yet, tried to make everything as clear as possible for the players to understand and enjoy the challenge as a whole.&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">http://example.com/2023/08/06/Writeups/quals23-misc/</guid>
-            <title>Securinets Quals CTF 23 Misc Challenges Writeup</title>
-            <link>http://example.com/2023/08/06/Writeups/quals23-misc/</link>
-            <pubDate>Sun, 06 Aug 2023 19:00:00 +0100</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;raf-hide&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#raf-hide&#34;&gt;#&lt;/a&gt; Raf Hide&lt;/h1&gt;
+&lt;h1 id=&#34;raf-hide&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#raf-hide&#34;&gt;#&lt;/a&gt; Raf Hide&lt;/h1&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://i.imgur.com/QRKzGoO.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;description&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#description&#34;&gt;#&lt;/a&gt; Description:&lt;/h3&gt;
+&lt;h3 id=&#34;description-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#description-2&#34;&gt;#&lt;/a&gt; Description:&lt;/h3&gt;
 &lt;blockquote Secrect=&#34;&#34;&gt;
 &lt;p&gt;My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you help me extract the flag?&lt;br&gt;
 Flag format: Securinets&lt;/p&gt;
@@ -395,11 +394,11 @@ and 6! = 720 which is possible to deal with it using a python script. Let’s re
 &lt;/ul&gt;
 &lt;p&gt;Flag formal: &lt;strong&gt;Securinets{show_name_00UP1234_DOWN1234_YYYYMMDD}&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly90d2l0dGVyLmNvbS9hZG1pZGEwdWk=&#34;&gt;adm &amp;amp; mida0ui&lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&#34;attachment&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#attachment&#34;&gt;#&lt;/a&gt; Attachment&lt;/h2&gt;
+&lt;h2 id=&#34;attachment-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#attachment-2&#34;&gt;#&lt;/a&gt; Attachment&lt;/h2&gt;
 &lt;p&gt;A file called  &lt;code&gt;dump.bin&lt;/code&gt;  was provided in a zip. Weighing 8 MB. Dating back to February the 1st, 2020. 1:07 AM.&lt;/p&gt;
 &lt;p&gt;Another file is what seems to be an updated firmware for the device,  &lt;code&gt;Firmware.bin&lt;/code&gt;  weighing 4 MB. And dating back to August the 25th, 2020.&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVRHTkFPV0taWmJDelp1Vklta2xBMThJSF9jVXZ0a055P3VzcD1zaGFyaW5n&#34;&gt;Download Link&lt;/span&gt;&lt;/p&gt;
-&lt;h1 id=&#34;analysis&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#analysis&#34;&gt;#&lt;/a&gt; Analysis&lt;/h1&gt;
+&lt;h2 id=&#34;analysis&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#analysis&#34;&gt;#&lt;/a&gt; Analysis&lt;/h2&gt;
 &lt;p&gt;A Couch potato is a lazy guy that sits in front of the TV screen, indicating that we are dealing with a console, set-top-box STB or Digital Video Recorder DVR and not a PCI card satellite/Tuner card or a computer. The user mentioned that he was watching his favorite channel when he fall asleep which make it more likely an STB, or a receiver for simplicity.&lt;br&gt;
 This also means that the show name we are looking for was broadcasted in his favorite channel.&lt;/p&gt;
 &lt;p&gt;The user also mentioned that the device failed him, which means that the device is not responding to the commands he is sending to it. Kind of talking about a control unit, or that’s clearly a remote control that has some keys malfunctioning, specifically the UP and DOWN arrow keys as we know.&lt;/p&gt;
@@ -429,7 +428,7 @@ This also means that the show name we are looking for was broadcasted in his fav
 &lt;/ul&gt;
 &lt;h2 id=&#34;tools&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#tools&#34;&gt;#&lt;/a&gt; Tools&lt;/h2&gt;
 &lt;p&gt;HexWorkshop / HxD Editor is a good tool to start with. It is a hex editor that can be used to view and edit files in hexadecimal and binary formats. It is a good tool to start with as it can be used to view the memory dump and search for strings. It can also be used to search for patterns and hex values.&lt;/p&gt;
-&lt;h2 id=&#34;writeup&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#writeup&#34;&gt;#&lt;/a&gt; Writeup&lt;/h2&gt;
+&lt;h2 id=&#34;writeup-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#writeup-2&#34;&gt;#&lt;/a&gt; Writeup&lt;/h2&gt;
 &lt;p&gt;First, let’s investigate the dump file.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;NCRCBootloader&lt;/code&gt;  is the start point, which is the bootloader used for these chipsets as indicated in the Hex Editor screen:&lt;/p&gt;
 &lt;ul&gt;
@@ -521,7 +520,7 @@ converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché t
 &lt;p&gt;And there it is, the serial number, let’s query the IPTV validity.&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://i.imgur.com/lTGDuFS.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;And the last part of the flag is  &lt;code&gt;20141105&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id=&#34;final-words&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#final-words&#34;&gt;#&lt;/a&gt; Final Words&lt;/h1&gt;
+&lt;h2 id=&#34;final-words&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#final-words&#34;&gt;#&lt;/a&gt; Final Words&lt;/h2&gt;
 &lt;p&gt;Flag: &lt;strong&gt;Securinets{live_rugby_7s_00ff30cf_00ff8877_20141105}&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;GGs &lt;strong&gt;th3_r0n1ns&lt;/strong&gt; for solving this challenge&lt;/p&gt;
  ]]></description>

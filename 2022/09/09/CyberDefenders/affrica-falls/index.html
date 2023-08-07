@@ -1,0 +1,503 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2022/09/09/CyberDefenders/affrica-falls/">
+
+
+<meta name="description" content="This CTF challenge is from AfricaFalls Digital Forensics contest , We have disk image that have a lot of information like password, registries, browser history etc… We will investigate some useful inf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CyberDefenders Writeup AfricanFalls">
+<meta property="og:url" content="http://example.com/2022/09/09/CyberDefenders/affrica-falls/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="This CTF challenge is from AfricaFalls Digital Forensics contest , We have disk image that have a lot of information like password, registries, browser history etc… We will investigate some useful inf">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://imgur.com/YdY9w1L.png">
+<meta property="og:image" content="https://imgur.com/jL9EEDB.png">
+<meta property="og:image" content="https://imgur.com/uOJpYIM.png">
+<meta property="og:image" content="https://imgur.com/TuEyvM2.png">
+<meta property="og:image" content="https://imgur.com/GelvVNQ.png">
+<meta property="og:image" content="https://imgur.com/BmHa8m2.png">
+<meta property="og:image" content="https://imgur.com/UMN9Zbr.png">
+<meta property="og:image" content="https://imgur.com/OwOcsXB.png">
+<meta property="og:image" content="https://imgur.com/freR9Vd.png">
+<meta property="og:image" content="https://imgur.com/IAJ0GBZ.png">
+<meta property="og:image" content="https://imgur.com/eQ1U5w7.png">
+<meta property="article:published_time" content="2022-09-08T23:20:27.000Z">
+<meta property="article:modified_time" content="2023-04-29T14:18:39.811Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/YdY9w1L.png">
+
+
+  <title>
+CyberDefenders Writeup AfricanFalls - CyberDefenders |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">CyberDefenders Writeup AfricanFalls
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-09-09 00:20:27">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-09-09T00:20:27+01:00">2022-09-09</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://cyberdefenders.org/media/terraform/AfricanFalls/a2.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CyberDefenders/" itemprop="item" rel="index" title="In CyberDefenders"><span itemprop="name">CyberDefenders</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/09/CyberDefenders/affrica-falls/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>This CTF challenge is from AfricaFalls Digital Forensics contest , We have disk image that have a lot of information like password, registries, browser history etc…<br>
+We will investigate some useful informations! Be ready</p>
+<h1 id="challenge-information"><a class="markdownIt-Anchor" href="#challenge-information">#</a> Challenge Information</h1>
+<details class="info"><summary>Description</summary><div>
+<p>John Doe was accused of doing illegal activities. A disk image of his laptop was taken. Your task is to analyze the image and understand what happened under the hood.</p>
+</div></details>
+<p>Challenge Link &amp; Author</p>
+<div class="links"><div class="item" title="Challenge Link" style="--block-color:#2296fd;"><span class="exturl image" data-url="aHR0cHM6Ly9jeWJlcmRlZmVuZGVycy5vcmcvYmx1ZXRlYW0tY3RmLWNoYWxsZW5nZXMvNjY=" data-background-image="https://cyberdefenders.org/static/img/cyberdefenders-logo-white.png"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9jeWJlcmRlZmVuZGVycy5vcmcvYmx1ZXRlYW0tY3RmLWNoYWxsZW5nZXMvNjY=">Challenge Link</span>
+          <p class="desc">CyberDefenders - Brave</p>
+          </div></div><div class="item" title="Author - DFIRScience" style="--block-color:#fcc11c;"><span class="exturl image" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ERklSU2NpZW5jZQ==" data-background-image="https://pbs.twimg.com/profile_images/1517319188167204866/lgRHWtGk_400x400.jpg"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ERklSU2NpZW5jZQ==">Author - DFIRScience</span>
+          <p class="desc">DFIRScience Twitter Profile</p>
+          </div></div></div>
+<h1 id="walkthrough"><a class="markdownIt-Anchor" href="#walkthrough">#</a> Walkthrough</h1>
+<blockquote>
+<p>1- What is the MD5 hash value of the suspect disk?</p>
+</blockquote>
+<p>Just inspec the  <code>ad1.txt</code>  and you’ll find useful information about the disk image like the acquisition time and the checksum</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> DiskDrigger.ad1.txt </span><br><span class="line">Created By AccessData® FTK® Imager 4.5.0.3</span><br><span class="line"></span><br><span class="line">Case Information:</span><br><span class="line">Acquired using: ADI4.5.0.3</span><br><span class="line">...</span><br><span class="line">[Computed Hashes]</span><br><span class="line"> MD5 checksum:    9471e69c95d8909ae60ddff30d50ffa1</span><br><span class="line"> SHA1 checksum:   167aa08db25dfeeb876b0176ddc329a3d9f2803a</span><br><span class="line"></span><br><span class="line">Image information:</span><br><span class="line"> Acquisition started:   Tue Jun 15 12:28:20 2021</span><br><span class="line"> Acquisition finished:  Tue Jun 15 12:33:10 2021</span><br><span class="line"> Segment list:</span><br><span class="line">  D:\Users\Mawso3a\Desktop\DiskDrigger.ad1</span><br><span class="line"></span><br><span class="line">Image Verification Results:</span><br><span class="line"> Verification started:  Tue Jun 15 12:33:18 2021</span><br><span class="line"> Verification finished: Tue Jun 15 12:33:51 2021</span><br><span class="line"> MD5 checksum:    9471e69c95d8909ae60ddff30d50ffa1 : verified</span><br><span class="line"> SHA1 checksum:   167aa08db25dfeeb876b0176ddc329a3d9f2803a : verified</span><br></pre></td></tr></table></figure>
+<div class="note success">
+<p>Answer: 9471e69c95d8909ae60ddff30d50ffa1</p>
+</div>
+<blockquote>
+<p>2- What phrase did the suspect search for on 2021-04-29 18:17:38 UTC? (three words, two spaces in between)<br>
+We found that the user used a chrome as his main browser! So we decide to get the database that contains the history of browsing. We can inspect it with DB Browser SQLite<br>
+<img data-src="https://imgur.com/YdY9w1L.png" alt=""><br>
+After Opening the database you can search about the history and find the correct answer using the right timestamp</p>
+</blockquote>
+<p><img data-src="https://imgur.com/jL9EEDB.png" alt=""></p>
+<div class="note success">
+<p>Answer:  password cracking lists</p>
+</div>
+<blockquote>
+<p>3- What is the IPv4 address of the FTP server the suspect connected to?</p>
+</blockquote>
+<p>Wait man! FileZilla is installed in our system. I am sure that we will find the information in  <code>filezilla.xml</code></p>
+<p><img data-src="https://imgur.com/uOJpYIM.png" alt=""></p>
+<div class="note success">
+<p>Answer:  192.168.1.20</p>
+</div>
+<blockquote>
+<p>4- What date and time was a password list deleted in UTC? (YYYY-MM-DD HH:MM:SS UTC)</p>
+</blockquote>
+<p>This is EASY DUDE! just check the Recycle Bin ! You’ll find your target !<br>
+<img data-src="https://imgur.com/TuEyvM2.png" alt=""></p>
+<div class="note success">
+<p>Answer:  2021-04-29 18:22:17 UTC</p>
+</div>
+<blockquote>
+<p>5- How many times was Tor Browser ran on the suspect’s computer? (number only)</p>
+</blockquote>
+<p>I guess this question is tricky! where is tor man !!! OK calm down you’ll find  <code>lnk</code>  file about tor but i think it’s fake one ! Let’s try an LNK Parser. I’ll use  <code>ericzimmerman</code>  tool !</p>
+<p><img data-src="https://imgur.com/GelvVNQ.png" alt=""></p>
+<p>Wow firefox.exe in TOR LNK file! This is Joke</p>
+<div class="note success">
+<p>Answer:  0</p>
+</div>
+<blockquote>
+<p>6- What is the suspect’s email address?</p>
+</blockquote>
+<p>OK backing again to the browser history to check if the user visit a mailing website !<br>
+<img data-src="https://imgur.com/BmHa8m2.png" alt=""></p>
+<div class="note success">
+<p>Answer:   <span class="exturl" data-url="bWFpbHRvOmRyZWFtbWFrZXI4MkBwcm90b25tYWlsLmNvbQ==">dreammaker82@protonmail.com</span></p>
+</div>
+<blockquote>
+<p>7- What is the FQDN did the suspect port scan?</p>
+</blockquote>
+<p>He asked about port scan?? mmm I guess nmap is here ! Nmap are you here ?<br>
+<img data-src="https://imgur.com/UMN9Zbr.png" alt="" title="NMAP: YES I AM HERE !"></p>
+<p>Just i checked the PowerShell history. You’ll find it in  <code>AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine</code></p>
+<p><img data-src="https://imgur.com/OwOcsXB.png" alt=""></p>
+<div class="note success">
+<p>Answer:  dfir.science</p>
+</div>
+<blockquote>
+<p>8- What country was picture “20210429_152043.jpg” allegedly taken in?</p>
+</blockquote>
+<p>I tried to inspect the metadata of the image and i found GPS position information!</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exiftool 20210429_152043.jpg</span><br><span class="line">....</span><br><span class="line">....</span><br><span class="line">GPS Latitude                    : 16 deg 0<span class="string">&#x27; 0.00&quot; S</span></span><br><span class="line"><span class="string">GPS Longitude                   : 23 deg 0&#x27;</span> 0.00<span class="string">&quot; E</span></span><br><span class="line"><span class="string">Focal Length                    : 3.7 mm</span></span><br><span class="line"><span class="string">GPS Position                    : 16 deg 0&#x27; 0.00&quot;</span> S, 23 deg 0<span class="string">&#x27; 0.00&quot; E</span></span><br><span class="line"><span class="string">Light Value                     : 13.7</span></span><br></pre></td></tr></table></figure>
+<p>Ok let’s try to find the country using GPS Coordinates Finder</p>
+<p><img data-src="https://imgur.com/freR9Vd.png" alt=""></p>
+<div class="note success">
+<p>Answer:  Zambia</p>
+</div>
+<blockquote>
+<p>9- What is the parent folder name picture “20210429_151535.jpg” was in before the suspect copy it to “contact” folder on his desktop?</p>
+</blockquote>
+<p>Shellbags explorer will solve our problem here! But wait man ! What are ShellBag artifacts?<br>
+ <code>ShellBags</code>  are a popular artifact in Windows forensics often used to identify the existence of directories on local, network, and removable storage devices. ShellBags are stored as a highly nested and hierarchal set of subkeys in the UsrClass<br>
+This registyr hive will save us :  <code>[root]\Users\John Doe\AppData\Local\Microsoft\Windows\Usrclass.dat</code></p>
+<p>ٍ<img data-src="https://imgur.com/IAJ0GBZ.png" alt=""></p>
+<div class="note success">
+<p>Answer:  Camera</p>
+</div>
+<blockquote>
+<p>10- A Windows password hashes for an account are below. What is the user’s password?</p>
+</blockquote>
+<p>Just try an online hash cracker</p>
+<p>ٍ<img data-src="https://imgur.com/eQ1U5w7.png" alt=""></p>
+<div class="note success">
+<p>Answer:   AFR1CA!</p>
+</div>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-29 15:18:39" itemprop="dateModified" datetime="2023-04-29T15:18:39+01:00">2023-04-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/09/08/Kubernetes/private-docker-k8s/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;res.cloudinary.com&#x2F;practicaldev&#x2F;image&#x2F;fetch&#x2F;s--ne7pa20x--&#x2F;c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600&#x2F;https:&#x2F;&#x2F;thepracticaldev.s3.amazonaws.com&#x2F;i&#x2F;7xyqmfvmadyqu2girucz.jpg" title="Dockerize a website &amp; Pull it privately in k8s">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>Dockerize a website & Pull it privately in k8s</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2022/09/09/Kubernetes/nginx-ingress/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;imgur.com&#x2F;vC01Qdu.png" title="Deploy Nginx Ingress in Bare-metal Cluster">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>Deploy Nginx Ingress in Bare-metal Cluster</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#challenge-information"><span class="toc-number">1.</span> <span class="toc-text"> Challenge Information</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#walkthrough"><span class="toc-number">2.</span> <span class="toc-text"> Walkthrough</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/09/05/CyberDefenders/Phishy/" rel="bookmark" title="CyberDefenders Writeup  Phishy">CyberDefenders Writeup  Phishy</a></li><li><a href="/2022/09/06/CyberDefenders/brave/" rel="bookmark" title="CyberDefenders Writeup Brave">CyberDefenders Writeup Brave</a></li><li><a href="/2022/09/07/CyberDefenders/EscapeRoom/" rel="bookmark" title="CyberDefenders Writeup EscapeRoom">CyberDefenders Writeup EscapeRoom</a></li><li class="active"><a href="/2022/09/09/CyberDefenders/affrica-falls/" rel="bookmark" title="CyberDefenders Writeup AfricanFalls">CyberDefenders Writeup AfricanFalls</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/09/08/Kubernetes/private-docker-k8s/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/09/09/CyberDefenders/affrica-falls/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

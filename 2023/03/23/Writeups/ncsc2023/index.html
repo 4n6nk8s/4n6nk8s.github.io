@@ -1,0 +1,704 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2023/03/23/Writeups/ncsc2023/">
+
+
+<meta name="description" content="The National Cyber Security Congress (NCSC) is a three-day event that brings together cyber security enthusiasts and experts. The event features a wide range of activities, including workshops, talks,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NCSC&#39;2023 Writeup Challenges">
+<meta property="og:url" content="http://example.com/2023/03/23/Writeups/ncsc2023/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="The National Cyber Security Congress (NCSC) is a three-day event that brings together cyber security enthusiasts and experts. The event features a wide range of activities, including workshops, talks,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://imgur.com/LJslRYb.png">
+<meta property="og:image" content="https://i.imgur.com/i231apB.png">
+<meta property="og:image" content="https://i.imgur.com/q3GSPiL.png">
+<meta property="og:image" content="https://i.imgur.com/N4B9j4z.png">
+<meta property="og:image" content="https://i.imgur.com/P0hrYhX.png">
+<meta property="og:image" content="https://i.imgur.com/DWMzUMB.png">
+<meta property="og:image" content="https://i.imgur.com/1xA56pZ.png">
+<meta property="og:image" content="https://i.imgur.com/9a0GCzz.png">
+<meta property="og:image" content="https://i.imgur.com/hEG0dsu.png">
+<meta property="og:image" content="https://i.imgur.com/wB3m3QV.png">
+<meta property="og:image" content="https://i.imgur.com/k3uwJ0M.png">
+<meta property="og:image" content="https://i.imgur.com/wI2SQK7.png">
+<meta property="og:image" content="https://i.imgur.com/YVrQJqG.png">
+<meta property="og:image" content="https://i.imgur.com/5Enx08x.png">
+<meta property="og:image" content="https://imgur.com/WEzP4bO.png">
+<meta property="og:image" content="https://imgur.com/6HyLxUY.png">
+<meta property="og:image" content="https://imgur.com/MLrvWUk.png">
+<meta property="og:image" content="https://imgur.com/vnZLXyb.png">
+<meta property="og:image" content="https://imgur.com/xsRciDM.png">
+<meta property="og:image" content="https://imgur.com/5JQEtHj.png">
+<meta property="og:image" content="https://imgur.com/QTfwCZC.png">
+<meta property="og:image" content="https://imgur.com/GSgaCKF.png">
+<meta property="og:image" content="https://imgur.com/HZcwRyX.png">
+<meta property="og:image" content="https://imgur.com/OAyXmNQ.png">
+<meta property="og:image" content="https://imgur.com/oIzwhG8.png">
+<meta property="og:image" content="https://imgur.com/eD0vAq0.png">
+<meta property="og:image" content="https://imgur.com/DZqPB6p.png">
+<meta property="og:image" content="https://imgur.com/6PRgDFo.png">
+<meta property="og:image" content="https://imgur.com/MZ9tbCH.png">
+<meta property="og:image" content="https://imgur.com/yM0C7nL.png">
+<meta property="og:image" content="https://imgur.com/me4efrx.png">
+<meta property="og:image" content="https://imgur.com/gj4wGE9.png">
+<meta property="og:image" content="https://imgur.com/cpA2O6c.png">
+<meta property="og:image" content="https://imgur.com/dROW4SQ.png">
+<meta property="og:image" content="https://imgur.com/dr87PxX.png">
+<meta property="og:image" content="https://imgur.com/VLbBAGf.png">
+<meta property="og:image" content="https://imgur.com/O8uXhZV.png">
+<meta property="og:image" content="https://imgur.com/U69KQtM.png">
+<meta property="og:image" content="https://imgur.com/PCmO273.png">
+<meta property="og:image" content="https://imgur.com/GunNYhA.png">
+<meta property="og:image" content="https://imgur.com/vZrtZLd.png">
+<meta property="og:image" content="https://imgur.com/0PFJsCI.png">
+<meta property="og:image" content="https://imgur.com/hZQya2W.png">
+<meta property="og:image" content="https://imgur.com/6QTqehO.png">
+<meta property="og:image" content="https://imgur.com/1Eny78d.png">
+<meta property="og:image" content="https://imgur.com/uq3xAoV.png">
+<meta property="og:image" content="https://imgur.com/DuPq2Sp.png">
+<meta property="og:image" content="https://imgur.com/iFClk1V.png">
+<meta property="og:image" content="https://imgur.com/DhelAJU.png">
+<meta property="article:published_time" content="2023-03-23T10:33:37.000Z">
+<meta property="article:modified_time" content="2023-04-29T14:18:39.811Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/LJslRYb.png">
+
+
+  <title>
+NCSC'2023 Writeup Challenges - Writeups |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">NCSC'2023 Writeup Challenges
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2023-03-23 11:33:37">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-03-23T11:33:37+01:00">2023-03-23</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://imgur.com/LJslRYb.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Writeups/" itemprop="item" rel="index" title="In Writeups"><span itemprop="name">Writeups</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/23/Writeups/ncsc2023/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>The National Cyber Security Congress (NCSC) is a three-day event that brings together cyber security enthusiasts and experts. The event features a wide range of activities, including workshops, talks, conferences, and two exciting CTF competitions.</p>
+<p><img data-src="https://imgur.com/LJslRYb.png" alt=""></p>
+<p>As a technical team member, I had the chance to create challenges in Kubernetes, Digital Forensics, Misc, Hardware, and Game Hacking categories.</p>
+<p>The NCSC CTF provided a unique opportunity for cyber security enthusiasts to demonstrate their problem-solving abilities, teamwork, and technical proficiency in a fun and competitive environment. Overall, the event was an exciting and rewarding experience for all involved.</p>
+<p>In this blog, I will share some write-ups that players have requested!</p>
+<h1 id="digital-forensics-mokni-seals"><a class="markdownIt-Anchor" href="#digital-forensics-mokni-seals">#</a> Digital Forensics : Mokni &amp; Seals</h1>
+<p><img data-src="https://i.imgur.com/i231apB.png" alt=""></p>
+<p>We got a zip file! I bet that file is a memory dump! So i tried to run the volatility imageinfo plugin but it takes a long time. So I tried to figure out if this file is Linux memory dump or not!</p>
+<figure class="highlight bash"><figcaption><span>linux or win ?</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raf@4n6nk8s: strings data.raw | grep <span class="string">&quot;Linux version&quot;</span> </span><br><span class="line">Linux version 5.8.0-43-generic (buildd@lcy01-amd64-018) (gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0, GNU ld (GNU Binutils <span class="keyword">for</span> Ubuntu) 2.34) 49~20.04.1-Ubuntu SMP Fri Feb 5 09:57:56 UTC 2021 (Ubuntu 5.8.0-43.49~20.04.1-generic 5.8.18)</span><br></pre></td></tr></table></figure>
+<p>And yes it’s a Linux Memory dump! I guess its time to start finding/making a profile but let me check that is memory dump can be analyzed with a profile or not!</p>
+<figure class="highlight bash"><figcaption><span>checking</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strings data.raw | grep -i insmod       </span><br><span class="line">sudo insmod ./lime-5.8.0-43-generic.ko path=../../Linux64.mem format=raw</span><br><span class="line">sudo insmod ./lime-5.8.0-43-generic.ko <span class="string">&quot;path=../../Linux64.mem format=raw&quot;</span></span><br><span class="line">sudo insmod ./lime-5.8.0-43-generic.ko <span class="string">&quot;path=../../Linux64.mem format=raw&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Oh! The format is ram! which means that even if we get the correct profile volatility can’t analyze this memory dump! Strings time! The author want us to solve this mem dump using strings !</p>
+<p>Let’s try to figure out some command lines! Bash history! Let me show you this trick!</p>
+<figure class="highlight bash"><figcaption><span>extract bash history</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">strings data.raw | grep -Ei <span class="string">&quot;@*:~\\$&quot;</span>     </span><br><span class="line">raf-square@ubuntu:~$ vim /etc/containers/registries.conf</span><br><span class="line">raf-square@ubuntu:~$</span><br><span class="line">raf-square@ubuntu:~$ <span class="built_in">echo</span> <span class="string">&quot;This Is My Secret&quot;</span> &gt; secret.txt</span><br><span class="line">raf-square@ubuntu:~$</span><br><span class="line">raf-square@ubuntu:~$ podman login -u $(<span class="built_in">head</span> -n 2 secret.txt | <span class="built_in">tail</span> -n 1 | awk <span class="string">&#x27;&#123; print $4 &#125;&#x27;</span>) -p $(<span class="built_in">head</span> -n 3 secret.txt | <span class="built_in">tail</span> -n 1 | awk <span class="string">&#x27;&#123; print $4 &#125;&#x27;</span>)</span><br><span class="line">raf-square@ubuntu:~$ podman pull nginx</span><br><span class="line">^Craf-square@ubuntu:~$ <span class="built_in">cd</span> LiME/src/</span><br><span class="line">raf-square@ubuntu:~$ vim /etc/containers/registries.conf</span><br><span class="line">raf-square@ubuntu:~$</span><br><span class="line">raf-square@ubuntu:~$ vim /etc/containers/registries.conf</span><br><span class="line">raf-square@ubuntu:~$</span><br><span class="line">u:~$ podman login -u $(<span class="built_in">head</span> -n 2 secret.txt | <span class="built_in">tail</span> -n 1 | awk <span class="string">&#x27;&#123; print $4 &#125;&#x27;</span>) -p $(<span class="built_in">head</span> -n 3 secret.txt | <span class="built_in">tail</span> -n 1 | awk <span class="string">&#x27;&#123; print $4 &#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>Mmmm nice! now at least we got some commands and we got the user-name and host-name !<br>
+From these commands we can understand that the user edit  <code>/etc/containers/registries.conf</code> , then create a  <code>secret.txt</code> . Then logged in with podman using that secret.txt. But we don’t have any information about the content of the creds in these commands!.</p>
+<p>We have 2 methods to figure out what’s happen and get the creds!</p>
+<p>either running a strings and grepping on  <code>CMDLINE=podman login</code>  or grepping on  <code>This Is My Secret</code>  and check the lines before and after to see the content!</p>
+<figure class="highlight bash"><figcaption><span>extract creds</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strings data.raw | grep -Ei <span class="string">&quot;CMDLINE=podman login&quot;</span>       </span><br><span class="line">_CMDLINE=podman login -u 2ecf92b1-83a8-4355-8cb7-8354f4677894 -p fwO8Q~XTlBmpYoG43J~OusANA_azV02ZS3PuzaXb</span><br></pre></td></tr></table></figure>
+<p>OR</p>
+<figure class="highlight bash"><figcaption><span>extract creds</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">strings data.raw | grep -Ei -C 2 <span class="string">&quot;This Is My Secret&quot;</span> </span><br><span class="line"> Documents  LiME         Music     Public      Templates</span><br><span class="line">Desktop  Downloads  Linux64.mem  Pictures  secret.txt  Videos</span><br><span class="line">raf-square@ubuntu:~$ <span class="built_in">echo</span> <span class="string">&quot;This Is My Secret&quot;</span> &gt; secret.txt</span><br><span class="line">raf-square@ubuntu:~$</span><br><span class="line">fctt</span><br><span class="line">--</span><br><span class="line">application/octet-stream</span><br><span class="line">text/plain</span><br><span class="line">This Is My Secret</span><br><span class="line">Service principal ID: 2ecf92b1-83a8-4355-8cb7-8354f4677894</span><br><span class="line">Service principal password: fwO8Q~XTlBmpYoG43J~OusANA_azV02ZS3PuzaXb</span><br><span class="line">--</span><br></pre></td></tr></table></figure>
+<p>So the creds are  <code>2ecf92b1-83a8-4355-8cb7-8354f4677894:fwO8Q~XTlBmpYoG43J~OusANA_azV02ZS3PuzaXb</code></p>
+<p>But I didn’t think this is a normal creds for  <code>dockerhub</code>  or any public famous container registry! Espacially he pulled a container named nginx! I bet that nginx is a customized one and its a trick!</p>
+<p>Editing  <code>/etc/containers/registries.conf</code>  can confirm that change something! This configuration file used by the container runtime environment on Linux systems. This file specifies a list of container image registries that are trusted by the system and can be used to download container images.</p>
+<p>So let’s discover how to get the registry! Pulling nginx means he pulled the latest tag or at least he tried that! So let’s grep on  <code>nginx:latest</code></p>
+<figure class="highlight bash"><figcaption><span>extract registry</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">strings data.raw | grep -Ei <span class="string">&quot;nginx:latest&quot;</span>  </span><br><span class="line">Trying to pull qualsk8s.azurecr.io/nginx:latest...</span><br><span class="line">Trying to pull qualsk8s.azurecr.io/nginx:latest...</span><br><span class="line"><span class="string">&quot;, &quot;</span>qualsk8s.azurecr.io/nginx:latest<span class="string">&quot;) not found</span></span><br><span class="line"><span class="string">Trying to pull qualsk8s.azurecr.io/nginx:latest...</span></span><br><span class="line"><span class="string">Trying to pull qualsk8s.azurecr.io/nginx:latest...</span></span><br><span class="line"><span class="string">Trying to pull qualsk8s.azurecr.io/nginx:latest...</span></span><br></pre></td></tr></table></figure>
+<p>Bingo!  <code>qualsk8s.azurecr.io</code>  is the container registry! If you are an Azure guy you can get that from the previous step! when we get this output!</p>
+<figure class="highlight text"><figcaption><span>creds</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Service principal ID: 2ecf92b1-83a8-4355-8cb7-8354f4677894</span><br><span class="line">Service principal password: fwO8Q~XTlBmpYoG43J~OusANA_azV02ZS3PuzaXb</span><br></pre></td></tr></table></figure>
+<p>Ok it’s time to login and pull that image and run it!</p>
+<figure class="highlight bash"><figcaption><span>login and pull</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker login qualsk8s.azurecr.io -u 2ecf92b1-83a8-4355-8cb7-8354f4677894 -p fwO8Q~XTlBmpYoG43J~OusANA_azV02ZS3PuzaXb </span><br><span class="line"></span><br><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure>
+<p>After checking the image! I got that it’s a static web page so let’s run it!</p>
+<figure class="highlight bash"><figcaption><span>run nginx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name chall -p 80:80 -d nginx </span><br></pre></td></tr></table></figure>
+<p>After running this container we got this web-page and guess what!! There is a flag icon! Let’s check it !<br>
+<img data-src="https://i.imgur.com/q3GSPiL.png" alt=""></p>
+<p>This flag icon lead you to this link  <code>https://pastebin.com/vjFtjMga</code>  which is protected pastebin<br>
+how to get that password now! Let’s check the docker history!</p>
+<figure class="highlight bash"><figcaption><span>docker history</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mohamed@RafSquare:~$ docker <span class="built_in">history</span> qualsk8s.azurecr.io/nginx</span><br><span class="line">IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT</span><br><span class="line">093f65335d3a   13 days ago   ENTRYPOINT [<span class="string">&quot;nginx&quot;</span> <span class="string">&quot;-g&quot;</span> <span class="string">&quot;daemon off;&quot;</span>]         0B        buildkit.dockerfile.v0</span><br><span class="line">&lt;missing&gt;      13 days ago   RUN /bin/sh -c <span class="built_in">chmod</span> +r -R . <span class="comment"># buildkit         563kB     buildkit.dockerfile.v0</span></span><br><span class="line">&lt;missing&gt;      13 days ago   RUN /bin/sh -c <span class="built_in">mv</span> password.txt .hidden.txt <span class="comment">#…   11B       buildkit.dockerfile.v0</span></span><br><span class="line">&lt;missing&gt;      13 days ago   COPY ./ ./ <span class="comment"># buildkit                           563kB     buildkit.dockerfile.v0</span></span><br><span class="line">&lt;missing&gt;      3 weeks ago   RUN /bin/sh -c <span class="built_in">rm</span> -rf ./* <span class="comment"># buildkit            0B        buildkit.dockerfile.v0</span></span><br><span class="line">&lt;missing&gt;      3 weeks ago   WORKDIR /usr/share/nginx/html                   0B        buildkit.dockerfile.v0</span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="built_in">set</span> -x     &amp;&amp; apkArch=<span class="string">&quot;<span class="subst">$(cat /etc…   29.2MB</span></span></span><br><span class="line"><span class="subst"><span class="string">&lt;missing&gt;      5 weeks ago   /bin/sh -c #(nop)</span>  ENV NJS_VERSION=0.7.9        0B</span></span><br><span class="line"><span class="string">&lt;missing&gt;      5 weeks ago   /bin/sh -c #(nop)  CMD [&quot;</span>nginx<span class="string">&quot; &quot;</span>-g<span class="string">&quot; &quot;</span>daemon…   0B</span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop)  STOPSIGNAL SIGQUIT           0B</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop)  EXPOSE 80                    0B</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop)  ENTRYPOINT [&quot;/docker-entr…   0B</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop) COPY file:e57eef017a414ca7…   4.62kB</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop) COPY file:abbcbf84dc17ee44…   1.27kB</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop) COPY file:5c18272734349488…   2.12kB</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop) COPY file:7b307b62e82255f0…   1.62kB</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="built_in">set</span> -x     &amp;&amp; addgroup -g 101 -S …   4.45MB</span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop)  ENV PKG_RELEASE=1            0B</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop)  ENV NGINX_VERSION=1.23.3     0B</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop)  LABEL maintainer=NGINX Do…   0B</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop)  CMD [&quot;/bin/sh&quot;]              0B</span></span><br><span class="line">&lt;missing&gt;      5 weeks ago   /bin/sh -c <span class="comment">#(nop) ADD file:40887ab7c06977737…   7.05MB</span></span><br></pre></td></tr></table></figure>
+<p>And yes!! There is  <code>.hidden.txt</code>  that contain a password for sure ! let’s get that password!</p>
+<figure class="highlight bash"><figcaption><span>docker exec</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it 460fc5a977c5 <span class="built_in">cat</span> .hidden.txt</span><br><span class="line">vT56X19Qu3</span><br></pre></td></tr></table></figure>
+<p>We got this pastebin !</p>
+<p><img data-src="https://i.imgur.com/N4B9j4z.png" alt=""></p>
+<p>This is will lead us to word sheet that contains a hex data!</p>
+<p><img data-src="https://i.imgur.com/P0hrYhX.png" alt=""></p>
+<p>The hex data seams introducing spaces and tabs! I don’t care let’s decode it and see what’s will be!<br>
+I’ll try to convert it to a file using  <code>xxd</code>  and import that file to <span class="exturl" data-url="aHR0cDovL2Rjb2RlLmZy">dcode.fr</span></p>
+<figure class="highlight bash"><figcaption><span>xxd</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxd -r -p hex.txt &gt; result.txt</span><br></pre></td></tr></table></figure>
+<p>Yeah it’s a file that contains a lot of spaces! Its whitespaces</p>
+<p>Bingo! This is the flag  <code>Securinets&#123;208e5976c9d654e47d73ef44cabc272d&#125;</code></p>
+<h1 id="digital-forensics-recover-my-work"><a class="markdownIt-Anchor" href="#digital-forensics-recover-my-work">#</a> Digital Forensics: Recover my Work 😦</h1>
+<p><img data-src="https://i.imgur.com/DWMzUMB.png" alt=""></p>
+<p>We got a file named  <code>memory.dmp</code> . It’s a memory dump for sure! Let’s run imageinfo plugin to get our profile!</p>
+<figure class="highlight bash"><figcaption><span>profile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vol.py -f memory.dmp imageinfo</span><br><span class="line">Volatility Foundation Volatility Framework 2.6.1</span><br><span class="line">INFO    : volatility.debug    : Determining profile based on KDBG search...</span><br><span class="line">WARNING : volatility.debug    : Alignment of WindowsCrashDumpSpace64 is too small, plugins will be extremely slow</span><br><span class="line">WARNING : volatility.debug    : Alignment of WindowsCrashDumpSpace64 is too small, plugins will be extremely slow</span><br><span class="line">WARNING : volatility.debug    : Alignment of WindowsCrashDumpSpace64 is too small, plugins will be extremely slow</span><br><span class="line">WARNING : volatility.debug    : Alignment of WindowsCrashDumpSpace64 is too small, plugins will be extremely slow</span><br></pre></td></tr></table></figure>
+<p>But sadly we got this type of outpût! I bet that the suggested profile (in case it exists) will be wrong! Let’s know the exact profile with my own way! Let’s run strings the file and grep “service pack”</p>
+<figure class="highlight text"><figcaption><span>Extract info</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)</span><br></pre></td></tr></table></figure>
+<p>Cool, This build and service pack is supported by  <code>Win7SP1x64</code> ! I guess that imageinfo plugin got problem because the iso is customizated !</p>
+<p>Let’s start checking our memory dump! First thing should be checked is the running processes! I’ll use pstree for that thing!</p>
+<p><img data-src="https://i.imgur.com/1xA56pZ.png" alt=""></p>
+<p>MMMM intersting! Found chrome, firefox, outlook and RDP opened! what a trip! After digging on chrome history and firefox, I found rabbit holes and some links to wordlists! Bad Author (Me).</p>
+<p>Checking the consoles plugin too. Another rabbit hole! rabbit hole everywhere!</p>
+<p>It’s time to check and figure out that outlook process!<br>
+Outlook save the mails as pst or ost files! These files contains the mails data such as the message, attachements, sender/receiver information!</p>
+<p>So let’s try to extract these files !</p>
+<figure class="highlight bash"><figcaption><span>check files</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vol.py -f memory.dmp --profile=Win7SP1x64 filescan | grep -i pst$</span><br><span class="line">0x000000007d81a490      5      5 RW-r-- \Device\HarddiskVolume2\Users\Raf_Square\AppData\Local\Microsoft\Outlook\Outlook.pst</span><br><span class="line">0x000000007dd59340      5      5 RW-r-- \Device\HarddiskVolume2\Users\Raf_Square\AppData\Local\Microsoft\Outlook\Work Progress.pst</span><br><span class="line">0x000000007dd73220      1      0 R--rw- \Device\HarddiskVolume2\Users\Raf_Square\AppData\Local\Microsoft\Outlook\Work Progress.pst</span><br><span class="line">0x000000007e3f8b30      5      5 RW-r-- \Device\HarddiskVolume2\Users\Raf_Square\AppData\Local\Microsoft\Outlook\Forgot the password.pst</span><br><span class="line">0x000000007e5297a0      1      0 R--rw- \Device\HarddiskVolume2\Users\Raf_Square\AppData\Local\Microsoft\Outlook\Forgot the password.pst</span><br><span class="line">0x000000007e5eee60     30      0 RW-r-- \Device\HarddiskVolume2\Users\Raf_Square\AppData\Local\Microsoft\Outlook\Outlook.pst</span><br></pre></td></tr></table></figure>
+<p>After extracting the files using  <code>dumpfiles</code>  plugin and making sure that the files are safe and not corrupted. I opened them using a pst online viewer!</p>
+<p>The 1st mail i got it is from Adam! He send to me a zip file inside mega storage after our online meeting! I bet that zip is protected with that boring password</p>
+<p><img data-src="https://i.imgur.com/9a0GCzz.png" alt=""></p>
+<p>Ah my bad! The mega too is protected! We need the encryption key!</p>
+<p><img data-src="https://i.imgur.com/hEG0dsu.png" alt=""></p>
+<p>Let’s check the other mail! and as expected Adam forget to share the decryption key of the mega link to open the zip!</p>
+<p><img data-src="https://i.imgur.com/wB3m3QV.png" alt=""></p>
+<p>Bingo we got the zip! But it’s protected! Tried bruteforcing the password. But I failed!</p>
+<p>Mmmm Let’s think a little bit! The author said that he used to use the same password! We need to find another usage of that password to open the zip and get the flag!</p>
+<p>And It’s time to investigate the  <code>mstsc.exe</code>  or let’s just say the RDP! Remote Desktop?? Mmmm how to extract information from that thing?</p>
+<p>Let’s talk brievly! Extracting the memory part used by RDP can save our life! I’ll try to recover what the user see when he used RDP!!!</p>
+<p>Yes this possible dear reader, Don’t worry You’ll see how! Just make sure that you have  <code>Gimp</code></p>
+<p>Let’s now extract the memory part used by RDP process using the  <code>memdump</code>  plugin in volatility!</p>
+<figure class="highlight bash"><figcaption><span>memdump</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vol.py -f memory.dmp --profile=Win7SP1x64 memdump -p 360 -D .</span><br><span class="line">Volatility Foundation Volatility Framework 2.6.1</span><br><span class="line">************************************************************************</span><br><span class="line">Writing mstsc.exe [   360] to 360.dmp</span><br></pre></td></tr></table></figure>
+<p>After getting that file! Let’s change its extension from  <code>.dmp</code>  to  <code>.data</code>  and open that file with gimp!</p>
+<p><img data-src="https://i.imgur.com/k3uwJ0M.png" alt=""></p>
+<p>Now it’s time for focusing! Yeah focusing will save your time! Many people can’t figure or recover images quickly! But believe me focusing on the noise will help you recover the data in a short time!</p>
+<p>After 4 mins of playing with offset and width i got it!</p>
+<p>Check the offset and the width!</p>
+<p><img data-src="https://i.imgur.com/wI2SQK7.png" alt=""></p>
+<p>Ohhh man! The user was opened <span class="exturl" data-url="aHR0cHM6Ly9jdGYuc2VjdXJpbmV0cy50bg==">https://ctf.securinets.tn</span> (check it for know more information about our CTFs events xD ) and tried to secure a zip file with that shitty password!</p>
+<p>Finally This is the flag  <code>Securinets&#123;R3M0tE_DeSKtOp_1s_FunNy_!_!&#125;</code></p>
+<h1 id="hardware-liquid-display"><a class="markdownIt-Anchor" href="#hardware-liquid-display">#</a> Hardware: Liquid Display</h1>
+<p><img data-src="https://i.imgur.com/YVrQJqG.png" alt=""></p>
+<p>We got an image and a data file!<br>
+<img data-src="https://i.imgur.com/5Enx08x.png" alt=""></p>
+<p>The image contains an LCD 16x2 SPI connected to something called  <code>WOKWI LOGIC</code></p>
+<p>After some searching I got that this component is a logic analyzer. But wait!! What is that??</p>
+<p>A logic analyzer is an electronic instrument that captures and displays multiple signals from a digital system or digital circuit. A logic analyzer may convert the captured data into timing diagrams, protocol decodes, state machine traces…</p>
+<p><img data-src="https://imgur.com/WEzP4bO.png" alt=""></p>
+<p>As my friend said this is the hardware wireshark xD</p>
+<p>So we can understand now that this circuit capture the signals of each pin of the LCD and the data file is the capture file that contains the files!</p>
+<p>So after some searching we get how to open that data file (which is a ASCII text file, I didn’t recommend to analyse it as text file).</p>
+<p>You can check this <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLndva3dpLmNvbS9ndWlkZXMvbG9naWMtYW5hbHl6ZXI=">link</span> to get more information about the logic analyzer!</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zaWdyb2sub3JnL3dpa2kvRG93bmxvYWRz">PulseView</span> is an open source Logic Analyzer GUI belongs to The sigrok project that aims at creating a portable, cross-platform, Free/Libre/Open-Source signal analysis software suite that supports various device types</p>
+<p>I’ll use that Logic Analyzer GUI for this challenge!</p>
+<p><img data-src="https://imgur.com/6HyLxUY.png" alt=""></p>
+<p>Import the file data in this way! and let’s the show begin!</p>
+<p><img data-src="https://imgur.com/MLrvWUk.png" alt=""></p>
+<p>A lot of fun wait us right?! Don’t worry man! This is not that super hard! Just all what we need to do now is to simulate these signals manually! These signals are sent to the LCD and that LCD display something (It should be the flag!). So we need to understand how LCD works! I recommend to read the datasheet this thing!</p>
+<p>I will not re-write what the datasheet said! so read it! You should understand how the LCD dispaly chars!</p>
+<p><img data-src="https://imgur.com/vnZLXyb.png" alt=""></p>
+<p>Also don’t forget to check the instruction table and understand how these instruction works!</p>
+<p><img data-src="https://imgur.com/xsRciDM.png" alt=""></p>
+<p>Let’s just take an example of the 1st instruction! The  <code>Clear Display</code> . This instruction clear all the data and return the cursor to the original status! Ah yeah of course you must to understand that LCD have cursors, display modes …</p>
+<p>After understand how this LCD works it’s time to check how characters are written on that LCD!</p>
+<p><img data-src="https://imgur.com/5JQEtHj.png" alt=""></p>
+<p>This table will help us to convert the signals to chars and recover our flag!</p>
+<p>After reading the datasheet. You will understand that the D0 (that correspond to RS pin) can help you to understand when the display device clear the chars and reset the cursor or write something on the screen!</p>
+<p><img data-src="https://imgur.com/QTfwCZC.png" alt=""></p>
+<p>If you take a closer look you’ll get it! The guy who write the program write something and clear it then write another thing then delete it and so on!<br>
+<img data-src="https://imgur.com/GSgaCKF.png" alt=""></p>
+<p>So now it’s time to check the write blocks and check what that guy try to do! After reversing all the block i got the flag! It’s on the last block! Let me show you how I recover that data!</p>
+<p><img data-src="https://imgur.com/HZcwRyX.png" alt=""></p>
+<p>Using the characters table you can recover the flag! Mapping the signal and the Big table lead you to the flag!</p>
+<p>And This is will be our flag!  <code>Securinets&#123;LcD_1s_H4rD_!:(&#125;</code></p>
+<h1 id="game-hacking-platformer"><a class="markdownIt-Anchor" href="#game-hacking-platformer">#</a> Game Hacking: Platformer:</h1>
+<p><img data-src="https://imgur.com/OAyXmNQ.png" alt=""></p>
+<p>In this challenge we have a game made by unity! It’s 2D platformer game where the player can jump and run in the map! But where is the flag??<br>
+<img data-src="https://imgur.com/oIzwhG8.png" alt=""></p>
+<p>Mmmmm my sixth sense told me that the flag is hidden somewhere in the map and the player can’t reach it! Hack Time!!!</p>
+<p>Let’s change the player ability and let him can move in any place we want it. By disabling the collision and physics mechanism! Good bye gravitiy,Rigidbody,collisions!</p>
+<p>To do this let’s open  <code>Assembly-CSharp.dll</code>  located in  <code>Platformer_Data/Managed</code>  folder.</p>
+<p>Wow! This is the player controller code! that allow the player to move and the animation to be played and responsable for jumping and detect ground detection to deny player to jump many times on the air!</p>
+<p><img data-src="https://imgur.com/eD0vAq0.png" alt=""></p>
+<p>Boring mechanism!! Let me change this shitty code by mine! I’ll let the player move to any point he want!</p>
+<p><img data-src="https://imgur.com/DZqPB6p.png" alt=""><br>
+You can copy that code</p>
+<figure class="highlight csharp"><figcaption><span>change mechanism</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">this</span>.rb = <span class="keyword">base</span>.GetComponent&lt;Rigidbody2D&gt;();</span><br><span class="line">	<span class="keyword">this</span>.rb.isKinematic = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">this</span>.anim = <span class="keyword">base</span>.GetComponent&lt;Animator&gt;();</span><br><span class="line">	<span class="keyword">this</span>.mySpriteRenderer = <span class="keyword">base</span>.GetComponent&lt;SpriteRenderer&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Token: 0x06000005 RID: 5</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">float</span> axisRaw = Input.GetAxisRaw(<span class="string">&quot;Horizontal&quot;</span>);</span><br><span class="line">	<span class="built_in">float</span> verticalInput = Input.GetAxisRaw(<span class="string">&quot;Vertical&quot;</span>);</span><br><span class="line">	Vector3 movement = <span class="keyword">new</span> Vector3(axisRaw, verticalInput, <span class="number">0f</span>).normalized * <span class="number">10f</span> * Time.deltaTime;</span><br><span class="line">	<span class="keyword">base</span>.transform.Translate(movement);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After applying the changes our player can now go to any place we want! But i didn’t find the flag! Oh god! This is what i found!<br>
+<img data-src="https://imgur.com/6PRgDFo.png" alt=""></p>
+<p>I checked all the map and sadly nothing interesting 😦</p>
+<p>Let’s check the files again! Maybe we will find something!</p>
+<p><img data-src="https://imgur.com/MZ9tbCH.png" alt=""></p>
+<p>Oh man look here! I found that there is levels on this game! Let me back to the decompiled code!</p>
+<p><img data-src="https://imgur.com/yM0C7nL.png" alt=""></p>
+<p>Oh no! The game is opened on the 2nd level! Let’s change this room to “Level1” and Play again! And yes It’s a new Level</p>
+<p><img data-src="https://imgur.com/me4efrx.png" alt=""></p>
+<p>After moving right and left, I found the flag!</p>
+<p><img data-src="https://imgur.com/gj4wGE9.png" alt=""></p>
+<p>And Yes We did it! Just move right and left and collect the letters ! and you’ll get this one ! Wrap it in Securinets{}<br>
+<img data-src="https://imgur.com/cpA2O6c.png" alt=""></p>
+<p>Flag:  <code>Securinets&#123;Gam1ng_AnD_L0VE&#125;</code></p>
+<h1 id="misc-full-difference"><a class="markdownIt-Anchor" href="#misc-full-difference">#</a> Misc: Full Difference</h1>
+<p><img data-src="https://imgur.com/dROW4SQ.png" alt=""></p>
+<p>Full Difference, The difference will make a difference! What is that thing ?? we got 2 images with different type but same picture!<br>
+<img data-src="https://imgur.com/dr87PxX.png" alt=""></p>
+<p>Thinking a little bit can we understand what the author means! Full difference! It means that the pixels should be different a full difference! which means the Red,Green and Blue channels should be differents!</p>
+<p>“Will make a difference!” After extracting the different pixels we should calculate the difference between each channels ?? Mmmmm makes sense!</p>
+<figure class="highlight python"><figcaption><span>solver</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">im1=Image.<span class="built_in">open</span>(<span class="string">&quot;tobi.jpg&quot;</span>)</span><br><span class="line">im2=Image.<span class="built_in">open</span>(<span class="string">&quot;tobi.png&quot;</span>)</span><br><span class="line">pix2=im2.load()</span><br><span class="line">pix1=im1.load()</span><br><span class="line">width,height=im1.size</span><br><span class="line">result=<span class="string">&quot;&quot;</span></span><br><span class="line">data=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,width):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,height):</span><br><span class="line">        <span class="keyword">if</span> pix1[i,j] != pix2[i,j] <span class="keyword">and</span> pix1[i,j][<span class="number">0</span>] != pix2[i,j][<span class="number">0</span>] <span class="keyword">and</span> pix1[i,j][<span class="number">1</span>] != pix2[i,j][<span class="number">1</span>] <span class="keyword">and</span> pix1[i,j][<span class="number">2</span>] != pix2[i,j][<span class="number">2</span>]:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">3</span>):</span><br><span class="line">                data.append(<span class="built_in">chr</span>(<span class="built_in">abs</span>(pix1[i,j][k] - pix2[i,j][k])))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> char <span class="keyword">in</span> string.ascii_letters + string.digits + string.punctuation:</span><br><span class="line">        result+=char</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+<p>So the logic behind that code is to extract the pixels that have a full difference then calculate the difference between them. After that we convert the numbers to chars (should be printable!)</p>
+<p>This expression will give us the different pixels</p>
+<figure class="highlight python"><figcaption><span>exp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pix1[i,j] != pix2[i,j] <span class="keyword">and</span> pix1[i,j][<span class="number">0</span>] != pix2[i,j][<span class="number">0</span>] <span class="keyword">and</span> pix1[i,j][<span class="number">1</span>] != pix2[i,j][<span class="number">1</span>] <span class="keyword">and</span> pix1[i,j][<span class="number">2</span>] != pix2[i,j][<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>In addition this expression collect the result of calculation the diff between the 2 pixels of each image!</p>
+<figure class="highlight python"><figcaption><span>diff</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.append(<span class="built_in">chr</span>(<span class="built_in">abs</span>(pix1[i,j][k] - pix2[i,j][k])))</span><br></pre></td></tr></table></figure>
+<p>Then it’s time to convert it to printable data!</p>
+<figure class="highlight python"><figcaption><span>print</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> char <span class="keyword">in</span> string.ascii_letters + string.digits + string.punctuation:</span><br><span class="line">        result+=char</span><br></pre></td></tr></table></figure>
+<p>Running this code will give you this base64 encoding!  <code>dGgxNV8xNV9zaDB1TGRfYjNfaDRyRA==</code></p>
+<p>Bingo we got this statement!  <code>th15_15_sh0uLd_b3_h4rD</code> . Let’s wrap it in Securinets! Oh nooo! Didn’t work. I guess the challenge is not finished!</p>
+<p>We have 2 images! PNG and JPEG. Mmmm Let’s try to do some steganography on these images using the password/key that we got previously.</p>
+<p>The 1st idea in my mind is to try steghide! Nothing else! Let’s try it</p>
+<p><img data-src="https://imgur.com/VLbBAGf.png" alt=""></p>
+<p>YEEES MAAN! We got a flag.zip file! But wait it’s protected again 😦. I tried to brute force that thing using rockyou but failed !!! What is going on here! The flag is inside that zip what we should to do now!</p>
+<p>Let’s extract more information about the zip using  <code>7z</code>  utility</p>
+<figure class="highlight bash"><figcaption><span>7z</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">7z l  -slt flag.zip</span><br><span class="line"></span><br><span class="line">Path = flag.txt</span><br><span class="line">Folder = -</span><br><span class="line">Size = 40</span><br><span class="line">Packed Size = 52</span><br><span class="line">Modified = 2022-11-18 21:17:23</span><br><span class="line">Created =</span><br><span class="line">Accessed =</span><br><span class="line">Attributes = A</span><br><span class="line">Encrypted = +</span><br><span class="line">Comment =</span><br><span class="line">CRC = 4F639BBA</span><br><span class="line">Method = ZipCrypto Store</span><br><span class="line">Host OS = FAT</span><br><span class="line">Version = 20</span><br><span class="line">Volume Index = 0</span><br></pre></td></tr></table></figure>
+<p>Nice the flag.txt size is 40 bytes! So our flag is 40-chars strings! The encryption method is  <code>ZipCrypto</code> !</p>
+<p>Bingoo! This method is vulnerable! Let’s check how can we get our flag!</p>
+<p>After some searching we found a repository talking about “Crack legacy zip encryption with Biham and Kocher’s known plaintext attack.”</p>
+<p>I recommend to check this <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpbWNpODYvYmtjcmFjaw==">repo</span> and understand how this attack can be manipulated and how to install that tool!</p>
+<p>Let’s now start downloading the tool</p>
+<figure class="highlight bash"><figcaption><span>wget</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/kimci86/bkcrack/releases/download/v1.5.0/bkcrack-1.5.0-Linux.tar.gz</span><br></pre></td></tr></table></figure>
+<p>We need to recover the internal key that will allow us to extract the file!</p>
+<p>The attack requires at least 12 bytes of known plaintext. At least 8 of them must be contiguous. The larger the contiguous known plaintext, the faster the attack. In our case we have a flag.txt that contains  <code>Securinets&#123;*&#125;</code></p>
+<p>In our case we know 11 chars ( <code>Securinets&#123;</code> ) and the last char  <code>&#125;</code></p>
+<p>Let’s recover our key now!</p>
+<figure class="highlight bash"><figcaption><span>prepare our data</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -n <span class="string">&quot;Securinets&#123;&quot;</span> &gt; plaintext.txt</span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&quot;&#125;&quot;</span> | xxd <span class="comment"># 7d is the result</span></span><br></pre></td></tr></table></figure>
+<p>The attack requires the plain text content and in case there is another seperate bytes we can specify the offset and the byte value in hex</p>
+<p>Now time to work !</p>
+<figure class="highlight bash"><figcaption><span>get the key</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bkcrack-1.5.0-Linux/bkcrack -C flag.zip -c flag.txt -p plaintext.txt -x 39 7d </span><br><span class="line"></span><br><span class="line">bkcrack 1.5.0 - 2022-07-07</span><br><span class="line">[16:21:19] Z reduction using 4 bytes of known plaintext</span><br><span class="line">100.0 % (4 / 4)</span><br><span class="line">[16:21:19] Attack on 1405963 Z values at index 6</span><br><span class="line">Keys: 184a904b d4557686 2222c7f2</span><br><span class="line">9.2 % (129555 / 1405963)</span><br><span class="line">[16:24:40] Keys</span><br><span class="line">184a904b d4557686 2222c7f2</span><br></pre></td></tr></table></figure>
+<p>We got the keys !  <code>184a904b d4557686 2222c7f2</code> . Now we can decipher/decrypt the file! which means extract it from the zip!</p>
+<figure class="highlight bash"><figcaption><span>extract</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bkcrack-1.5.0-Linux/bkcrack -C flag.zip -c flag.txt -k 184a904b d4557686 2222c7f2 -d my_flag.txt   </span><br><span class="line"></span><br><span class="line">bkcrack 1.5.0 - 2022-07-07</span><br><span class="line">[16:32:25] Writing deciphered data my_flag.txt (maybe compressed)</span><br><span class="line">Wrote deciphered data.</span><br></pre></td></tr></table></figure>
+<p>Bingo We got the flag!!! How 2 images can hide data like that!</p>
+<p><img data-src="https://imgur.com/O8uXhZV.png" alt=""></p>
+<p>Flag:  <code>Securinets&#123;Z1p_CRyPt0_&amp;_5t3gH1d3_1s_BAd&#125;</code></p>
+<h1 id="kubernetes-challenge-serie"><a class="markdownIt-Anchor" href="#kubernetes-challenge-serie">#</a> Kubernetes challenge serie</h1>
+<p>NCSC’2023 consider the 1st tunisian CTF competition that have a whole Kubernetes Category! These are oriented for beginners/Intermediate users to consodilate their basic knowledge in Kubernetes!</p>
+<p><img data-src="https://imgur.com/U69KQtM.png" alt=""></p>
+<h2 id="kubernetes-secrets"><a class="markdownIt-Anchor" href="#kubernetes-secrets">#</a> Kubernetes: Secrets:</h2>
+<p>In this challenge we get an IP and the author told us that he have a secret in the cluster!<br>
+<img data-src="https://imgur.com/PCmO273.png" alt=""></p>
+<p>Visiting the IP on the browser will lead us to the author page! This is not our objective!</p>
+<p>We need to access to the API-Server. Let’s check the default port 6443</p>
+<figure class="highlight bash"><figcaption><span>curl</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sk https://20.169.73.19:6443/version</span><br></pre></td></tr></table></figure>
+<p>And this request is failed! Mmmm The author change the default api-server?? Nmap time! Let’s scan that IP!</p>
+<p>After checking the IP we get that port opened 7443!</p>
+<p><img data-src="https://imgur.com/GunNYhA.png" alt=""></p>
+<p>And Yes! We got a response! It’s KUBERNETES TIME!!</p>
+<p>Let’s check what permission we have as an anonymous users! To be honest I’ll try to check if I can got namespaces Or secrets first! Let me check that!</p>
+<figure class="highlight bash"><figcaption><span>curl-namespaces</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sk https://20.169.73.19:7443/api/v1/namespaces | grep <span class="string">&#x27;&quot;name&quot;: &quot;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>And we got a list of namespaces! This is cool! We have  <code>task1,task2,task3 and task4</code>  namespaces! I bet that each challenge is in single namespace! This is Great!<br>
+<img data-src="https://imgur.com/vZrtZLd.png" alt=""></p>
+<p>Hummm We need secrets and this is the 1st challenge! So We are sure that we can list the secrets in the  <code>task1</code>  namespace!</p>
+<figure class="highlight bash"><figcaption><span>curl-namespaces</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sk https://20.169.73.19:7443/api/v1/namespaces/task1/secrets</span><br></pre></td></tr></table></figure>
+<p>Bingo We got the Secrets List! We are on the right way!<br>
+<img data-src="https://imgur.com/0PFJsCI.png" alt=""></p>
+<p>Flag :  <code>Securinets&#123;S3crEts_Ar3_S0_CriT1c4LL&#125;</code></p>
+<blockquote>
+<p>We got a message! We must check it for sure!</p>
+</blockquote>
+<p>Look what we got here !</p>
+<figure class="highlight text"><figcaption><span>check</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Look here YOU will need this one believe me!!!</span><br><span class="line"> eyJhbGciOiJSUzI1NiIsImtpZCI6IkZwcWlIMGR2QlJ5Q0ZwTHV5a0JFQnlEcVI5UWZHLUdsY2NLQkkyMGlZWU0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0YXNrMiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJwb2QtbGlzdGVyLXRva2VuLXpoNHM2Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InBvZC1saXN0ZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIyZjc2YjA3ZS0wY2NjLTRhMDQtYWUxZi1jNGJhMzIxZjYzZmQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6dGFzazI6cG9kLWxpc3RlciJ9.cewI8cdU8u-MxhLW5enn9bqj2DnD6Kn6iJZD2Y70uSIN-Pdq4VGrCNN0oB0edWaNZd_2o3NCVfE1GY9JRIjQeMuV_Uk5-tEQ62TS1b2hpHPoq8FtRFDyji26LyTR2XGU7gSYdQV6G8axOU3z8_RRWQarN5VfSgDp-WmwizjwWJLMhENGgvWBxOKjHrF0tDCEmshH1g841NB4XtzeiXRxEC1AN9kNv-7SZvYWasHbPuva-fsGBp-AvhUUTStcCVahZ8VElJ51q3VxKBTXX-DoDWfsVD5rOcCse0yj4jxgN3GIqjIaAcjBiPI2XmhQv-tMMbYpj7gfAxrzhdh77UfaBg</span><br></pre></td></tr></table></figure>
+<h2 id="kubernetes-pody"><a class="markdownIt-Anchor" href="#kubernetes-pody">#</a> Kubernetes: Pody:</h2>
+<p>After getting the secrets we can move to the next challenge that named  <code>Pody</code></p>
+<p><img data-src="https://imgur.com/hZQya2W.png" alt=""></p>
+<p>In this challenge the author told us that the container is inside a pod! So how can we get inside that pod? Thinking a little bit we didn’t get any solution expect opening a shell session inside the pod!</p>
+<p>Kubectl Are you there?? Yes! It’s Kubectl time! I love to work with kubectl I will not waste my time curling endpoints 😃 So I’ll make my kubeconfig file for this challenge!</p>
+<p>When I checked the secrets in the previous challenge I got the certificate authority Certifcate. And of course don’t forget the token that we got!</p>
+<blockquote>
+<p>This token is used for authentication and authorization in kubernetes. This authorization is occur on the api-server level not the etcd!</p>
+</blockquote>
+<p>Let’s make our kubeconfig! But wait! In case you don’t have kubectl, it’s time to install it! You can follow this <span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvdGFza3MvdG9vbHMvaW5zdGFsbC1rdWJlY3RsLWxpbnV4Lw==">guide</span> to install it</p>
+<figure class="highlight yaml"><figcaption><span>kubeconfig</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Config</span></span><br><span class="line"><span class="attr">clusters:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">cluster:</span></span><br><span class="line">    <span class="attr">certificate-authority-data:</span>  <span class="string">LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1ETXdOVEV5TWpVMU1sb1hEVE16TURNd01qRXlNalUxTWxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTDEzCm0rOG5ySVlXU21hQjREMU9yWWJVS1hycE4rS2ZUZDk1TjA2UTQ5U3IyUU1FZkZXZHhjSGJadThRVWRIVXo1dFcKdmVvRnk4cFBpcmhhNHdGYnJEbXczdFp4NlgxbGxEZlp4b29jd1ZBOS9pMTBjNGE4TURvOGVuc1hlYWU1TytZcQpMZmdiM04zcWZYYjZmSHAzekwxeHJzWThPUEZVeHhmU3AxaElXa0RNZ0tZY0lhU2NoRVUzYTk0ZityY2tIOUFwCnltRi95TlB3bXgyU1RFZUVFSkZoZFdWUzVVamdSTmxnNzFPWklyb05DMXMzWEJxb2RiZ1FWUjBUeTI5bnJGc0QKQnBJQW1WQVRCS3QxTjcyRjRMRDA0c3M3QVUxU0NDSCtoUmlrTWE1ZkdtOTBjMWRacEVuZ1IyVEUwSzZ4WVY3TAplOElrcE5WOVBaLy9RT2ZqSnFFQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZBWWUzVktNRDY3T3V5NWhWTGxTN0RWeU52SExNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSE9EMUNTNGQzNjJLRXE1dTZyQwpQOEF6a3hDMTJDdVF1bDh4aUVTajZ4M25wb25oT2M3WU0zRUhQZk5wNHRDZmNsdFpDMU51SXNrVDRuSkRLRTFYCjRNVFNOL0kxVDlGSHd5SUhNbDZMZm1RL1ZLVlo1YlZJMEZlUENQanFnOWZSbHFYaitsRUxJQnRJVE0xbUlmeW0KZlZmMisrS3h4OTFTME54bWRKUzU0amY1SUJMRVh2SnRiWFYrblZ1ekhER3l5eDREblVDMm4zR3NrcEtBOGRJRQpZZktRWk5IZjJ4L0FySWM2a3A0em9TSWI1RVQvdDk4b3p5R2pldlVnbDd1L0orUzkwTS9pWWgyaGlGSXRRVE1WCnBTa0pQM1lIbDlzWVRSS0dXZTBtcEtnVm1RZm9VTVNzdURrRnZ4ZFNhVG9QQUN6aUdxdUNnVXVyWHMxNXJjOWkKR2xBPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">https://20.169.73.19:7443</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">raf-k8s</span></span><br><span class="line"><span class="attr">contexts:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">context:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">ncsc-sa@raf-k8s</span></span><br><span class="line">  <span class="attr">context:</span></span><br><span class="line">    <span class="attr">cluster:</span> <span class="string">raf-k8s</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">ncsc-sa</span></span><br><span class="line"><span class="attr">current-context:</span> <span class="string">ncsc-sa@raf-k8s</span></span><br><span class="line"><span class="attr">users:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ncsc-sa</span></span><br><span class="line">  <span class="attr">user:</span></span><br><span class="line">    <span class="attr">token:</span> <span class="string">eyJhbGciOiJSUzI1NiIsImtpZCI6IkZwcWlIMGR2QlJ5Q0ZwTHV5a0JFQnlEcVI5UWZHLUdsY2NLQkkyMGlZWU0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0YXNrMiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJwb2QtbGlzdGVyLXRva2VuLXpoNHM2Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InBvZC1saXN0ZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIyZjc2YjA3ZS0wY2NjLTRhMDQtYWUxZi1jNGJhMzIxZjYzZmQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6dGFzazI6cG9kLWxpc3RlciJ9.cewI8cdU8u-MxhLW5enn9bqj2DnD6Kn6iJZD2Y70uSIN-Pdq4VGrCNN0oB0edWaNZd_2o3NCVfE1GY9JRIjQeMuV_Uk5-tEQ62TS1b2hpHPoq8FtRFDyji26LyTR2XGU7gSYdQV6G8axOU3z8_RRWQarN5VfSgDp-WmwizjwWJLMhENGgvWBxOKjHrF0tDCEmshH1g841NB4XtzeiXRxEC1AN9kNv-7SZvYWasHbPuva-fsGBp-AvhUUTStcCVahZ8VElJ51q3VxKBTXX-DoDWfsVD5rOcCse0yj4jxgN3GIqjIaAcjBiPI2XmhQv-tMMbYpj7gfAxrzhdh77UfaBg</span></span><br></pre></td></tr></table></figure>
+<p>This kubeconfig file will allow us to authenticate to the api-server using kubectl utility without wasting time specifying the token and other stuff!</p>
+<p>Assume that you save that file in name  <code>ncsc-k8s.conf</code> . Let’s export the KUBECONFIG env var.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> KUBECONFIG=ncsc-k8s.conf</span><br><span class="line">$ kubectl get pods -n task2 </span><br><span class="line">NAME      READY   STATUS    RESTARTS        AGE</span><br><span class="line">web-app   1/1     Running   3 (2d19h ago)   17d</span><br></pre></td></tr></table></figure>
+<p>Bingo !! We got access and everything is ok until now. Let’s describe the pod and check what we have first before getting a shell !</p>
+<figure class="highlight bash"><figcaption><span>describe pod</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod web-app -n task2   </span><br><span class="line">Name:             web-app</span><br><span class="line">Namespace:        task2</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">    Mounts:</span><br><span class="line">      /etc/nginx/flag.txt from flag-configmap (rw,path=<span class="string">&quot;flag.txt&quot;</span>)</span><br><span class="line">      /var/cache/nginx from tmpfs-2 (rw)</span><br><span class="line">      /var/run from tmpfs-1 (rw)</span><br><span class="line">      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-wrfpc (ro)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Wow there is  <code>flag.txt</code>  file inside the pod! Let’s be more accurate! The flag is in  <code>/etc/nginx/flag.txt</code></p>
+<p>Let’s get a shell or run a command from the pod using the  <code>kubectl exec</code>  command!</p>
+<p><img data-src="https://imgur.com/6QTqehO.png" alt=""></p>
+<p>Yes we got the flag! And another message: Your current token is enough!</p>
+<blockquote>
+<p>I tried to delete the flag! But as expected the author make the pod Read-only file system</p>
+</blockquote>
+<p>Flag :  <code>Securinets&#123;Ex3c_1s_DAnGer0uS_B3_C4r3fUL&#125;</code></p>
+<h2 id="kubernetes-hidden"><a class="markdownIt-Anchor" href="#kubernetes-hidden">#</a> Kubernetes: Hidden? :</h2>
+<p>We still have the same token! Our kubectl works fine. So no worries we can do it!</p>
+<p><img data-src="https://imgur.com/1Eny78d.png" alt=""></p>
+<p>In this challenge the flag is hidden?? But how!? Let’s check first what can we do in our  <code>task3</code>  namespace</p>
+<figure class="highlight bash"><figcaption><span>service</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get service -n task3        </span><br><span class="line">NAME      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE</span><br><span class="line">web-app   ClusterIP   10.109.128.98   &lt;none&gt;        80/TCP    17d</span><br></pre></td></tr></table></figure>
+<p>We can access to services! In case you don’t know what is service I recommend to check this <span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvY29uY2VwdHMvc2VydmljZXMtbmV0d29ya2luZy9zZXJ2aWNlLw==">page</span>. As we understand, There is a pod inside task3 namespace but we don’t have any access to it 😦!. No worries we still have services! This service as we can see its attached to that pod. Let’s get our flag!</p>
+<p>After a little bit of thinking, I got an idea! Let’s access to the service from our previous pod!</p>
+<p>YES MAN! pods and services can communicate between each others</p>
+<p><img data-src="https://imgur.com/uq3xAoV.png" alt=""></p>
+<p>Ok let’s do it then, we have the service internal IP and we can run curl command inside our previous pod!</p>
+<p><img data-src="https://imgur.com/DuPq2Sp.png" alt=""></p>
+<p>Bingo! Flag:  <code>Securinets&#123;K8s_S3rV1cEs_ArE_P0wErFull&#125;</code> <br>
+And as Usual! another token for the next challenge :</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In The Next Challenge You will Need This one!</span><br><span class="line"> eyJhbGciOiJSUzI1NiIsImtpZCI6IkZwcWlIMGR2QlJ5Q0ZwTHV5a0JFQnlEcVI5UWZHLUdsY2NLQkkyMGlZWU0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0YXNrNCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJuY3NjLXBhcnRpY2lwYW50LXRva2VuLTdnZ2JxIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6Im5jc2MtcGFydGljaXBhbnQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIwNmM3OGJhZC01NjAwLTQ2N2QtYjdhYi0wNWQzN2RjMjg0MzIiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6dGFzazQ6bmNzYy1wYXJ0aWNpcGFudCJ9.exWa8skN0HdscxzG2PBFYn9eU9l_sL7hAjUw8sFPsnjUKHPHzmqwDpN4WfSPCHFOfv7KKimYvr9SuMjB75KuapxXKnyBwEaIZEkH3c0lavBCPYfGou_BrVsAHVSdbw6pQ9YYonuc3WTiGkcXC-XjKXfY8PGppmnGh7gUsuxY9xwpju10PutjIs8s0g9z2tTBYUhOraa54WRCODDGw-o415rXsaVHuV8A2Cj3jQZVBzXXi5-snfvjX27-nMyGDh4F0gu8sXD3PZfLjLdrOQpP6s_jzbUN9G1g8iLQTXNjCvgUw2cnBOvWtRGLtbdizOazlKUyJAOSXfmu3W45bMJPOg</span><br></pre></td></tr></table></figure>
+<h2 id="kubernetes-special"><a class="markdownIt-Anchor" href="#kubernetes-special">#</a> Kubernetes: Special :</h2>
+<p>After getting the new token it’s time to edit the kubeconfig file! Just replace the old toke by the new one! To work with kubectl correctly!</p>
+<p><img data-src="https://imgur.com/iFClk1V.png" alt=""></p>
+<p>Something Special?? What a special? Everything in Kubernetes is SO Special!! So no worries, We can deal with that kind of things!</p>
+<p>Talking about something special take me to think about what we can call it  <code>Custom Resources Definition</code>  in Kubernetes!</p>
+<p>In Kubernetes, a custom resource is an extension of the Kubernetes API that allows you to define your own custom resources with their own custom controllers.</p>
+<p>A custom resource definition (CRD) is used to create a new custom resource type in Kubernetes. A CRD defines the structure and behavior of the new custom resource, including its name, attributes, and API endpoints. Once a CRD is defined, instances of the custom resource can be created and managed using Kubernetes tools like kubectl and the Kubernetes API.</p>
+<figure class="highlight bash"><figcaption><span>api-resources</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-resources</span><br><span class="line">NAME                              SHORTNAMES                                      APIVERSION                             NAMESPACED   KIND</span><br><span class="line">bindings                                                                          v1                                     <span class="literal">true</span>         Binding</span><br><span class="line">componentstatuses                 cs                                              v1                                     <span class="literal">false</span>        ComponentStatus</span><br><span class="line">configmaps                        cm                                              v1                                     <span class="literal">true</span>         ConfigMap</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">rolebindings                                                                      rbac.authorization.k8s.io/v1           <span class="literal">true</span>         RoleBinding</span><br><span class="line">roles                                                                             rbac.authorization.k8s.io/v1           <span class="literal">true</span>         Role</span><br><span class="line">priorityclasses                   pc                                              scheduling.k8s.io/v1                   <span class="literal">false</span>        PriorityClass</span><br><span class="line">ncscctfs                                                                          securinets.com/v1alpha1                <span class="literal">true</span>         NCSCCtf</span><br></pre></td></tr></table></figure>
+<p>But wait! I am right! There is an api-group and a custom resource called ncscctfs!</p>
+<p>Now it’s time to get the flag!</p>
+<figure class="highlight bash"><figcaption><span>get</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get ncscctfs -n task4           </span><br><span class="line">NAME   AGE</span><br><span class="line">flag   17d</span><br></pre></td></tr></table></figure>
+<p>And yes there is a ncscctf resource named flag! Let’s describe that thing and get the flag!</p>
+<figure class="highlight bash"><figcaption><span>describe</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe ncscctfs flag -n task4 </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://imgur.com/DhelAJU.png" alt=""></p>
+<p>Flag:  <code>Securinets&#123;CuSt0m_REs0urcEs_ArE_P0wErFul&#125;</code></p>
+<h1 id="final-words"><a class="markdownIt-Anchor" href="#final-words">#</a> Final Words</h1>
+<p>In conclusion, the success of this event and competition is due in no small part to the dedication and hard work of the technical team. Their expertise and professionalism were instrumental in overcoming the various challenges we faced throughout the event lifecycle, and their tireless efforts ensured that we delivered a product that met the highest standards of quality and performance. On behalf of the team, I would like to express our sincere gratitude to our technical colleagues for their unwavering commitment to the project, and for their invaluable contributions to its success</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-29 15:18:39" itemprop="dateModified" datetime="2023-04-29T15:18:39+01:00">2023-04-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/09/12/Writeups/csaw2022/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;imgur.com&#x2F;ys2CFN6.png" title="CSAW&#39;2022 Forensics Writeup">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Writeups</span>
+  <h3>CSAW'2022 Forensics Writeup</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2023/04/28/Kubernetes/k8s-auth/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i0.wp.com&#x2F;cms.pingsafe.com&#x2F;wp-content&#x2F;uploads&#x2F;2022&#x2F;12&#x2F;KSPM.png?fit&#x3D;927%2C600&amp;ssl&#x3D;1" title="SSO-based authentication mechanism for multi-clusters">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>SSO-based authentication mechanism for multi-clusters</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#digital-forensics-mokni-seals"><span class="toc-number">1.</span> <span class="toc-text"> Digital Forensics : Mokni &amp; Seals</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#digital-forensics-recover-my-work"><span class="toc-number">2.</span> <span class="toc-text"> Digital Forensics: Recover my Work 😦</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hardware-liquid-display"><span class="toc-number">3.</span> <span class="toc-text"> Hardware: Liquid Display</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#game-hacking-platformer"><span class="toc-number">4.</span> <span class="toc-text"> Game Hacking: Platformer:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#misc-full-difference"><span class="toc-number">5.</span> <span class="toc-text"> Misc: Full Difference</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#kubernetes-challenge-serie"><span class="toc-number">6.</span> <span class="toc-text"> Kubernetes challenge serie</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-secrets"><span class="toc-number">6.1.</span> <span class="toc-text"> Kubernetes: Secrets:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-pody"><span class="toc-number">6.2.</span> <span class="toc-text"> Kubernetes: Pody:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-hidden"><span class="toc-number">6.3.</span> <span class="toc-text"> Kubernetes: Hidden? :</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-special"><span class="toc-number">6.4.</span> <span class="toc-text"> Kubernetes: Special :</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final-words"><span class="toc-number">7.</span> <span class="toc-text"> Final Words</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/09/12/Writeups/csaw2022/" rel="bookmark" title="CSAW'2022 Forensics Writeup">CSAW'2022 Forensics Writeup</a></li><li class="active"><a href="/2023/03/23/Writeups/ncsc2023/" rel="bookmark" title="NCSC'2023 Writeup Challenges">NCSC'2023 Writeup Challenges</a></li><li><a href="/2023/08/06/Writeups/quals23-forensics/" rel="bookmark" title="Securinets Quals CTF 23 Forensics Challenges Writeup">Securinets Quals CTF 23 Forensics Challenges Writeup</a></li><li><a href="/2023/08/06/Writeups/quals23-misc/" rel="bookmark" title="Securinets Quals CTF 23 Misc Challenges Writeup">Securinets Quals CTF 23 Misc Challenges Writeup</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/09/12/Writeups/csaw2022/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/04/28/Kubernetes/k8s-auth/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/03/23/Writeups/ncsc2023/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

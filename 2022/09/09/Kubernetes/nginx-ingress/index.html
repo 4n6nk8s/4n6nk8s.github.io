@@ -1,0 +1,492 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2022/09/09/Kubernetes/nginx-ingress/">
+
+
+<meta name="description" content="# Ingress in bare metal Kubernetes cluster You are working in enterprise that have one cluster with one public IP address and one Domain Name. In our Example  justk8s.k8s . That Enterprise want to dep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deploy Nginx Ingress in Bare-metal Cluster">
+<meta property="og:url" content="http://example.com/2022/09/09/Kubernetes/nginx-ingress/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="# Ingress in bare metal Kubernetes cluster You are working in enterprise that have one cluster with one public IP address and one Domain Name. In our Example  justk8s.k8s . That Enterprise want to dep">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://imgur.com/rXoZYym.png">
+<meta property="og:image" content="https://imgur.com/P0IubVc.png">
+<meta property="og:image" content="https://imgur.com/JM86JeT.png">
+<meta property="og:image" content="https://imgur.com/MaTmKew.png">
+<meta property="og:image" content="https://imgur.com/Xv7PiiK.png">
+<meta property="og:image" content="https://imgur.com/jWkr5kf.png">
+<meta property="og:image" content="https://imgur.com/p4sAzQX.png">
+<meta property="og:image" content="https://imgur.com/tauie6V.png">
+<meta property="article:published_time" content="2022-09-09T14:08:22.000Z">
+<meta property="article:modified_time" content="2023-04-29T14:18:39.811Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/rXoZYym.png">
+
+
+  <title>
+Deploy Nginx Ingress in Bare-metal Cluster - Kubernetes |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Deploy Nginx Ingress in Bare-metal Cluster
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-09-09 15:08:22">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-09-09T15:08:22+01:00">2022-09-09</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://imgur.com/vC01Qdu.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Kubernetes/" itemprop="item" rel="index" title="In Kubernetes"><span itemprop="name">Kubernetes</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/09/Kubernetes/nginx-ingress/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="ingress-in-bare-metal-kubernetes-cluster"><a class="markdownIt-Anchor" href="#ingress-in-bare-metal-kubernetes-cluster">#</a> Ingress in bare metal Kubernetes cluster</h1>
+<p>You are working in enterprise that have one cluster with one public IP address and one Domain Name. In our Example  <code>justk8s.k8s</code> .<br>
+That Enterprise want to deploy two web apps for these new service (gym and restaurant) with that single cluster,IP and Domain Name !!<br>
+Your task is to deploy these two apps! So you decide to use  <code>Ingress</code>  because it’s the best solution for this kind of problems!</p>
+<h2 id="what-is-ingress"><a class="markdownIt-Anchor" href="#what-is-ingress">#</a> What is Ingress</h2>
+<p>Kubernetes Ingress is an API object that provides routing rules to manage external users’ access to the services in a Kubernetes cluster, typically via HTTPS/HTTP. With Ingress, you can easily set up rules for routing traffic without creating a bunch of Load Balancers or exposing each service on the node<br>
+<img data-src="https://imgur.com/rXoZYym.png" alt=""></p>
+<h2 id="ingress-controller"><a class="markdownIt-Anchor" href="#ingress-controller">#</a> Ingress Controller</h2>
+<p>An Ingress Controller is a Kubernetes controller that is deployed manually to the cluster, most often as a DaemonSet or a Deployment object that runs dedicated Pods for handling incoming traffic load balancing and smart routing. It is responsible for processing the Ingress objects (which specify that they especially want to use the Ingress Controller) and dynamically configuring real routing rules<br>
+The most common used Ingress controllerfor Kubernetes is  <code>Ingress Nginx</code> <br>
+<img data-src="https://imgur.com/P0IubVc.png" alt=""></p>
+<h2 id="ingress-in-cloud-vs-ingress-in-bare-metal-cluster"><a class="markdownIt-Anchor" href="#ingress-in-cloud-vs-ingress-in-bare-metal-cluster">#</a> Ingress in cloud Vs Ingress in bare metal cluster</h2>
+<p>Deploying Ingress pn managed Kubernetes cluster provided in cloud easier than in bare metal cluster. Because the Ingress Controller must be exposed as LoadBlancer!</p>
+<p>In traditional cloud environments, where network load balancers are available on-demand, a single Kubernetes manifest suffices to provide a single point of contact to the NGINX Ingress controller to external clients and, indirectly, to any application running inside the cluster.</p>
+<p><img data-src="https://imgur.com/JM86JeT.png" alt=""></p>
+<p>Bare-metal environments lack this commodity, requiring a slightly different setup to offer the same kind of access to external consumers. So we need an aproach to solve this problem !</p>
+<p><img data-src="https://imgur.com/MaTmKew.png" alt=""></p>
+<h1 id="create-load-balancer-proxy-for-bare-metal-cluster"><a class="markdownIt-Anchor" href="#create-load-balancer-proxy-for-bare-metal-cluster">#</a> Create Load Balancer / Proxy for bare metal cluster</h1>
+<p>There is a lot of method to set up a Load Balancer or Proxy to get Ingress work on our cluster.</p>
+<ul>
+<li>We can expose our ingress controller using NodePort service and set up a proxy that forward to this service using a nginx proxy or HA proxy</li>
+<li>We can also install a software solution called  <code>metalLB</code> . This solution allows to create Load Balancer in local cluster without any problem ! So we can expose our ingress controller using Load Balancer service like in the cloud environment!</li>
+</ul>
+<h2 id="create-load-balancer-using-metallb"><a class="markdownIt-Anchor" href="#create-load-balancer-using-metallb">#</a> Create Load Balancer using metalLB:</h2>
+<p>In this demo we will deploy one of the 2 apps and expose it with Load Balancer service for the test purposes. So Let’s start deploying the restaurant app and expose it !</p>
+<figure class="highlight yaml"><figcaption><span>Restaurant App Deployment</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">4n6nk8s-kitchen</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">kitchen</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">kitchen</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">kitchen-app</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">mohamedrafraf/k8s-kitchen</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+<p>Create the gym app deployment</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl apply -f kitchen-deployment.yaml</span><br><span class="line">deployment.apps/4n6nk8s-kitchen created</span><br><span class="line"></span><br><span class="line">raf²@4n6nk8s-master$ kubectl get all</span><br><span class="line">NAME                                   READY   STATUS    RESTARTS   AGE</span><br><span class="line">pod/4n6nk8s-kitchen-698f44db99-29dnr   1/1     Running   0          63s</span><br></pre></td></tr></table></figure>
+<p>Let’s now expose now the deployment:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl expose deploy/4n6nk8s-kitchen--type=LoadBalacner --port=80</span><br><span class="line">service/4n6nk8s-kitchen created</span><br></pre></td></tr></table></figure>
+<p>Let’s check this service</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl get svc</span><br><span class="line">NAME              TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        AGE</span><br><span class="line">4n6nk8s-kitchen   LoadBalancer   10.97.71.78      &lt;pending&gt;       80:30918/TCP   21s</span><br><span class="line">kubernetes        ClusterIP      10.96.0.1        &lt;none&gt;          443/TCP        5d11h</span><br></pre></td></tr></table></figure>
+<p>As we see the LoadBalancer service still pending since we don’t have any Load Balancer! Now it’s time to talk about the metalLB !</p>
+<p>MetalLB provides a network load-balancer implementation for Kubernetes clusters that do not run on a supported cloud provider, effectively allowing the usage of LoadBalancer Services within any cluster.<br>
+<img data-src="https://imgur.com/Xv7PiiK.png" alt=""></p>
+<p>It’s time to install metalLB. Installing metalLB is so easy we just need to apply two manifest from the official site of <span class="exturl" data-url="aHR0cHM6Ly9tZXRhbGxiLnVuaXZlcnNlLnRmL2luc3RhbGxhdGlvbi8=">metalLB</span></p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml</span><br><span class="line">kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml</span><br></pre></td></tr></table></figure>
+<p>After running the previous commands, a new namespace will be created with a deployment, daesmonset and lot of RBAC authorization and rules!. So let’s check this namespace!</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl get all -n metallb-system</span><br><span class="line">NAME                              READY   STATUS    RESTARTS       AGE</span><br><span class="line">pod/controller-7cf77c64fb-4b8sx   1/1     Running   0              23s</span><br><span class="line">pod/speaker-chh2t                 1/1     Running   0              23s</span><br><span class="line">pod/speaker-xbn8z                 1/1     Running   0              23s</span><br><span class="line"></span><br><span class="line">NAME                     DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE</span><br><span class="line">daemonset.apps/speaker   2         2         2       2            2           kubernetes.io/os=linux   23s</span><br><span class="line"></span><br><span class="line">NAME                         READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">deployment.apps/controller   1/1     1            1           23s</span><br><span class="line"></span><br><span class="line">NAME                                    DESIRED   CURRENT   READY   AGE</span><br><span class="line">replicaset.apps/controller-7cf77c64fb   1         1         1       23s</span><br></pre></td></tr></table></figure>
+<h2 id="configure-the-address-pool-of-the-load-balancer"><a class="markdownIt-Anchor" href="#configure-the-address-pool-of-the-load-balancer">#</a> Configure the address pool of the Load Balancer</h2>
+<p>Now we must configure the  <code>metalLB</code>  using configmap object. In this configmap we give the address pool that will be used as LoadBalancer IP! Also the type of the Load Balancer.</p>
+<blockquote>
+<p>metalLB supports two LoadBalancing modes : Layer 2 mode and BGP mode. In our case we will use the Layer 2 mode</p>
+</blockquote>
+<p>Now Let’s move to the configmap manifest!</p>
+<figure class="highlight yaml"><figcaption><span>Configmap</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">metallb-system</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">config:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    address-pools:</span></span><br><span class="line"><span class="string">    - name: default</span></span><br><span class="line"><span class="string">      protocol: layer2</span></span><br><span class="line"><span class="string">      addresses:</span></span><br><span class="line"><span class="string">      - 192.168.1.240-192.168.1.250</span></span><br></pre></td></tr></table></figure>
+<p>After Applying this recent configmap. we can say that the metalLB installtion is finished! So Let’s check the services again in our cluster !</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl get svc</span><br><span class="line">NAME              TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        AGE</span><br><span class="line">4n6nk8s-kitchen   LoadBalancer   10.97.71.78      192.168.1.241   80:30918/TCP   5m4s</span><br><span class="line">kubernetes        ClusterIP      10.96.0.1        &lt;none&gt;          443/TCP        5d11h</span><br></pre></td></tr></table></figure>
+<p>Bingo! our Load Balancer service has an external IP address. So our deployment is accessable through this IP! Let’s check it:<br>
+ٍ<img data-src="https://imgur.com/jWkr5kf.png" alt=""><br>
+Everything is OK! now we can say that we have a Load Balancer on our bare metal cluster!</p>
+<h1 id="install-the-nginx-ingress-controller"><a class="markdownIt-Anchor" href="#install-the-nginx-ingress-controller">#</a> Install the nginx Ingress Controller:</h1>
+<p>Installing the nginx ingress controller can be done either by using Helm or the yaml manifest provided in the nginx controller website</p>
+<h2 id="install-the-controller-using-helm"><a class="markdownIt-Anchor" href="#install-the-controller-using-helm">#</a> Install the controller using Helm</h2>
+<p>If you have Helm, you can deploy the ingress controller with the following command:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ helm upgrade --install ingress-nginx ingress-nginx \</span><br><span class="line">  --repo https://kubernetes.github.io/ingress-nginx \</span><br><span class="line">  --namespace ingress-nginx --create-namespace</span><br></pre></td></tr></table></figure>
+<h2 id="install-the-controller-using-yaml-manifest"><a class="markdownIt-Anchor" href="#install-the-controller-using-yaml-manifest">#</a> Install the controller using yaml manifest:</h2>
+<p>If you don’t have Helm or if you prefer to use a YAML manifest, you can run the following command instead:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml</span><br><span class="line"></span><br><span class="line">namespace/ingress-nginx created</span><br><span class="line">serviceaccount/ingress-nginx created</span><br><span class="line">serviceaccount/ingress-nginx-admission created</span><br><span class="line">role.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">role.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">rolebinding.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">configmap/ingress-nginx-controller created</span><br><span class="line">service/ingress-nginx-controller created</span><br><span class="line">service/ingress-nginx-controller-admission created</span><br><span class="line">deployment.apps/ingress-nginx-controller created</span><br><span class="line">job.batch/ingress-nginx-admission-create created</span><br><span class="line">job.batch/ingress-nginx-admission-patch created</span><br><span class="line">ingressclass.networking.k8s.io/nginx created</span><br><span class="line">validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created</span><br></pre></td></tr></table></figure>
+<h2 id="check-the-nginx-ingress-controller"><a class="markdownIt-Anchor" href="#check-the-nginx-ingress-controller">#</a> Check the Nginx Ingress Controller:</h2>
+<p>Let’s check the pods created in the namespace of the ingress-nginx</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl get pods --namespace=ingress-nginx</span><br><span class="line"></span><br><span class="line">NAME                                        READY   STATUS              RESTARTS   AGE</span><br><span class="line">ingress-nginx-admission-create-qd8fz        0/1     ContainerCreating   0          10s</span><br><span class="line">ingress-nginx-admission-patch-76lgl         0/1     ContainerCreating   0          10s</span><br><span class="line">ingress-nginx-controller-7575567f98-hg6tq   0/1     ContainerCreating   0          10s</span><br></pre></td></tr></table></figure>
+<p>After waiting a few minute until the controller is ready, we must check all the services and deployments of the ingress-nginx namespace again ! You must find an output similar to the following</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl get all -n ingress-nginx</span><br><span class="line"></span><br><span class="line">NAME                                            READY   STATUS      RESTARTS        AGE</span><br><span class="line">pod/ingress-nginx-admission-create-9dshm        0/1     Completed   0               23m</span><br><span class="line">pod/ingress-nginx-admission-patch-rj7gk         0/1     Completed   0               23m</span><br><span class="line">pod/ingress-nginx-controller-7575567f98-8w6pm   1/1     Running     0               23m</span><br><span class="line"></span><br><span class="line">NAME                                         TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE</span><br><span class="line">service/ingress-nginx-controller             LoadBalancer   10.100.234.221   192.168.1.240   80:32545/TCP,443:31214/TCP   23m</span><br><span class="line">service/ingress-nginx-controller-admission   ClusterIP      10.109.162.157   &lt;none&gt;          443/TCP                      23m</span><br><span class="line"></span><br><span class="line">NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">deployment.apps/ingress-nginx-controller   1/1     1            1           23m</span><br><span class="line"></span><br><span class="line">NAME                                                  DESIRED   CURRENT   READY   AGE</span><br><span class="line">replicaset.apps/ingress-nginx-controller-7575567f98   1         1         1       23m</span><br><span class="line"></span><br><span class="line">NAME                                       COMPLETIONS   DURATION   AGE</span><br><span class="line">job.batch/ingress-nginx-admission-create   1/1           3s         23m</span><br><span class="line">job.batch/ingress-nginx-admission-patch    1/1           4s         23m</span><br></pre></td></tr></table></figure>
+<p>Bingo! the ingress controller is ready and on running state! also is exposed with Load Balancer and it have a Extenal-IP  <code>192.168.1.240</code> <br>
+Now we can deploy an ingress object without any problem ! It’s time to deploy our 2 apps with ingress in one single domain name and one IP address !</p>
+<h1 id="deploy-the-two-apps-using-ingress"><a class="markdownIt-Anchor" href="#deploy-the-two-apps-using-ingress">#</a> Deploy The two Apps using Ingress:</h1>
+<p>Let’s start by deploying the apps and expose it with Cluster IP service !</p>
+<figure class="highlight yaml"><figcaption><span>Gym App Deployment</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">4n6nk8s-gym</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">gym</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">gym</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">gym-app</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">mohamedrafraf/k8s-gym</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">gym-svc</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">gym</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+<p>Create the deployment and service of the gym app</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl apply -f gym-deployment.yaml</span><br><span class="line">deployment.apps/4n6nk8s-gym created</span><br><span class="line">raf²@4n6nk8s-master$ kubectl apply -f gym-svc.yaml</span><br><span class="line">service/gym-svc created</span><br></pre></td></tr></table></figure>
+<p>The manifest of the restaurant app and the service:</p>
+<figure class="highlight yaml"><figcaption><span>Restaurant App Deployment</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">4n6nk8s-kitchen</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">kitchen</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">kitchen</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">kitchen-app</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">mohamedrafraf/k8s-kitchen</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kitchen-svc</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">kitchen</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+<p>Create the restaurant deployment and the service:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl apply -f kitchen-deployment.yaml</span><br><span class="line">deployment.apps/4n6nk8s-kitchen created</span><br><span class="line">raf²@4n6nk8s-master$ kubectl apply -f kitchen-svc.yaml</span><br><span class="line">service/kitchen-svc created</span><br></pre></td></tr></table></figure>
+<p>Check the deployments and the services! :</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl get all</span><br><span class="line">NAME                                   READY   STATUS    RESTARTS   AGE</span><br><span class="line">pod/4n6nk8s-gym-698f44db99-29dnr       1/1     Running   0          63s</span><br><span class="line">pod/4n6nk8s-kitchen-6b56959b86-n7c9z   1/1     Running   0          46s</span><br><span class="line"></span><br><span class="line">NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE</span><br><span class="line">service/gym-svc             ClusterIP   10.110.191.206   &lt;none&gt;        80/TCP     53s</span><br><span class="line">service/kitchen-svc         ClusterIP   10.102.94.94     &lt;none&gt;        80/TCP     39s</span><br><span class="line">service/kubernetes          ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP    3d14h</span><br><span class="line"></span><br><span class="line">NAME                              READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">deployment.apps/4n6nk8s-gym       1/1     1            1           63s</span><br><span class="line">deployment.apps/4n6nk8s-kitchen   1/1     1            1           46s</span><br><span class="line"></span><br><span class="line">NAME                                         DESIRED   CURRENT   READY   AGE</span><br><span class="line">replicaset.apps/4n6nk8s-gym-698f44db99       1         1         1       63s</span><br><span class="line">replicaset.apps/4n6nk8s-kitchen-6b56959b86   1         1         1       46s</span><br></pre></td></tr></table></figure>
+<p>Let’s now create the ingress manifest:</p>
+<figure class="highlight yaml"><figcaption><span>Ingress YAML Definition</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/rewrite-target:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">ingress-4n6nk8s</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">ingressClassName:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">justk8s.k8s</span></span><br><span class="line">    <span class="attr">http:</span></span><br><span class="line">      <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/kitchen</span></span><br><span class="line">        <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">service:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">kitchen-svc</span></span><br><span class="line">            <span class="attr">port:</span></span><br><span class="line">              <span class="attr">number:</span> <span class="number">80</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/gym</span></span><br><span class="line">        <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">service:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">gym-svc</span></span><br><span class="line">            <span class="attr">port:</span></span><br><span class="line">              <span class="attr">number:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+<p>The  <code>ingressClassName</code>  must be “nginx” since we have nginx ingress controller. The  <code>host</code>  field in the  <code>rules</code>  define the domain name of the request. So if a HTTP request come to the cluster with the host name  <code>justk8s.k8s</code>  this rull will be applied!<br>
+The the  <code>path</code>  int the  <code>paths</code>  will be the route ! The ingress give you the service in this route!<br>
+In our Example if we enter  <code>http://justk8s.k8s/kitchen</code>  the ingress will forward the restaurant app!<br>
+in the  <code>path</code>  field we specify the  <code>service</code>  name and the  <code>port number</code></p>
+<p>Now Let’s Create the ingress object</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl apply -f ingress.yaml</span><br><span class="line">ingress.networking.k8s.io/ingress-4n6nk8s created</span><br></pre></td></tr></table></figure>
+<p>Check the ingerss object !</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl get ingress</span><br><span class="line">NAME              CLASS   HOSTS         ADDRESS   PORTS   AGE</span><br><span class="line">ingress-4n6nk8s   nginx   justk8s.k8s             80      5s</span><br></pre></td></tr></table></figure>
+<p>Display more details about the ingress object with  <code>kubectl describe ingress</code> :</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">raf²@4n6nk8s-master$ kubectl describe ingress ingress-4n6nk8s</span><br><span class="line">Name:             ingress-4n6nk8s</span><br><span class="line">Labels:           &lt;none&gt;</span><br><span class="line">Namespace:        default</span><br><span class="line">Address:          192.168.1.240</span><br><span class="line">Default backend:  default-http-backend:80 (&lt;error: endpoints <span class="string">&quot;default-http-backend&quot;</span> not found&gt;)</span><br><span class="line">Rules:</span><br><span class="line">  Host         Path  Backends</span><br><span class="line">  ----         ----  --------</span><br><span class="line">  justk8s.k8s</span><br><span class="line">               /kitchen   kitchen-svc:80 (10.1.235.141:80)</span><br><span class="line">               /gym       gym-svc:80 (10.1.235.147:80)</span><br><span class="line">Annotations:   nginx.ingress.kubernetes.io/rewrite-target: /</span><br><span class="line">Events:</span><br><span class="line">  Type    Reason  Age               From                      Message</span><br><span class="line">  ----    ------  ----              ----                      -------</span><br><span class="line">  Normal  Sync    7s (x2 over 19s)  nginx-ingress-controller  Scheduled <span class="keyword">for</span> <span class="built_in">sync</span></span><br></pre></td></tr></table></figure>
+<p>We see that the Default backend display  <code>(&lt;error: endpoints &quot;default-http-backend&quot; not found&gt;)</code> .<br>
+This error occur because we don’t specify a default backend (route) so when you enter  <code>http://justk8s.k8s/</code>  we will find the nginx 404 not found page !</p>
+<h1 id="check-the-deployments"><a class="markdownIt-Anchor" href="#check-the-deployments">#</a> Check the Deployments!</h1>
+<p>After Installing the LoadBalancer and Ingress Controller. Let’s try to access to our 2 apps. But before access to this apps let’s create an  <code>/etc/hosts</code>  entry ( <code>C:\Windows\System32\Drivers\etc\hosts</code>  for Windows):</p>
+<figure class="highlight bash"><figcaption><span>/etc/hosts</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.240 justk8s.k8s <span class="comment"># The IP address of the Load Balancer of the Ingress Controller !</span></span><br></pre></td></tr></table></figure>
+<p>Now Let’s go to our browser! I add this entry in my master node! So I can access to these apps from my master node !:</p>
+<p><img data-src="https://imgur.com/p4sAzQX.png" alt=""><br>
+<img data-src="https://imgur.com/tauie6V.png" alt=""></p>
+<p>Bingo! Everything is Ok !</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-29 15:18:39" itemprop="dateModified" datetime="2023-04-29T15:18:39+01:00">2023-04-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/09/09/CyberDefenders/affrica-falls/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;cyberdefenders.org&#x2F;media&#x2F;terraform&#x2F;AfricanFalls&#x2F;a2.png" title="CyberDefenders Writeup AfricanFalls">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> CyberDefenders</span>
+  <h3>CyberDefenders Writeup AfricanFalls</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2022/09/10/Kubernetes/nfs-k8s/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;www.axigen.com&#x2F;usr&#x2F;files&#x2F;articles&#x2F;x118.png.pagespeed.ic.B1J-BES_Qy.png" title="NFS as Remote Storage for Kubernetes">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>NFS as Remote Storage for Kubernetes</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ingress-in-bare-metal-kubernetes-cluster"><span class="toc-number">1.</span> <span class="toc-text"> Ingress in bare metal Kubernetes cluster</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-ingress"><span class="toc-number">1.1.</span> <span class="toc-text"> What is Ingress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ingress-controller"><span class="toc-number">1.2.</span> <span class="toc-text"> Ingress Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ingress-in-cloud-vs-ingress-in-bare-metal-cluster"><span class="toc-number">1.3.</span> <span class="toc-text"> Ingress in cloud Vs Ingress in bare metal cluster</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#create-load-balancer-proxy-for-bare-metal-cluster"><span class="toc-number">2.</span> <span class="toc-text"> Create Load Balancer &#x2F; Proxy for bare metal cluster</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#create-load-balancer-using-metallb"><span class="toc-number">2.1.</span> <span class="toc-text"> Create Load Balancer using metalLB:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#configure-the-address-pool-of-the-load-balancer"><span class="toc-number">2.2.</span> <span class="toc-text"> Configure the address pool of the Load Balancer</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#install-the-nginx-ingress-controller"><span class="toc-number">3.</span> <span class="toc-text"> Install the nginx Ingress Controller:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#install-the-controller-using-helm"><span class="toc-number">3.1.</span> <span class="toc-text"> Install the controller using Helm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-the-controller-using-yaml-manifest"><span class="toc-number">3.2.</span> <span class="toc-text"> Install the controller using yaml manifest:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#check-the-nginx-ingress-controller"><span class="toc-number">3.3.</span> <span class="toc-text"> Check the Nginx Ingress Controller:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#deploy-the-two-apps-using-ingress"><span class="toc-number">4.</span> <span class="toc-text"> Deploy The two Apps using Ingress:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#check-the-deployments"><span class="toc-number">5.</span> <span class="toc-text"> Check the Deployments!</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/08/05/Kubernetes/kubeadm/" rel="bookmark" title="Setting Up Kubernetes with Kubeadm">Setting Up Kubernetes with Kubeadm</a></li><li><a href="/2022/09/06/Kubernetes/configmap-secrets/" rel="bookmark" title="Introduction To Configmap & Secrets">Introduction To Configmap & Secrets</a></li><li><a href="/2022/09/08/Kubernetes/private-docker-k8s/" rel="bookmark" title="Dockerize a website & Pull it privately in k8s">Dockerize a website & Pull it privately in k8s</a></li><li class="active"><a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="bookmark" title="Deploy Nginx Ingress in Bare-metal Cluster">Deploy Nginx Ingress in Bare-metal Cluster</a></li><li><a href="/2022/09/10/Kubernetes/nfs-k8s/" rel="bookmark" title="NFS as Remote Storage for Kubernetes">NFS as Remote Storage for Kubernetes</a></li><li><a href="/2023/04/28/Kubernetes/k8s-auth/" rel="bookmark" title="SSO-based authentication mechanism for multi-clusters">SSO-based authentication mechanism for multi-clusters</a></li><li><a href="/2023/06/03/Kubernetes/post/" rel="bookmark" title="Streamlined Application Deployemet using Kubernetes">Streamlined Application Deployemet using Kubernetes</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/09/09/CyberDefenders/affrica-falls/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/09/10/Kubernetes/nfs-k8s/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/09/09/Kubernetes/nginx-ingress/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

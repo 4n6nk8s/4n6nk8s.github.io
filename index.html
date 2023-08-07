@@ -1,0 +1,532 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/">
+
+
+<meta name="description" content="We are a Forensics Duo at SOter14 CTF Team &amp; Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="4n6 &amp; k8s">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="We are a Forensics Duo at SOter14 CTF Team &amp; Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+
+
+  <title>Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+            <a href="/" class="logo" rel="start"><p class="artboard">Raf² & Adam</p>
+              <h1 itemprop="name headline" class="title">4n6 & k8s</h1>
+            </a>
+          
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://i.imgur.com/Q8jNCo2.png"></li>
+          <li class="item" data-background-image="https://i.imgur.com/2wBF3bd.png"></li>
+          <li class="item" data-background-image="https://i.imgur.com/UswhbiU.png"></li>
+          <li class="item" data-background-image="https://i.imgur.com/vymMzwZ.png"></li>
+          <li class="item" data-background-image="https://i.imgur.com/jRdwzRi.png"></li>
+          <li class="item" data-background-image="https://i.imgur.com/k1NP7VW.png"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="index wrap">
+      <h2 class="divider">Categories</h2>
+      <div class="cards">
+          
+<section class="item">
+  <div class="cover" data-background-image="/Kubernetes/cover.jpg">
+    <h2 class="title">Kubernetes</h2>
+  </div>
+  <div class="info">
+    <div class="ribbon"><a href="/categories/Kubernetes/" itemprop="url" title="Kubernetes">Kubernetes</a></div>
+    <div class="inner">
+        <ul class="posts">
+            <li><a title="Deploy Nginx Ingress in Bare-metal Cluster" href="/2022/09/09/Kubernetes/nginx-ingress/">Deploy Nginx Ingress in Bare-metal Cluster</a></li>
+            <li><a title="Dockerize a website & Pull it privately in k8s" href="/2022/09/08/Kubernetes/private-docker-k8s/">Dockerize a website & Pull it privately in k8s</a></li>
+            <li><a title="Introduction To Configmap & Secrets" href="/2022/09/06/Kubernetes/configmap-secrets/">Introduction To Configmap & Secrets</a></li>
+            <li><a title="NFS as Remote Storage for Kubernetes" href="/2022/09/10/Kubernetes/nfs-k8s/">NFS as Remote Storage for Kubernetes</a></li>
+            <li><a title="SSO-based authentication mechanism for multi-clusters" href="/2023/04/28/Kubernetes/k8s-auth/">SSO-based authentication mechanism for multi-clusters</a></li>
+            <li><a title="Setting Up Kubernetes with Kubeadm" href="/2022/08/05/Kubernetes/kubeadm/">Setting Up Kubernetes with Kubeadm</a></li>
+        </ul>
+        <div class="meta footer">
+          <span>
+            <i class="ic i-file"></i>7 posts in total
+          </span>
+        </div>
+        <a href="/categories/Kubernetes/" itemprop="url" title="Kubernetes" class="btn">more...</a>
+    </div>
+  </div>
+</section>
+
+          
+<section class="item">
+  <div class="cover" data-background-image="/CyberDefenders/cover.jpg">
+    <h2 class="title">CyberDefenders</h2>
+  </div>
+  <div class="info">
+    <div class="ribbon"><a href="/categories/CyberDefenders/" itemprop="url" title="CyberDefenders">CyberDefenders</a></div>
+    <div class="inner">
+        <ul class="posts">
+            <li><a title="CyberDefenders Writeup  Phishy" href="/2022/09/05/CyberDefenders/Phishy/">CyberDefenders Writeup  Phishy</a></li>
+            <li><a title="CyberDefenders Writeup AfricanFalls" href="/2022/09/09/CyberDefenders/affrica-falls/">CyberDefenders Writeup AfricanFalls</a></li>
+            <li><a title="CyberDefenders Writeup Brave" href="/2022/09/06/CyberDefenders/brave/">CyberDefenders Writeup Brave</a></li>
+            <li><a title="CyberDefenders Writeup EscapeRoom" href="/2022/09/07/CyberDefenders/EscapeRoom/">CyberDefenders Writeup EscapeRoom</a></li>
+        </ul>
+        <div class="meta footer">
+          <span>
+            <i class="ic i-file"></i>4 posts in total
+          </span>
+        </div>
+        <a href="/categories/CyberDefenders/" itemprop="url" title="CyberDefenders" class="btn">more...</a>
+    </div>
+  </div>
+</section>
+
+          
+<section class="item">
+  <div class="cover" data-background-image="/Writeups/cover.jpg">
+    <h2 class="title">Writeups</h2>
+  </div>
+  <div class="info">
+    <div class="ribbon"><a href="/categories/Writeups/" itemprop="url" title="Writeups">Writeups</a></div>
+    <div class="inner">
+        <ul class="posts">
+            <li><a title="CSAW'2022 Forensics Writeup" href="/2022/09/12/Writeups/csaw2022/">CSAW'2022 Forensics Writeup</a></li>
+            <li><a title="NCSC'2023 Writeup Challenges" href="/2023/03/23/Writeups/ncsc2023/">NCSC'2023 Writeup Challenges</a></li>
+            <li><a title="Securinets Quals CTF 23 Forensics Challenges Writeup" href="/2023/08/06/Writeups/quals23-forensics/">Securinets Quals CTF 23 Forensics Challenges Writeup</a></li>
+            <li><a title="Securinets Quals CTF 23 Misc Challenges Writeup" href="/2023/08/06/Writeups/quals23-misc/">Securinets Quals CTF 23 Misc Challenges Writeup</a></li>
+        </ul>
+        <div class="meta footer">
+          <span>
+            <i class="ic i-file"></i>4 posts in total
+          </span>
+        </div>
+        <a href="/categories/Writeups/" itemprop="url" title="Writeups" class="btn">more...</a>
+    </div>
+  </div>
+</section>
+
+      </div>
+    <h2 class="divider">Post List</h2>
+    <div class="segments posts">
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2023/08/06/Writeups/quals23-forensics/" itemprop="url" title="Securinets Quals CTF 23 Forensics Challenges Writeup"><img data-src="https://i.imgur.com/7DVuoG0.png"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2023-08-06 19:00:00">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2023-08-06T19:00:00+01:00">2023-08-06</time>
+  </span>
+</div>
+
+    <h3><a href="/2023/08/06/Writeups/quals23-forensics/" itemprop="url" title="Securinets Quals CTF 23 Forensics Challenges Writeup">Securinets Quals CTF 23 Forensics Challenges Writeup</a></h3>
+    <div class="excerpt">
+        # The Betrayers
+
+# Description:
+An IT company provides a critical service to customers. One day, the service is attacked by DDoS. The Attack is originated from within the company’s internal network, and that each compromised host was sending a large number of requests to the server.
+The attack...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/Writeups/" itemprop="url" title="Writeups"><i class="ic i-flag"></i>Writeups</a>
+      </span>
+    </div>
+    <a href="/2023/08/06/Writeups/quals23-forensics/" itemprop="url" title="Securinets Quals CTF 23 Forensics Challenges Writeup" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2023/08/06/Writeups/quals23-misc/" itemprop="url" title="Securinets Quals CTF 23 Misc Challenges Writeup"><img data-src="https://i.imgur.com/7DVuoG0.png"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2023-08-06 19:00:00">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2023-08-06T19:00:00+01:00">2023-08-06</time>
+  </span>
+</div>
+
+    <h3><a href="/2023/08/06/Writeups/quals23-misc/" itemprop="url" title="Securinets Quals CTF 23 Misc Challenges Writeup">Securinets Quals CTF 23 Misc Challenges Writeup</a></h3>
+    <div class="excerpt">
+        # Raf Hide
+
+# Description:
+
+My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you help me extract the flag?
+Flag format: Securinets
+
+In this Challenge you will get a go binary and a...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/Writeups/" itemprop="url" title="Writeups"><i class="ic i-flag"></i>Writeups</a>
+      </span>
+    </div>
+    <a href="/2023/08/06/Writeups/quals23-misc/" itemprop="url" title="Securinets Quals CTF 23 Misc Challenges Writeup" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2023/06/03/Kubernetes/post/" itemprop="url" title="Streamlined Application Deployemet using Kubernetes"><img data-src="https://imgur.com/CL8Xz9l.png"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2023-06-03 17:38:55">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2023-06-03T17:38:55+01:00">2023-06-03</time>
+  </span>
+</div>
+
+    <h3><a href="/2023/06/03/Kubernetes/post/" itemprop="url" title="Streamlined Application Deployemet using Kubernetes">Streamlined Application Deployemet using Kubernetes</a></h3>
+    <div class="excerpt">
+        # Introduction
+As second-year engineering students, we embarked our academic group project that pushes us beyond our limits. Being self-proclaimed cloud-native and Kubernetes geeks, we decided to venture into an unfamiliar territory with an advanced project. Our goal? To unravel the mysteries of...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/Kubernetes/" itemprop="url" title="Kubernetes"><i class="ic i-flag"></i>Kubernetes</a>
+      </span>
+    </div>
+    <a href="/2023/06/03/Kubernetes/post/" itemprop="url" title="Streamlined Application Deployemet using Kubernetes" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2023/04/28/Kubernetes/k8s-auth/" itemprop="url" title="SSO-based authentication mechanism for multi-clusters"><img data-src="https://i0.wp.com/cms.pingsafe.com/wp-content/uploads/2022/12/KSPM.png?fit=927%2C600&ssl=1"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2023-04-28 11:29:37">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2023-04-28T11:29:37+01:00">2023-04-28</time>
+  </span>
+</div>
+
+    <h3><a href="/2023/04/28/Kubernetes/k8s-auth/" itemprop="url" title="SSO-based authentication mechanism for multi-clusters">SSO-based authentication mechanism for multi-clusters</a></h3>
+    <div class="excerpt">
+        # Introduction
+# How it comes
+As a university student, I was assigned to create an authentication project for a specific system. But instead of choosing a traditional approach like Kerberos, I decided to spice things up and bring Kubernetes and cloud-native technologies into the mix (Typical Me)....
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/Kubernetes/" itemprop="url" title="Kubernetes"><i class="ic i-flag"></i>Kubernetes</a>
+      </span>
+    </div>
+    <a href="/2023/04/28/Kubernetes/k8s-auth/" itemprop="url" title="SSO-based authentication mechanism for multi-clusters" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2023/03/23/Writeups/ncsc2023/" itemprop="url" title="NCSC&#39;2023 Writeup Challenges"><img data-src="https://imgur.com/LJslRYb.png"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2023-03-23 11:33:37">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2023-03-23T11:33:37+01:00">2023-03-23</time>
+  </span>
+</div>
+
+    <h3><a href="/2023/03/23/Writeups/ncsc2023/" itemprop="url" title="NCSC&#39;2023 Writeup Challenges">NCSC'2023 Writeup Challenges</a></h3>
+    <div class="excerpt">
+        The National Cyber Security Congress (NCSC) is a three-day event that brings together cyber security enthusiasts and experts. The event features a wide range of activities, including workshops, talks, conferences, and two exciting CTF competitions.
+
+As a technical team member, I had the chance to...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/Writeups/" itemprop="url" title="Writeups"><i class="ic i-flag"></i>Writeups</a>
+      </span>
+    </div>
+    <a href="/2023/03/23/Writeups/ncsc2023/" itemprop="url" title="NCSC&#39;2023 Writeup Challenges" class="btn">more...</a>
+  </div>
+</article>
+
+    </div>
+
+  </div>
+
+  
+  <nav class="pagination">
+    <div class="inner">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="ic i-angle-right" aria-label="Next page"></i></a>
+    </div>
+  </nav>
+
+
+
+        </div>
+        <div id="sidebar">
+          
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/page/2/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

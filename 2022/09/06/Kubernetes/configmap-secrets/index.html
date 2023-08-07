@@ -1,0 +1,431 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2022/09/06/Kubernetes/configmap-secrets/">
+
+
+<meta name="description" content="# An introduction to Kubernetes Secrets and ConfigMaps Kubernetes has two types of objects that can inject configuration data into a container when it starts up: Secrets and ConfigMaps. Secrets and Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction To Configmap &amp; Secrets">
+<meta property="og:url" content="http://example.com/2022/09/06/Kubernetes/configmap-secrets/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="# An introduction to Kubernetes Secrets and ConfigMaps Kubernetes has two types of objects that can inject configuration data into a container when it starts up: Secrets and ConfigMaps. Secrets and Co">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-06T10:29:37.000Z">
+<meta property="article:modified_time" content="2023-04-29T14:18:39.811Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+
+
+  <title>
+Introduction To Configmap & Secrets - Kubernetes |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Introduction To Configmap & Secrets
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-09-06 11:29:37">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-09-06T11:29:37+01:00">2022-09-06</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://kruschecompany.com/wp-content/uploads/2019/08/01-1280x595.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Kubernetes/" itemprop="item" rel="index" title="In Kubernetes"><span itemprop="name">Kubernetes</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/06/Kubernetes/configmap-secrets/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h2 id="an-introduction-to-kubernetes-secrets-and-configmaps"><a class="markdownIt-Anchor" href="#an-introduction-to-kubernetes-secrets-and-configmaps">#</a> An introduction to Kubernetes Secrets and ConfigMaps</h2>
+<p>Kubernetes has two types of objects that can inject configuration data into a container when it starts up: Secrets and ConfigMaps. Secrets and ConfigMaps behave similarly in Kubernetes, both in how they are created and because they can be exposed inside a container as mounted files or volumes or environment variables.</p>
+<h3 id="to-understand-more-how-configmap-and-secrets-are-important-lets-consider-the-following-scenario"><a class="markdownIt-Anchor" href="#to-understand-more-how-configmap-and-secrets-are-important-lets-consider-the-following-scenario">#</a> To understand more how configmap and secrets are important let’s consider the following scenario:</h3>
+<p>You have to run a postgres docker image on your host, you explore the documentation of this docker image provided in <em><a href="%22https://hub.docker.com/_/postgres%22">DockerHub</a></em> and you find that you the PostgreSQL image uses several environment variables and there is a mandatory variable called  <code>POSTGRES_PASSWORD</code>  must be defined by running this following command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  docker run --name my-postgres -e POSTGRES_PASSWORD=mypassword -d postgres</span><br></pre></td></tr></table></figure>
+<h3 id="but-how-we-can-use-this-environment-variables-and-how-we-can-manage-them-in-kubernetes"><a class="markdownIt-Anchor" href="#but-how-we-can-use-this-environment-variables-and-how-we-can-manage-them-in-kubernetes">#</a> But how we can use this environment variables and how we can manage them in kubernetes ?</h3>
+<p>We can centralize the variables environment in two types of objects and import these variables in the manifest of a pod, replicasets, or deployments</p>
+<h3 id="what-is-a-configmaps"><a class="markdownIt-Anchor" href="#what-is-a-configmaps">#</a> What is a ConfigMaps</h3>
+<p>In Kubernetes, a ConfigMap is nothing more than a key/value pair. A ConfigMap store’s non-confidential data, meaning no passwords or API keys. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.</p>
+<p>A ConfigMap allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable.</p>
+<h4 id="example-of-confimap-manifest-that-store-the-database-name-username"><a class="markdownIt-Anchor" href="#example-of-confimap-manifest-that-store-the-database-name-username">#</a> Example of confimap manifest that store the database name &amp; username:</h4>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">config-map</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">postgres-db:</span> <span class="string">&quot;database&quot;</span></span><br><span class="line">  <span class="attr">postgres-user:</span> <span class="string">&quot;mohamed&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="create-the-configmaps-object"><a class="markdownIt-Anchor" href="#create-the-configmaps-object">#</a> Create the ConfigMaps Object:</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ kubectl apply -f first-configmap.yaml</span><br><span class="line">configmap/config-map created</span><br></pre></td></tr></table></figure>
+<h4 id="list-the-configmap-objects"><a class="markdownIt-Anchor" href="#list-the-configmap-objects">#</a> List the ConfigMap Objects:</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ kubectl get configmap</span><br><span class="line">NAME               DATA   AGE</span><br><span class="line">config-map         2      26s</span><br><span class="line">kube-root-ca.crt   1      13h</span><br></pre></td></tr></table></figure>
+<h3 id="what-is-a-secrets"><a class="markdownIt-Anchor" href="#what-is-a-secrets">#</a> What is a Secrets:</h3>
+<p>Secrets are a Kubernetes object intended for storing a small amount of sensitive data. It is worth noting that Secrets are stored base64-encoded within Kubernetes, so they are not wildly secure.<br>
+Secrets are similar to ConfigMaps but are specifically intended to hold confidential data.</p>
+<h4 id="example-of-confimap-manifest-that-store-the-database-password"><a class="markdownIt-Anchor" href="#example-of-confimap-manifest-that-store-the-database-password">#</a> Example of confimap manifest that store the database password:</h4>
+<p>we must encode the value that we will stored in the Secrets</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ <span class="built_in">echo</span> -n <span class="string">&quot;mohamed&quot;</span> | <span class="built_in">base64</span></span><br><span class="line">bW9oYW1lZA==</span><br></pre></td></tr></table></figure>
+<p>Now we can use the base64 cipher in the Secret manifest</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">database-secret</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">Opaque</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">postgres-pass:</span> <span class="string">&quot;bW9oYW1lZA==&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="create-the-configmaps-object-2"><a class="markdownIt-Anchor" href="#create-the-configmaps-object-2">#</a> Create the ConfigMaps Object:</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ kubectl apply -f first-secret.yaml</span><br><span class="line">secret/database-secret created</span><br></pre></td></tr></table></figure>
+<h4 id="list-the-configmap-objects-2"><a class="markdownIt-Anchor" href="#list-the-configmap-objects-2">#</a> List the ConfigMap Objects:</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ kubectl get secrets</span><br><span class="line">NAME                  TYPE                                  DATA   AGE</span><br><span class="line">database-secret       Opaque                                1      8s</span><br><span class="line">default-token-xl8sl   kubernetes.io/service-account-token   3      13h</span><br></pre></td></tr></table></figure>
+<h3 id="how-to-use-configmaps-and-secrets-values-in-a-pod"><a class="markdownIt-Anchor" href="#how-to-use-configmaps-and-secrets-values-in-a-pod">#</a> How to use ConfigMaps and Secrets values in a Pod</h3>
+<p>we can use the values from  <code>ConfigMaps</code>  and  <code>Secrets</code>  in the pod manifests in the  <code>env</code>  propriety of the container by using the  <code>valueFrom</code>  field that can import values from configMap and Secrets</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">&lt;pod-name&gt;</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&lt;name&gt;</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">&lt;image&gt;</span></span><br><span class="line">      <span class="attr">env:</span></span><br><span class="line">        <span class="comment"># Define the environment variable</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&lt;variable-name&gt;</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">&lt;config-map-object&gt;</span>     </span><br><span class="line">              <span class="attr">key:</span> <span class="string">&lt;key-name&gt;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&lt;variable-name&gt;</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">secretKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">&lt;secret-object&gt;</span>     </span><br><span class="line">              <span class="attr">key:</span> <span class="string">&lt;key-name&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="create-a-postgresql-pod-that-uses-values-from-configmaps-and-secrets"><a class="markdownIt-Anchor" href="#create-a-postgresql-pod-that-uses-values-from-configmaps-and-secrets">#</a> Create a PostgreSQL Pod that uses values from ConfigMaps and Secrets</h3>
+<h4 id="1-create-the-pod-manifest"><a class="markdownIt-Anchor" href="#1-create-the-pod-manifest">#</a> 1- Create the Pod manifest:</h4>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">postgresql</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">postgres</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">postgres</span></span><br><span class="line">      <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">5432</span></span><br><span class="line">      <span class="attr">env:</span></span><br><span class="line">        <span class="comment"># Define the environment variable</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">POSTGRES_USER</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">config-map</span>   </span><br><span class="line">              <span class="attr">key:</span> <span class="string">postgres-user</span></span><br><span class="line"></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">POSTGRES_DBNAME</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">config-map</span>   </span><br><span class="line">              <span class="attr">key:</span> <span class="string">postgres-db</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">POSTGRES_PASSWORD</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">secretKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">database-secret</span>   </span><br><span class="line">              <span class="attr">key:</span> <span class="string">postgres-pass</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="2-create-the-pod"><a class="markdownIt-Anchor" href="#2-create-the-pod">#</a> 2- Create the Pod:</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ kubectl apply -f postgres.yaml</span><br><span class="line">pod/postgresql created</span><br></pre></td></tr></table></figure>
+<h4 id="3-list-the-created-pod"><a class="markdownIt-Anchor" href="#3-list-the-created-pod">#</a> 3- List The Created Pod:</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ kubectl get pods</span><br><span class="line"></span><br><span class="line">NAME         READY   STATUS    RESTARTS   AGE</span><br><span class="line">postgresql   1/1     Running   0          8s</span><br></pre></td></tr></table></figure>
+<h4 id="4-test-the-database-created-with-variables-of-configmap-and-secrets"><a class="markdownIt-Anchor" href="#4-test-the-database-created-with-variables-of-configmap-and-secrets">#</a> 4- Test the Database created with variables of ConfigMap and Secrets:</h4>
+<p>We can open a bash session on the pod and open the database  <code>mohamed</code>  with the  <code>psql</code>  command provided by the postgreSQL</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">justk8s@justk8s-master:~$ kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> postgresql  -- /bin/bash</span><br><span class="line"></span><br><span class="line">root@postgresql:/<span class="comment"># psql -U &quot;mohamed&quot;</span></span><br><span class="line">psql (14.4 (Debian 14.4-1.pgdg110+1))</span><br><span class="line">Type <span class="string">&quot;help&quot;</span> <span class="keyword">for</span> <span class="built_in">help</span>.</span><br><span class="line"></span><br><span class="line">mohamed=<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h4 id="references"><a class="markdownIt-Anchor" href="#references">#</a> References:</h4>
+<p><em><span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvdGFza3MvZGVidWcvZGVidWctYXBwbGljYXRpb24vZ2V0LXNoZWxsLXJ1bm5pbmctY29udGFpbmVyLw==">Get a Shell to a Running Container</span></em></p>
+<p><em><span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvY29uY2VwdHMvY29uZmlndXJhdGlvbi9jb25maWdtYXAv">ConfigMaps</span></em></p>
+<p><em><span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvY29uY2VwdHMvY29uZmlndXJhdGlvbi9zZWNyZXQv">Secrets</span></em></p>
+<p><em><span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9fL3Bvc3RncmVz">PostgreSQL Docker</span></em></p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-29 15:18:39" itemprop="dateModified" datetime="2023-04-29T15:18:39+01:00">2023-04-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/09/05/CyberDefenders/Phishy/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;cyberdefenders.org&#x2F;media&#x2F;terraform&#x2F;Phishy&#x2F;phishy.png" title="CyberDefenders Writeup  Phishy">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> CyberDefenders</span>
+  <h3>CyberDefenders Writeup  Phishy</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2022/09/06/CyberDefenders/brave/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;cyberdefenders.org&#x2F;media&#x2F;terraform&#x2F;Brave&#x2F;brave2.png" title="CyberDefenders Writeup Brave">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> CyberDefenders</span>
+  <h3>CyberDefenders Writeup Brave</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#an-introduction-to-kubernetes-secrets-and-configmaps"><span class="toc-number">1.</span> <span class="toc-text"> An introduction to Kubernetes Secrets and ConfigMaps</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#to-understand-more-how-configmap-and-secrets-are-important-lets-consider-the-following-scenario"><span class="toc-number">1.1.</span> <span class="toc-text"> To understand more how configmap and secrets are important let’s consider the following scenario:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#but-how-we-can-use-this-environment-variables-and-how-we-can-manage-them-in-kubernetes"><span class="toc-number">1.2.</span> <span class="toc-text"> But how we can use this environment variables and how we can manage them in kubernetes ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#what-is-a-configmaps"><span class="toc-number">1.3.</span> <span class="toc-text"> What is a ConfigMaps</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#example-of-confimap-manifest-that-store-the-database-name-username"><span class="toc-number">1.3.1.</span> <span class="toc-text"> Example of confimap manifest that store the database name &amp; username:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#create-the-configmaps-object"><span class="toc-number">1.3.2.</span> <span class="toc-text"> Create the ConfigMaps Object:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#list-the-configmap-objects"><span class="toc-number">1.3.3.</span> <span class="toc-text"> List the ConfigMap Objects:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#what-is-a-secrets"><span class="toc-number">1.4.</span> <span class="toc-text"> What is a Secrets:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#example-of-confimap-manifest-that-store-the-database-password"><span class="toc-number">1.4.1.</span> <span class="toc-text"> Example of confimap manifest that store the database password:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#create-the-configmaps-object-2"><span class="toc-number">1.4.2.</span> <span class="toc-text"> Create the ConfigMaps Object:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#list-the-configmap-objects-2"><span class="toc-number">1.4.3.</span> <span class="toc-text"> List the ConfigMap Objects:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#how-to-use-configmaps-and-secrets-values-in-a-pod"><span class="toc-number">1.5.</span> <span class="toc-text"> How to use ConfigMaps and Secrets values in a Pod</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#create-a-postgresql-pod-that-uses-values-from-configmaps-and-secrets"><span class="toc-number">1.6.</span> <span class="toc-text"> Create a PostgreSQL Pod that uses values from ConfigMaps and Secrets</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-create-the-pod-manifest"><span class="toc-number">1.6.1.</span> <span class="toc-text"> 1- Create the Pod manifest:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-create-the-pod"><span class="toc-number">1.6.2.</span> <span class="toc-text"> 2- Create the Pod:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-list-the-created-pod"><span class="toc-number">1.6.3.</span> <span class="toc-text"> 3- List The Created Pod:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-test-the-database-created-with-variables-of-configmap-and-secrets"><span class="toc-number">1.6.4.</span> <span class="toc-text"> 4- Test the Database created with variables of ConfigMap and Secrets:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#references"><span class="toc-number">1.6.5.</span> <span class="toc-text"> References:</span></a></li></ol></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/08/05/Kubernetes/kubeadm/" rel="bookmark" title="Setting Up Kubernetes with Kubeadm">Setting Up Kubernetes with Kubeadm</a></li><li class="active"><a href="/2022/09/06/Kubernetes/configmap-secrets/" rel="bookmark" title="Introduction To Configmap & Secrets">Introduction To Configmap & Secrets</a></li><li><a href="/2022/09/08/Kubernetes/private-docker-k8s/" rel="bookmark" title="Dockerize a website & Pull it privately in k8s">Dockerize a website & Pull it privately in k8s</a></li><li><a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="bookmark" title="Deploy Nginx Ingress in Bare-metal Cluster">Deploy Nginx Ingress in Bare-metal Cluster</a></li><li><a href="/2022/09/10/Kubernetes/nfs-k8s/" rel="bookmark" title="NFS as Remote Storage for Kubernetes">NFS as Remote Storage for Kubernetes</a></li><li><a href="/2023/04/28/Kubernetes/k8s-auth/" rel="bookmark" title="SSO-based authentication mechanism for multi-clusters">SSO-based authentication mechanism for multi-clusters</a></li><li><a href="/2023/06/03/Kubernetes/post/" rel="bookmark" title="Streamlined Application Deployemet using Kubernetes">Streamlined Application Deployemet using Kubernetes</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/09/05/CyberDefenders/Phishy/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/09/06/CyberDefenders/brave/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/09/06/Kubernetes/configmap-secrets/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

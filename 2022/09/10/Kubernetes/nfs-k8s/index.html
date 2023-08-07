@@ -1,0 +1,497 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2022/09/10/Kubernetes/nfs-k8s/">
+
+
+<meta name="description" content="We will setting up a NFS server to use it as remote storage for our cluster to create a lot of persistent volumes in our local infrastructure ! We Assume that we have 4 Ubuntu 20.04 LTS, The Kubernete">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NFS as Remote Storage for Kubernetes">
+<meta property="og:url" content="http://example.com/2022/09/10/Kubernetes/nfs-k8s/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="We will setting up a NFS server to use it as remote storage for our cluster to create a lot of persistent volumes in our local infrastructure ! We Assume that we have 4 Ubuntu 20.04 LTS, The Kubernete">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-10T22:26:58.000Z">
+<meta property="article:modified_time" content="2023-04-29T14:18:39.811Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+
+
+  <title>
+NFS as Remote Storage for Kubernetes - Kubernetes |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">NFS as Remote Storage for Kubernetes
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-09-10 23:26:58">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-09-10T23:26:58+01:00">2022-09-10</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://www.axigen.com/usr/files/articles/x118.png.pagespeed.ic.B1J-BES_Qy.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Kubernetes/" itemprop="item" rel="index" title="In Kubernetes"><span itemprop="name">Kubernetes</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/10/Kubernetes/nfs-k8s/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>We will setting up a NFS server to use it as remote storage for our cluster to create a lot of persistent volumes in our local infrastructure !</p>
+<p>We Assume that we have 4 Ubuntu 20.04 LTS, The Kubernetes is installed and the  <code>4n6nk8s-nfs</code>  host in the same network with the cluster :</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Hostname</th>
+<th>IP address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Master</td>
+<td>4n6nk8s-master</td>
+<td>192.168.1.18/24</td>
+</tr>
+<tr>
+<td>Worker</td>
+<td>4n6nk8s-worker1</td>
+<td>192.168.1.19/24</td>
+</tr>
+<tr>
+<td>Worker</td>
+<td>4n6nk8s-worker2</td>
+<td>192.168.1.20/24</td>
+</tr>
+<tr>
+<td>NFS Server</td>
+<td>4n6nk8s-nfs</td>
+<td>192.168.1.80/24</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-is-a-nfs-network-file-system-server"><a class="markdownIt-Anchor" href="#what-is-a-nfs-network-file-system-server">#</a> What is a NFS (Network File System) Server:</h2>
+<p>Network File System (NFS) is a networking protocol for distributed file sharing. A file system defines the way data in the form of files is stored and retrieved from storage devices, such as hard disk drives, solid-state drives and tape drives. NFS is a network file sharing protocol that defines the way files are stored and retrieved from storage devices across networks.</p>
+<p>This distributed file system protocol allows a user on a client computer to access files over a network in the same way they would access a local storage file.</p>
+<h2 id="setting-up-the-nfs-server"><a class="markdownIt-Anchor" href="#setting-up-the-nfs-server">#</a> Setting up the NFS server</h2>
+<p>We need to install the  <code>nfs-kernel-server</code>  package on the NFS server. This package will store additional packages such as  <code>nfs-common</code>  and  <code>4n6nk8s@rpcbind</code></p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s-nfs:~$ sudo apt install nfs-kernel-server</span><br></pre></td></tr></table></figure>
+<p>Now let’s create an NFS Export Directory</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-nfs:~$ sudo <span class="built_in">mkdir</span> /mnt/nfs-data </span><br></pre></td></tr></table></figure>
+<p>Now let’s give it a read,write and execute privileges to all the contents inside the directory</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-nfs:~$ sudo <span class="built_in">chmod</span> 777 /mnt/nfs-data</span><br></pre></td></tr></table></figure>
+<p>Now Lets add a new line to the  <code>/etc/exports</code>  configuration file.</p>
+<blockquote>
+<p>The  <code>/etc/exports</code>  file indicates all directories that a nfs server exports to its clients. Each line in the file specifies a single directory.</p>
+</blockquote>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-nfs:~$ sudo vim /etc/exports</span><br></pre></td></tr></table></figure>
+<p>You can provide access to a single client, multiple clients, or specify an entire subnet. In this guide, we have allowed an entire subnet to have access to the NFS share.</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/mnt/nfs-data <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span>(rw,<span class="keyword">sync</span>,no_subtree_check)</span><br></pre></td></tr></table></figure>
+<p>After granting access to the subnet, let’s export the NFS share directory and restart the NFS</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-nfs:~$ sudo exportfs -a</span><br><span class="line">4n6nk8s@4n6nk8s-nfs:~$ sudo systemctl restart nfs-kernel-server</span><br></pre></td></tr></table></figure>
+<p>Let’s allow NFS access through the firewall</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-nfs:~$ sudo ufw allow from 192.168.43.0/24 to any port nfs</span><br></pre></td></tr></table></figure>
+<h2 id="install-the-nfs-client-on-the-kubernetes-nodes"><a class="markdownIt-Anchor" href="#install-the-nfs-client-on-the-kubernetes-nodes">#</a> Install the NFS Client on the Kubernetes Nodes</h2>
+<p>We must install the  <code>nfs-common</code>  packages to access to the NFS share so let’s install it by running the following command on each node:</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-worker1:~$ sudo apt install nfs-common</span><br></pre></td></tr></table></figure>
+<p>This command mount the NFS Share on one node for testing and sanity check only</p>
+<blockquote>
+<p>The mount command is not a mandatory step. We mount for testing purposes. you can skip to the next section</p>
+</blockquote>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-worker1:~$ sudo mount 4n6nk8s-nfs:/mnt/nfs-data  /mnt</span><br></pre></td></tr></table></figure>
+<p>Let’s Create a file for testing</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-worker1:~$ <span class="built_in">cd</span> /mnt</span><br><span class="line">4n6nk8s@4n6nk8s-worker1:/mnt $ <span class="built_in">touch</span> file </span><br></pre></td></tr></table></figure>
+<p>Check the  <code>/mnt/nfs-data</code>  on the NFS server</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-nfs:~$ <span class="built_in">cd</span> /mnt/nfs-data</span><br><span class="line">4n6nk8s@4n6nk8s-nfs:/mnt/nfs-data$ <span class="built_in">ls</span></span><br><span class="line">file </span><br></pre></td></tr></table></figure>
+<h2 id="kubernetes-with-nfs-remote-storage-demo"><a class="markdownIt-Anchor" href="#kubernetes-with-nfs-remote-storage-demo">#</a> Kubernetes with NFS remote Storage demo</h2>
+<p>After Setting up the NFS server and install the NFS client on the kubernetes nodes. Now it’s time to do some practice with  <code>Persistent Volume</code>  and  <code>Persistent Volume Claim</code>  with NFS storage.</p>
+<h3 id="create-a-persistent-volume-with-nfs"><a class="markdownIt-Anchor" href="#create-a-persistent-volume-with-nfs">#</a> Create a Persistent Volume with NFS</h3>
+<p>Example of Persistent Volume manifest using nfs:</p>
+<figure class="highlight yaml"><figcaption><span>PersistentVolume</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pv-nfs</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">100Mi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">nfs</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.80</span> <span class="comment"># the IP address of 4n6nk8s-nfs host</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">&quot;/mnt/nfs-data&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Make sure to put the correct IP address of the NFS server and the correct NFS Share point!<br>
+Create the persistent volume using kubectl</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl apply -f nfs-pv.yaml</span><br><span class="line">persistentvolume/pv-nfs created</span><br></pre></td></tr></table></figure>
+<p>List the Persistent Volumes to make sure for the creation</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl get pv</span><br><span class="line">NAME     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE</span><br><span class="line">pv-nfs   100Mi      RWX            Retain           Available           nfs                     4s</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="create-a-persistent-volume-claim-with-nfs"><a class="markdownIt-Anchor" href="#create-a-persistent-volume-claim-with-nfs">#</a> Create a Persistent Volume Claim with NFS</h3>
+<p>Example of Persistent Volume Claim manifest using nfs:</p>
+<figure class="highlight yaml"><figcaption><span>PersistentVolumeClaim</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pvc-nfs</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">nfs</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">        <span class="attr">storage:</span> <span class="string">100Mi</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Create the persistent volume using kubectl</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl apply -f nfs-pvc.yaml</span><br><span class="line">persistentvolumeclaim/pvc-nfs created</span><br></pre></td></tr></table></figure>
+<p>List the  <code>Persistent Volumes Claims</code>  to make sure for the creation</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl get pvc</span><br><span class="line">NAME      STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE</span><br><span class="line">pvc-nfs   Bound    pv-nfs   100Mi      RWX            nfs            3s</span><br></pre></td></tr></table></figure>
+<h3 id="create-nginx-deployment"><a class="markdownIt-Anchor" href="#create-nginx-deployment">#</a> Create Nginx Deployment</h3>
+<p>We use the  <code>volumeMounts</code>  and  <code>volumes </code> attributes in this manifest to use the persistent volume we created:</p>
+<figure class="highlight yaml"><figcaption><span>Deployment</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">nginx-deployment</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">role:</span> <span class="string">webserver</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">    <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">    <span class="attr">selector:</span></span><br><span class="line">        <span class="attr">matchLabels:</span></span><br><span class="line">            <span class="attr">role:</span> <span class="string">webserver</span></span><br><span class="line">    <span class="attr">template:</span></span><br><span class="line">        <span class="attr">metadata:</span></span><br><span class="line">            <span class="attr">labels:</span></span><br><span class="line">                <span class="attr">role:</span> <span class="string">webserver</span></span><br><span class="line">        <span class="attr">spec:</span></span><br><span class="line">            <span class="attr">containers:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">frontend</span></span><br><span class="line">              <span class="attr">image:</span> <span class="string">nginx</span>  <span class="comment"># we use wrong image for the demo !</span></span><br><span class="line">              <span class="attr">ports:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-port</span></span><br><span class="line">                  <span class="attr">containerPort:</span> <span class="number">80</span></span><br><span class="line">              <span class="attr">volumeMounts:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nfs</span></span><br><span class="line">                  <span class="attr">mountPath:</span> <span class="string">/usr/share/nginx/html</span></span><br><span class="line">            <span class="attr">volumes:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nfs</span></span><br><span class="line">              <span class="attr">persistentVolumeClaim:</span></span><br><span class="line">                <span class="attr">claimName:</span> <span class="string">pvc-nfs</span></span><br></pre></td></tr></table></figure>
+<p>Deploy the  <code>nginx-deployment.yaml</code>  using the  <code>kubectl apply -f</code> .</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl apply -f nginx-deployment.yaml</span><br><span class="line">deployment.apps/nginx-deployment created</span><br></pre></td></tr></table></figure>
+<p>Make sure that the deployment was created without any problems!</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl get pods</span><br><span class="line">NAME                                READY   STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-7976956b49-fgbb4   1/1     Running   0          16s</span><br><span class="line">nginx-deployment-7976956b49-hzrmm   1/1     Running   0          16s</span><br><span class="line">nginx-deployment-7976956b49-kg5tx   1/1     Running   0          16s</span><br></pre></td></tr></table></figure>
+<h3 id="sanity-check-testing-the-nfs-volumes"><a class="markdownIt-Anchor" href="#sanity-check-testing-the-nfs-volumes">#</a> Sanity Check (Testing the NFS volumes):</h3>
+<p>Let’s get shell on one of the running containers and go to the mount point then create a file!</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> nginx-deployment-7976956b49-fgbb4 -- /bin/bash Command Line Prompt</span><br><span class="line">root@nginx-deployment-7976956b49-fgbb4:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev  docker-entrypoint.d  docker-entrypoint.sh  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br></pre></td></tr></table></figure>
+<p>Now the shell is opened. Let’s create a file in  <code>/usr/share/nginx/html</code> :</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@nginx-deployment-7976956b49-fgbb4:/<span class="comment"># cd /usr/share/nginx/html/</span></span><br></pre></td></tr></table></figure>
+<p>We find the file created in the client test xD</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@nginx-deployment-7976956b49-fgbb4:/usr/share/nginx/html<span class="comment"># ls</span></span><br><span class="line">file</span><br></pre></td></tr></table></figure>
+<p>Create a file named “hi from the other side!”</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@nginx-deployment-7976956b49-fgbb4:/usr/share/nginx/html<span class="comment"># touch &quot;hi from the other side!&quot;</span></span><br><span class="line">root@nginx-deployment-7976956b49-fgbb4:/usr/share/nginx/html<span class="comment"># ls</span></span><br><span class="line">file  <span class="string">&#x27;hi from the other side!&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Let’s open another shell on another running container:</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> nginx-deployment-7976956b49-kg5tx -- /bin/bash Command Line Prompt</span><br><span class="line">root@nginx-deployment-7976956b49-kg5tx:/<span class="comment"># cd /usr/share/nginx/html/</span></span><br></pre></td></tr></table></figure>
+<p>Bingoo! we find the same content on the same share point!</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@nginx-deployment-7976956b49-kg5tx:/usr/share/nginx/html<span class="comment"># ls</span></span><br><span class="line"> file  <span class="string">&#x27;hi from the other side!&#x27;</span></span><br><span class="line">root@nginx-deployment-7976956b49-kg5tx:/usr/share/nginx/html<span class="comment"># exit</span></span><br></pre></td></tr></table></figure>
+<p>Now we will try to delete the deployment and recreate another to check the data in the  persistent volume</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl delete -f nginx-deployment.yaml</span><br><span class="line">deployment.apps <span class="string">&quot;nginx-deployment&quot;</span> deleted</span><br><span class="line"></span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl apply -f nginx-deployment.yaml</span><br><span class="line">deployment.apps/nginx-deployment created</span><br></pre></td></tr></table></figure>
+<p>Check the deployment created or not !</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~ kubectl get pods</span><br><span class="line">NAME                                READY   STATUS              RESTARTS   AGE</span><br><span class="line">nginx-deployment-7976956b49-7d5vw   1/1     Running             0          10s</span><br><span class="line">nginx-deployment-7976956b49-9r5gx   0/1     ContainerCreating   0          10s</span><br><span class="line">nginx-deployment-7976956b49-fdq7w   1/1     Running             0          10s</span><br></pre></td></tr></table></figure>
+<p>Open another shell on running container from the new deployment to check the content of the persistent volume:</p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> nginx-deployment-7976956b49-7d5vw -- /bin/bash Command Line Prompt</span><br><span class="line">root@nginx-deployment-7976956b49-7d5vw:/<span class="comment"># cd /usr/share/nginx/html/</span></span><br></pre></td></tr></table></figure>
+<p>Display the content of the mount point  <code>/usr/share/nginx/html/</code></p>
+<figure class="highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@nginx-deployment-7976956b49-7d5vw:/usr/share/nginx/html<span class="comment"># ls</span></span><br><span class="line"> file  <span class="string">&#x27;hi from the other side!&#x27;</span></span><br><span class="line">root@nginx-deployment-7976956b49-7d5vw:/usr/share/nginx/html<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<p>Bingoo! The content still in the persistent volume without any problem !</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-29 15:18:39" itemprop="dateModified" datetime="2023-04-29T15:18:39+01:00">2023-04-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/09/09/Kubernetes/nginx-ingress/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;imgur.com&#x2F;vC01Qdu.png" title="Deploy Nginx Ingress in Bare-metal Cluster">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>Deploy Nginx Ingress in Bare-metal Cluster</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2022/09/12/Writeups/csaw2022/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;imgur.com&#x2F;ys2CFN6.png" title="CSAW&#39;2022 Forensics Writeup">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> Writeups</span>
+  <h3>CSAW'2022 Forensics Writeup</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-a-nfs-network-file-system-server"><span class="toc-number">1.</span> <span class="toc-text"> What is a NFS (Network File System) Server:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setting-up-the-nfs-server"><span class="toc-number">2.</span> <span class="toc-text"> Setting up the NFS server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-the-nfs-client-on-the-kubernetes-nodes"><span class="toc-number">3.</span> <span class="toc-text"> Install the NFS Client on the Kubernetes Nodes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-with-nfs-remote-storage-demo"><span class="toc-number">4.</span> <span class="toc-text"> Kubernetes with NFS remote Storage demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#create-a-persistent-volume-with-nfs"><span class="toc-number">4.1.</span> <span class="toc-text"> Create a Persistent Volume with NFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#create-a-persistent-volume-claim-with-nfs"><span class="toc-number">4.2.</span> <span class="toc-text"> Create a Persistent Volume Claim with NFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#create-nginx-deployment"><span class="toc-number">4.3.</span> <span class="toc-text"> Create Nginx Deployment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sanity-check-testing-the-nfs-volumes"><span class="toc-number">4.4.</span> <span class="toc-text"> Sanity Check (Testing the NFS volumes):</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/08/05/Kubernetes/kubeadm/" rel="bookmark" title="Setting Up Kubernetes with Kubeadm">Setting Up Kubernetes with Kubeadm</a></li><li><a href="/2022/09/06/Kubernetes/configmap-secrets/" rel="bookmark" title="Introduction To Configmap & Secrets">Introduction To Configmap & Secrets</a></li><li><a href="/2022/09/08/Kubernetes/private-docker-k8s/" rel="bookmark" title="Dockerize a website & Pull it privately in k8s">Dockerize a website & Pull it privately in k8s</a></li><li><a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="bookmark" title="Deploy Nginx Ingress in Bare-metal Cluster">Deploy Nginx Ingress in Bare-metal Cluster</a></li><li class="active"><a href="/2022/09/10/Kubernetes/nfs-k8s/" rel="bookmark" title="NFS as Remote Storage for Kubernetes">NFS as Remote Storage for Kubernetes</a></li><li><a href="/2023/04/28/Kubernetes/k8s-auth/" rel="bookmark" title="SSO-based authentication mechanism for multi-clusters">SSO-based authentication mechanism for multi-clusters</a></li><li><a href="/2023/06/03/Kubernetes/post/" rel="bookmark" title="Streamlined Application Deployemet using Kubernetes">Streamlined Application Deployemet using Kubernetes</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/09/12/Writeups/csaw2022/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/09/10/Kubernetes/nfs-k8s/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

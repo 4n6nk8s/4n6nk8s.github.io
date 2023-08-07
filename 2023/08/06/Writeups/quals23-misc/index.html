@@ -1,0 +1,656 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2023/08/06/Writeups/quals23-misc/">
+
+
+<meta name="description" content="# Raf Hide  # Description:  My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you he">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Securinets Quals CTF 23 Misc Challenges Writeup">
+<meta property="og:url" content="http://example.com/2023/08/06/Writeups/quals23-misc/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="# Raf Hide  # Description:  My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you he">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/QRKzGoO.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/video-gif.gif">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/000.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/015.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/210.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/372.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/377.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/381.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/377.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/recoverd.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/381.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/Assembled.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/finally.png">
+<meta property="og:image" content="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/Final.png">
+<meta property="og:image" content="https://i.imgur.com/jHut52F.png">
+<meta property="og:image" content="https://i.imgur.com/vSB9IGX.png">
+<meta property="og:image" content="https://i.imgur.com/DfscXB4.png">
+<meta property="og:image" content="https://i.imgur.com/rdG9k09.png">
+<meta property="og:image" content="https://i.imgur.com/uWfBYaJ.png">
+<meta property="og:image" content="https://i.imgur.com/P8IBsRt.png">
+<meta property="og:image" content="https://i.imgur.com/f1fon6N.png">
+<meta property="og:image" content="https://i.imgur.com/7FHWF6K.png">
+<meta property="og:image" content="https://i.imgur.com/xqvWPxc.png">
+<meta property="og:image" content="https://i.imgur.com/P5bXWY4.png">
+<meta property="og:image" content="https://i.imgur.com/hVzUWC9.png">
+<meta property="og:image" content="https://i.imgur.com/ASWzJB9.png">
+<meta property="og:image" content="https://i.imgur.com/NUIk82u.png">
+<meta property="og:image" content="https://i.imgur.com/AmkpQPE.png">
+<meta property="og:image" content="https://i.imgur.com/B5scqzJ.png">
+<meta property="og:image" content="https://i.imgur.com/3hjuMYS.png">
+<meta property="og:image" content="https://i.imgur.com/lsXXO6K.png">
+<meta property="og:image" content="https://i.imgur.com/XmWhATI.png">
+<meta property="og:image" content="https://i.imgur.com/lTGDuFS.png">
+<meta property="article:published_time" content="2023-08-06T18:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-07T11:04:02.560Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/QRKzGoO.png">
+
+
+  <title>
+Securinets Quals CTF 23 Misc Challenges Writeup - Writeups |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Securinets Quals CTF 23 Misc Challenges Writeup
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2023-08-06 19:00:00">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-08-06T19:00:00+01:00">2023-08-06</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://i.imgur.com/7DVuoG0.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Writeups/" itemprop="item" rel="index" title="In Writeups"><span itemprop="name">Writeups</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/06/Writeups/quals23-misc/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="raf-hide"><a class="markdownIt-Anchor" href="#raf-hide">#</a> Raf Hide</h1>
+<p><img data-src="https://i.imgur.com/QRKzGoO.png" alt=""></p>
+<h3 id="description"><a class="markdownIt-Anchor" href="#description">#</a> Description:</h3>
+<blockquote Secrect="">
+<p>My friend write a tool that can hide data inside an image. He give me this tool with an anime video without any source code and challenge me to get the secret! . Can you help me extract the flag?<br>
+Flag format: Securinets</p>
+</blockquote>
+<blockquote>
+<p>In this Challenge you will get a go binary and a video! I will not explain how to reverse the binary. The main Idea is to understand what the binary do and extract the data from the video</p>
+</blockquote>
+<p>Author: <strong>Raf²</strong></p>
+<p>This is a python version of what the binary can do :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create an ArgumentParser object</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;Example program using options and arguments&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add options and arguments</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;-i&#x27;</span>, <span class="string">&#x27;--input&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;select cover-image&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-e&#x27;</span>, <span class="string">&#x27;--embedfile&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;select image to be embedded&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-o&#x27;</span>, <span class="string">&#x27;--output&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;The output&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Parse the arguments</span></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Check if the options and arguments are correct</span></span><br><span class="line"><span class="keyword">if</span> args.<span class="built_in">input</span> <span class="keyword">and</span> args.embedfile <span class="keyword">and</span> args.output:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Starting Hiding ...&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># Provide an usage message if the input is incorrect</span></span><br><span class="line">    parser.print_usage()</span><br><span class="line">    exit()</span><br><span class="line"></span><br><span class="line">image=Image.<span class="built_in">open</span>(args.<span class="built_in">input</span>)</span><br><span class="line">embed=Image.<span class="built_in">open</span>(args.embedfile).convert(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> image.size != embed.size:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;The Images are not in the same size!&#x27;</span>)</span><br><span class="line">    exit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">embed_data=embed.load()</span><br><span class="line">image_data=image.load()</span><br><span class="line">index=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(image.height):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(image.width):</span><br><span class="line">        flag_pix=<span class="built_in">int</span>(embed_data[i,j])</span><br><span class="line">        flag_pix &amp;=<span class="number">1</span></span><br><span class="line">        im_pix=<span class="built_in">list</span>(image_data[i,j])</span><br><span class="line">        data = ((flag_pix &lt;&lt; index%<span class="number">2</span>) | (<span class="number">254</span>-index%<span class="number">2</span>)) </span><br><span class="line">        <span class="keyword">if</span> flag_pix ==<span class="number">1</span> :</span><br><span class="line">            im_pix[index%<span class="number">3</span>]|= data &amp; (<span class="number">1</span>+index%<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            im_pix[index%<span class="number">3</span>]&amp;= data</span><br><span class="line">        image_data[i,j]=<span class="built_in">tuple</span>(im_pix)</span><br><span class="line">        index+=<span class="number">1</span></span><br><span class="line">image.save(args.output)</span><br></pre></td></tr></table></figure>
+<p>This is a golang version of what the binary can do :</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;image&quot;</span></span><br><span class="line">	<span class="string">&quot;image/color&quot;</span></span><br><span class="line">	<span class="string">&quot;image/png&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;flag&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create a new FlagSet to parse command line arguments</span></span><br><span class="line">	flagSet := flag.NewFlagSet(<span class="string">&quot;steganography&quot;</span>, flag.ExitOnError)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Define command line options and arguments</span></span><br><span class="line">	inputFileName := flagSet.String(<span class="string">&quot;i&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;select cover-image&quot;</span>)</span><br><span class="line">	embedFileName := flagSet.String(<span class="string">&quot;e&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;select image to be embedded&quot;</span>)</span><br><span class="line">	outputFileName := flagSet.String(<span class="string">&quot;o&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;The output&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Parse the command line arguments</span></span><br><span class="line">	flagSet.Parse(os.Args[<span class="number">1</span>:])</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Check if the options and arguments are correct</span></span><br><span class="line">	<span class="keyword">if</span> *inputFileName == <span class="string">&quot;&quot;</span> || *embedFileName == <span class="string">&quot;&quot;</span> || *outputFileName == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">		flagSet.Usage()</span><br><span class="line">		os.Exit(<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Open the input file</span></span><br><span class="line">	inputFile1, err := os.Open(*embedFileName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> inputFile1.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Decode the PNG image</span></span><br><span class="line">	inputImage1, _, err := image.Decode(inputFile1)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Check if the image is grayscale</span></span><br><span class="line">	grayImage, ok := inputImage1.(*image.Gray)</span><br><span class="line">	<span class="keyword">if</span> !ok &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Error: input image is not grayscale&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Get the width and height of the image</span></span><br><span class="line">	embed_width := grayImage.Bounds().Size().X</span><br><span class="line">	embed_height := grayImage.Bounds().Size().Y</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Open the input file</span></span><br><span class="line">	inputFile, err := os.Open(*inputFileName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> inputFile.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Decode the image as a generic Image interface value</span></span><br><span class="line">	inputImage, _, err := image.Decode(inputFile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Assert the image to an *image.RGBA or *image.NRGBA value</span></span><br><span class="line">	rgba, ok := inputImage.(*image.RGBA)</span><br><span class="line">	<span class="keyword">if</span> !ok &#123;</span><br><span class="line">		nrgba, ok := inputImage.(*image.NRGBA)</span><br><span class="line">		<span class="keyword">if</span> !ok &#123;</span><br><span class="line">			<span class="built_in">panic</span>(<span class="string">&quot;Input image format not supported&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		rgba = image.NewRGBA(nrgba.Bounds())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Get the width and height of the image</span></span><br><span class="line">	bounds := rgba.Bounds()</span><br><span class="line">	width := bounds.Size().X</span><br><span class="line">	height := bounds.Size().Y</span><br><span class="line">	index:=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> width!=embed_width || height!=embed_height &#123;</span><br><span class="line">		<span class="built_in">panic</span>(<span class="string">&quot;The Images are not in the same size!&quot;</span>)</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Invert the colors of the image by subtracting each RGB component from 255</span></span><br><span class="line">	<span class="keyword">for</span> y := <span class="number">0</span>; y &lt; height; y++ &#123;</span><br><span class="line">		<span class="keyword">for</span> x := <span class="number">0</span>; x &lt; width; x++ &#123;</span><br><span class="line">			intensity := grayImage.GrayAt(x, y).Y &amp; <span class="number">1</span></span><br><span class="line">			i:=<span class="type">uint8</span>(index%<span class="number">2</span>)</span><br><span class="line">			data:= ((intensity &lt;&lt; i) | (<span class="number">254</span>-i))</span><br><span class="line">			r, g, b, a := rgba.At(x, y).RGBA()</span><br><span class="line">			im_pix:= [<span class="number">3</span>]<span class="type">uint8</span>&#123;<span class="type">uint8</span>(r),<span class="type">uint8</span>(g),<span class="type">uint8</span>(b)&#125;</span><br><span class="line">			j:= <span class="type">uint</span>(index%<span class="number">3</span>)</span><br><span class="line">			<span class="keyword">if</span> intensity == <span class="number">1</span> &#123;</span><br><span class="line">				im_pix[j] = im_pix[j] | (data &amp; (<span class="number">1</span>+i))</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				im_pix[j] = im_pix[j] &amp; data</span><br><span class="line">			&#125;</span><br><span class="line">			newColor := color.RGBA&#123;</span><br><span class="line">				R: <span class="type">uint8</span>(im_pix[<span class="number">0</span>]),</span><br><span class="line">				G: <span class="type">uint8</span>(im_pix[<span class="number">1</span>]),</span><br><span class="line">				B: <span class="type">uint8</span>(im_pix[<span class="number">2</span>]),</span><br><span class="line">				A: <span class="type">uint8</span>(a),</span><br><span class="line">			&#125;</span><br><span class="line">			rgba.SetRGBA(x, y, newColor)</span><br><span class="line">			index++</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create the output file</span></span><br><span class="line">	outputFile, err := os.Create(*outputFileName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> outputFile.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Encode the output image as PNG</span></span><br><span class="line">	<span class="keyword">if</span> err := png.Encode(outputFile, rgba); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;Output image saved successfully&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As we see here this script try to hide image inside another image in a specific way. We need to understand how he hide data.</p>
+<p>The tool take a black-white image that have only 2 values in his pixels and try to inject this pixels in the LSB of RGB channels of the other image!<br>
+But be carefull is not a traditional or simple LSB steganoraphy here! In each iteration it take a single channel. For example the 1st pixel will use the Red value, 2nd will use the Green value, 3rd will use the Blue and so on.</p>
+<p>We need to reverse this algorithm and write a script that can extract from images used by this tool.</p>
+<p>Let’s use this one!</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">INPUT_FILFE=<span class="string">&quot;input.png&quot;</span></span><br><span class="line">EXTRACTED_DATA=<span class="string">&quot;extracted.png&quot;</span></span><br><span class="line">image=Image.<span class="built_in">open</span>(INPUT_FILFE)</span><br><span class="line">image_data = image.load()</span><br><span class="line">extracted = Image.new(<span class="string">&#x27;1&#x27;</span>, (image.width,image.height), <span class="number">1</span>)</span><br><span class="line">index=<span class="number">0</span></span><br><span class="line">output_data=extracted.load()</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(image.height):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(image.width):  </span><br><span class="line">        im_pix=<span class="built_in">list</span>(image_data[i,j])</span><br><span class="line">        flag_pix = (im_pix[index%<span class="number">3</span>]&amp;(<span class="number">1</span>+index%<span class="number">2</span>)) </span><br><span class="line">        <span class="keyword">if</span> flag_pix &gt;= <span class="number">1</span>:</span><br><span class="line">            flag_pix=<span class="number">255</span></span><br><span class="line">        output_data[i,j]=flag_pix</span><br><span class="line">        index+=<span class="number">1</span></span><br><span class="line">extracted.save(EXTRACTED_DATA)</span><br></pre></td></tr></table></figure>
+<p>To make sure that everything is ok now! We can use the given tool and hide a black-white image and try to extract it with our new script.</p>
+<p>We assume that everything is fine. Let’s take a look now how can we extract data from the video!</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/video-gif.gif" alt=""></p>
+<p>Let’s extract every frame from this video and try to extract a data from it using our last script. Maybe we will find something here!</p>
+<h3 id="extract-all-the-frames-using-ffmpeg"><a class="markdownIt-Anchor" href="#extract-all-the-frames-using-ffmpeg">#</a> Extract all the frames using ffmpeg</h3>
+<p>After running this command. we get 383 frames.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raf@Securinets:~$ <span class="built_in">mkdir</span> frames</span><br><span class="line">raf@Securinets:~$ ffmpeg -i challenge.mp4 frames/%3d.png</span><br></pre></td></tr></table></figure>
+<h3 id="extract-data-from-each-frame-using-our-solver"><a class="markdownIt-Anchor" href="#extract-data-from-each-frame-using-our-solver">#</a> Extract data from each frame using our solver</h3>
+<p>Let’s use our solver to try extracting data from each frame.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raf@Securinets:~$ <span class="built_in">mkdir</span> data</span><br></pre></td></tr></table></figure>
+<p>We will put our solver inside a function and use a for loop to run it on each frame</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extract</span>(<span class="params">frame,output</span>):</span><br><span class="line">    image=Image.<span class="built_in">open</span>(frame)</span><br><span class="line">    image_data = image.load()</span><br><span class="line">    extracted = Image.new(<span class="string">&#x27;1&#x27;</span>, (image.width,image.height), <span class="number">1</span>)</span><br><span class="line">    index=<span class="number">0</span></span><br><span class="line">    output_data=extracted.load()</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(image.height):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(image.width):  </span><br><span class="line">            im_pix=<span class="built_in">list</span>(image_data[i,j])</span><br><span class="line">            flag_pix = (im_pix[index%<span class="number">3</span>]&amp;(<span class="number">1</span>+index%<span class="number">2</span>)) </span><br><span class="line">            <span class="keyword">if</span> flag_pix &gt;= <span class="number">1</span>:</span><br><span class="line">                flag_pix=<span class="number">255</span></span><br><span class="line">            output_data[i,j]=flag_pix</span><br><span class="line">            index+=<span class="number">1</span></span><br><span class="line">    extracted.save(output)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">383</span>):</span><br><span class="line">    index=<span class="string">&quot;0&quot;</span>*(<span class="number">3</span>-<span class="built_in">len</span>(<span class="built_in">str</span>(i+<span class="number">1</span>)))+<span class="built_in">str</span>(i+<span class="number">1</span>)+<span class="string">&quot;.png&quot;</span></span><br><span class="line">    extract(<span class="string">&quot;frames/&quot;</span>+index,<span class="string">&quot;data/&quot;</span>+index)</span><br></pre></td></tr></table></figure>
+<p>Let’s now check the result and what we get!<br>
+Of couse we will get 383 images. But is all the images are usefull or not? Let’s check.</p>
+<p>We find this image extracted from the 1st frame of the image!</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/000.png" alt=""></p>
+<p>Bingo! We are on the right way! The author told us to check the last images! Yeah we will but let’s check what we got in all the images!</p>
+<p>We found a big number of image that have a black line in random position of the image!</p>
+<p float="left">
+  <img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/015.png" width="450" style="margin-right:50px;" />
+  <img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/210.png" width="450" /> 
+</p>
+<p>Ok Let’s focus on the last images as the author said. This is will be better for us. Wait what?! We found a 2 pastebin links and 2 images putted as hint for us. And of couse a rabbit hole(Fake Flag)</p>
+<p float="center">
+  <img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/372.png" width="320"style="margin-right:10px;" />
+  <img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/377.png" width="320"style="margin-right:10px;" /> 
+  <img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/381.png" width="320"style="margin-right:10px;" /> 
+</p>
+<p>Let’s check the content of the 2 pastebin links and see what we have!</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Advertising flash, it&#x27;s time to relax and rest.</span><br><span class="line">This pastebin is the solution to your problem </span><br><span class="line">Those links will Absolutely help you </span><br><span class="line"> </span><br><span class="line">https://4n6nk8s.tech</span><br><span class="line">https://anas-cherni.me/</span><br><span class="line">https://ironbyte.me/</span><br><span class="line">https://yassine-belkhadem.tech/ ( Don&#x27;t waste your time with this link)</span><br><span class="line">https://github.com/M0ngi</span><br><span class="line">https://soter14.tech/</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">Thi is the FLAG: GG_Tr0ll1ng_1s_MY_G4mE_!</span><br><span class="line"> </span><br><span class="line">https://github.com/Mohamed-Rafraf</span><br><span class="line">https://github.com/adamlahbib</span><br><span class="line">https://www.linkedin.com/in/mohamed-rafraf/</span><br><span class="line">https://www.linkedin.com/in/adamlahbib/</span><br><span class="line">https://www.linkedin.com/in/anascherni/</span><br><span class="line">https://www.linkedin.com/in/yassine-belkhadem-396266204/</span><br><span class="line">https://www.linkedin.com/in/m0ngi/</span><br><span class="line">https://www.linkedin.com/in/mohamed-ali-ouachani-00a452237/</span><br><span class="line">https://www.linkedin.com/in/rania-midaoui-b0163a1bb/</span><br><span class="line">https://www.linkedin.com/in/mohamed-ayadi-5a10621a4/</span><br><span class="line">https://www.linkedin.com/in/yassine-belarbi-853303208/</span><br></pre></td></tr></table></figure>
+<p>There is another fake flag &amp; links for the blogs of the author and his team members! Yeah It’s SOter14 team. Let’s Check the other one. Maybe it will help</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">6 &lt;--&gt; 29</span><br><span class="line">15 &lt;--&gt; 25</span><br><span class="line">11 &lt;--&gt; 34</span><br><span class="line">10 &lt;--&gt; 24</span><br><span class="line">1 &lt;--&gt; 23</span><br><span class="line">14 &lt;--&gt; 35</span><br><span class="line">2 &lt;--&gt; 19</span><br><span class="line">17 &lt;--&gt; 33</span><br><span class="line">3 &lt;--&gt; 32</span><br><span class="line">8 &lt;--&gt; 27</span><br><span class="line">13 &lt;--&gt; 31</span><br><span class="line">0 &lt;--&gt; 18</span><br><span class="line">7 &lt;--&gt; 20</span><br><span class="line">5 &lt;--&gt; 28</span><br><span class="line">12 &lt;--&gt; 30</span><br></pre></td></tr></table></figure>
+<p>Absolutely this thing will help but we still didn’t know how this text file will help us! Let’s understand the explanation putted on the other frames.</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/377.png" alt=""></p>
+<p>The author told us that he split the image to many slices and put each slice in an empty unique image!!! We get it! The random lines are tiny pieces of unique image!</p>
+<p>But how can we collect this slice and re-order them to get the original? The lines are ordered randomly? Let’s think.</p>
+<h3 id="collect-the-pieces-and-recover-the-orginal-image"><a class="markdownIt-Anchor" href="#collect-the-pieces-and-recover-the-orginal-image">#</a> collect the pieces and recover the orginal image</h3>
+<p>The solution is simple. That’s assume that the white color have a  <code>0 value</code>  and the black color have  <code>1 value</code> . We can sum the pixels of all the images with this concept to recover the image, right?</p>
+<blockquote>
+<p>We know that our image size is 720x720 (The resolution of our video) and from our extracted images we know that we have 360 images that splitted to slices. which mean that every line present 2px (width) from the original image.</p>
+</blockquote>
+<p>Take a look at this script then!</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">img=Image.new(<span class="string">&#x27;1&#x27;</span>,(<span class="number">720</span>,<span class="number">720</span>),<span class="number">255</span>)</span><br><span class="line">imgpixs=img.load()</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">360</span>):</span><br><span class="line">    name=<span class="string">&quot;0&quot;</span>*(<span class="number">3</span>-<span class="built_in">len</span>(<span class="built_in">str</span>(n+<span class="number">1</span>)))+<span class="built_in">str</span>(n+<span class="number">1</span>)+<span class="string">&quot;.png&quot;</span></span><br><span class="line">    image=Image.<span class="built_in">open</span>(<span class="string">&quot;data/&quot;</span>+name)</span><br><span class="line">    image_pixs=image.load()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Image Number : &quot;</span>,n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">720</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">720</span>):</span><br><span class="line">            <span class="keyword">if</span> image_pixs[i,j]!=<span class="number">255</span>:</span><br><span class="line">                imgpixs[i,j]=image_pixs[i,j]</span><br><span class="line"></span><br><span class="line">img.save(<span class="string">&quot;Recovered.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>In this script we collect all the black pixels and ignore the white pixels. Because we generate a white image and we will fill it with the black color. Let’s recover the image now!!</p>
+<p>Bingo! There is a progress, we got this image!</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/recoverd.png" alt=""></p>
+<p>Oh god! It’s a broken QR code. How can we deal with this thing. Oh yeah! We have another clue! The author left this hint for us!</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/381.png" alt=""></p>
+<p>Oh cool! The author split the QRCode to small square and shuffle them in random order! We need to recover them. The squares are numeroted from 0 to n-1 pieces. This order will help us. Now We get the utility of the pastebin link!</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">6 &lt;--&gt; 29</span><br><span class="line">15 &lt;--&gt; 25</span><br><span class="line">11 &lt;--&gt; 34</span><br><span class="line">10 &lt;--&gt; 24</span><br><span class="line">1 &lt;--&gt; 23</span><br><span class="line">14 &lt;--&gt; 35</span><br><span class="line">2 &lt;--&gt; 19</span><br><span class="line">17 &lt;--&gt; 33</span><br><span class="line">3 &lt;--&gt; 32</span><br><span class="line">8 &lt;--&gt; 27</span><br><span class="line">13 &lt;--&gt; 31</span><br><span class="line">0 &lt;--&gt; 18</span><br><span class="line">7 &lt;--&gt; 20</span><br><span class="line">5 &lt;--&gt; 28</span><br><span class="line">12 &lt;--&gt; 3</span><br></pre></td></tr></table></figure>
+<p>This is will help us how re-order the QRCode. Let’s take a deep look now the the broken QRCode!.</p>
+<p>The QRCode is splitted by 6 in width and 6 in height. So each piece’s size is 120x120. And we have 36 pieces. It’s impossible to recover the image without the help of pastebin link. Let’s take this line for example  <code>0 &lt;--&gt; 18</code> , this link told us that the author switch the 1st piece with the 19th piece. (We Start counting from 0 due to the explanation). So we need to write a script that can order this QRCode! We need to recover it!</p>
+<p>Let’s put the content of the pastebin inside a textfile named  <code>help.txt</code>  and start write our solver.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">W_SPLIT=<span class="number">6</span></span><br><span class="line">H_SPLIT=<span class="number">6</span></span><br><span class="line"></span><br><span class="line">ASSEMBLED_IMAGE=<span class="string">&quot;Assembled.png&quot;</span></span><br><span class="line">SPLITTED_IMAGE=<span class="string">&quot;Recovered.png&quot;</span></span><br><span class="line">image= Image.<span class="built_in">open</span>(SPLITTED_IMAGE)</span><br><span class="line">width, height = image.size</span><br><span class="line">pixels = image.load()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">change_chunk</span>(<span class="params">index1,index2</span>):</span><br><span class="line">    pos1=[]</span><br><span class="line">    pos1.append(index1 % W_SPLIT)</span><br><span class="line">    pos1.append(index1 // W_SPLIT)</span><br><span class="line">    pos2=[]</span><br><span class="line">    pos2.append(index2 % W_SPLIT)</span><br><span class="line">    pos2.append(index2 // W_SPLIT)</span><br><span class="line">    height_chunk=height // H_SPLIT</span><br><span class="line">    width_chunk= width // W_SPLIT</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (width_chunk):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span> (height_chunk):</span><br><span class="line">            aux= pixels[pos1[<span class="number">0</span>]*width_chunk+i,pos1[<span class="number">1</span>]*height_chunk+j]</span><br><span class="line">            pixels[pos1[<span class="number">0</span>]*width_chunk+i,pos1[<span class="number">1</span>]*height_chunk+j]= pixels[pos2[<span class="number">0</span>]*width_chunk+i,pos2[<span class="number">1</span>]*height_chunk+j]</span><br><span class="line">            pixels[pos2[<span class="number">0</span>]*width_chunk+i,pos2[<span class="number">1</span>]*height_chunk+j]= aux</span><br><span class="line"></span><br><span class="line">data=<span class="built_in">open</span>(<span class="string">&quot;help.txt&quot;</span>,<span class="string">&quot;r&quot;</span>).read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data)-<span class="number">1</span>):</span><br><span class="line">    position=data[i].split(<span class="string">&quot;&lt;--&gt;&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(position)</span><br><span class="line">    change_chunk(<span class="built_in">int</span>(position[<span class="number">0</span>]),<span class="built_in">int</span>(position[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">image.save(ASSEMBLED_IMAGE)</span><br></pre></td></tr></table></figure>
+<p>Yeah It works fine!! We recover the QRCode!</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/Assembled.png" alt=""></p>
+<p>But something is wrong here! It sills broken and We can’t scan it 😦. But why? are we have any problem with our solver?</p>
+<p>Ah No. I get it! We have 36 pieces and each line from  <code>help.txt</code>  have correspond to 2 pieces! So we have to find 18 lines, right ?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raf@Securinets:~$ <span class="built_in">wc</span> -l help.txt</span><br><span class="line">15</span><br></pre></td></tr></table></figure>
+<p>Oh no we have 15 lines, So we have 6 pieces we need to re-order them by ourselves! Now I get why the Author said Help  <code>LITTLE BIIT</code> . He left the 6 pieces to deal with it.</p>
+<p>In this case we need to do a bruteforce to all the combinasions. We have 6 pieces, so we have 6! possibility<br>
+and 6! = 720 which is possible to deal with it using a python script. Let’s re-order the 6 pieces each time and try to scan the QRCode. Once the QRCode is readable, we will stop our program!</p>
+<p>Let’s get the flag now !!! Let’s DO IT NOW! We’re so close!</p>
+<p>So the 1st thing that we need to do it is that we need to get the index of missed pieces. The  <code>help.txt</code>  is the key!</p>
+<p>Let’s generate an array that have the order (index) of the missed pieces. Then we use our  <code>change_chunck()</code>  method and try all the combinaisons using the  <code>itertools</code> . Finally try to scan the QRCode each time using the  <code>qrtools</code></p>
+<p>Let’s install the qrtools first</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raf@Securinets:~$ sudo apt-get install python3-qrtools</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Now let’s write down our last script (I Hope) :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> qrtools</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line"></span><br><span class="line">qr=qrtools.QR()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">missed_data</span>():</span><br><span class="line">    not_missed=[]</span><br><span class="line">    data=<span class="built_in">open</span>(<span class="string">&quot;help.txt&quot;</span>,<span class="string">&quot;r&quot;</span>).read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data)-<span class="number">1</span>):</span><br><span class="line">        position=data[i].split(<span class="string">&quot;&lt;--&gt;&quot;</span>)</span><br><span class="line">        not_missed.append(<span class="built_in">int</span>(position[<span class="number">0</span>]))</span><br><span class="line">        not_missed.append(<span class="built_in">int</span>(position[<span class="number">1</span>]))</span><br><span class="line">    <span class="built_in">print</span>(not_missed)</span><br><span class="line">    missed=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">36</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (i <span class="keyword">in</span> not_missed):</span><br><span class="line">            missed.append(i)</span><br><span class="line">    <span class="keyword">return</span> missed</span><br><span class="line"></span><br><span class="line">chuncks=missed_data()</span><br><span class="line"><span class="built_in">print</span>(chuncks)</span><br><span class="line">H_SPLIT=<span class="number">6</span></span><br><span class="line">W_SPLIT=<span class="number">6</span></span><br><span class="line">SPLITTED_IMAGE=<span class="string">&quot;Assembled.png&quot;</span></span><br><span class="line">height,width=<span class="number">720</span>,<span class="number">720</span></span><br><span class="line"></span><br><span class="line">permutations=<span class="built_in">list</span>(permutations(chuncks,<span class="number">6</span>))</span><br><span class="line">image=Image.<span class="built_in">open</span>(<span class="string">&quot;Assembled.png&quot;</span>)</span><br><span class="line">pixels=image.load()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">change_chunk</span>(<span class="params">index1,index2</span>):</span><br><span class="line">    pos1=[]</span><br><span class="line">    pos1.append(index1 % W_SPLIT)</span><br><span class="line">    pos1.append(index1 // W_SPLIT)</span><br><span class="line">    pos2=[]</span><br><span class="line">    pos2.append(index2 % W_SPLIT)</span><br><span class="line">    pos2.append(index2 // W_SPLIT)</span><br><span class="line">    height_chunk=height // H_SPLIT</span><br><span class="line">    width_chunk= width // W_SPLIT</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (width_chunk):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span> (height_chunk):</span><br><span class="line">            aux= pixels[pos1[<span class="number">0</span>]*width_chunk+i,pos1[<span class="number">1</span>]*height_chunk+j]</span><br><span class="line">            pixels[pos1[<span class="number">0</span>]*width_chunk+i,pos1[<span class="number">1</span>]*height_chunk+j]= pixels[pos2[<span class="number">0</span>]*width_chunk+i,pos2[<span class="number">1</span>]*height_chunk+j]</span><br><span class="line">            pixels[pos2[<span class="number">0</span>]*width_chunk+i,pos2[<span class="number">1</span>]*height_chunk+j]= aux</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;[-] Trying to fix the QRCode and Getting the flag ...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(permutations)):</span><br><span class="line">    comb=<span class="built_in">list</span>(permutations[i])</span><br><span class="line">    change_chunk(comb[<span class="number">0</span>],comb[<span class="number">1</span>])</span><br><span class="line">    change_chunk(comb[<span class="number">2</span>],comb[<span class="number">3</span>])</span><br><span class="line">    change_chunk(comb[<span class="number">4</span>],comb[<span class="number">5</span>])</span><br><span class="line">    image.save(<span class="string">&quot;Final.png&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> qr.decode(<span class="string">&quot;Final.png&quot;</span>):</span><br><span class="line">        <span class="built_in">print</span>(qr.data)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>And we got the flag as an output Here!!! BINGO! We get the flag!</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/finally.png" alt=""></p>
+<p>And of course the QRCode is saved! And this is our QRCode!</p>
+<p><img data-src="https://github.com/4n6nk8s/quals-2023-write-ups/raw/main/Raf-Hide/Final.png" alt=""></p>
+<blockquote Every_Fr4Me_H4S_HiS_own_S7ory="">
+<p>The Final flag is : Securinets</p>
+</blockquote>
+<h1 id="couch-potato"><a class="markdownIt-Anchor" href="#couch-potato">#</a> Couch Potato</h1>
+<p><img data-src="https://i.imgur.com/jHut52F.png" alt=""></p>
+<p>It’s past one, I was probably sleeping in front of my screen, I’m not even sure if I was awake for a bit or not, I’m not even sure if I’m dreaming or not… All I know is that I left the device on my favorite channel and that piece of crap failed me. Agh I need to fix it now. It is no longer responding to the commands I give it, and it is no longer showing my favorite channel! I hate my life, can you help me fix it?</p>
+<p>I am looking for three stuff:</p>
+<ul>
+<li><em>What nonsense was I watching the night the device failed me?</em></li>
+<li><em>I might need the Up and Down key codes in NEC 32-bit format?</em></li>
+<li><em>The expiration date of my IPTV subscription.</em></li>
+</ul>
+<p>Flag formal: <strong>Securinets{show_name_00UP1234_DOWN1234_YYYYMMDD}</strong></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9hZG1pZGEwdWk=">adm &amp; mida0ui</span></p>
+<h2 id="attachment"><a class="markdownIt-Anchor" href="#attachment">#</a> Attachment</h2>
+<p>A file called  <code>dump.bin</code>  was provided in a zip. Weighing 8 MB. Dating back to February the 1st, 2020. 1:07 AM.</p>
+<p>Another file is what seems to be an updated firmware for the device,  <code>Firmware.bin</code>  weighing 4 MB. And dating back to August the 25th, 2020.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVRHTkFPV0taWmJDelp1Vklta2xBMThJSF9jVXZ0a055P3VzcD1zaGFyaW5n">Download Link</span></p>
+<h1 id="analysis"><a class="markdownIt-Anchor" href="#analysis">#</a> Analysis</h1>
+<p>A Couch potato is a lazy guy that sits in front of the TV screen, indicating that we are dealing with a console, set-top-box STB or Digital Video Recorder DVR and not a PCI card satellite/Tuner card or a computer. The user mentioned that he was watching his favorite channel when he fall asleep which make it more likely an STB, or a receiver for simplicity.<br>
+This also means that the show name we are looking for was broadcasted in his favorite channel.</p>
+<p>The user also mentioned that the device failed him, which means that the device is not responding to the commands he is sending to it. Kind of talking about a control unit, or that’s clearly a remote control that has some keys malfunctioning, specifically the UP and DOWN arrow keys as we know.</p>
+<p>On other hand, the user is suspecting that the IPTV subscription was the thing behind the interruption of his channel. This means that the IPTV subscription was a service provided by the device itself or maybe a third party service. This also means that the STB we’re dealing with is a hybrid device, meaning that it can receive satellite signals and also IPTV, making it a 2nd generation STB and there are plenty in the market today, for third world countries.</p>
+<p>However, the user could be mistaken as the channels that you can shortlist in the favorites are more likely to be satellite channels, hence the IPTV subscription is not the reason behind the interruption of his favorite channel rather than the satellite signal itself or the cardsharing service he is using.</p>
+<p>With all that in mind, we can start our information gathering phase.</p>
+<h2 id="information-gathering"><a class="markdownIt-Anchor" href="#information-gathering">#</a> Information Gathering</h2>
+<p>TL;DR.</p>
+<p>The thing is devices like this are hard to find in UK, Europe and the US. Unlike Africa and Asia. That’s because in European countries and the US, they are mostly banned due to the fact that they are used for cardsharing and IPTV piracy. However, in Africa and Asia, they are still widely used and sold.</p>
+<p>So where to look? These devices are not open source nor they have some kind of documentation is to where to look in their ROMs. Satellite forums, subreddits, and Facebook groups are good resources and some deep search would yield some useful tools and details to deal with dump. We kind of need to know how the memory is splitted. The file is indeed a ROM/EEPROM snapshot, so it has a mapping of the memory. We just need to know where the information part is, channel list is, and applications or services are.</p>
+<p>The mapping generally includes the following:</p>
+<ul>
+<li>Bootloader</li>
+<li>Kernel or maincode</li>
+<li>User data</li>
+<li>Menu</li>
+<li>…</li>
+</ul>
+<p>Each at specific offsets and specific lengths. The user data is the most important part as it contains the channel list.</p>
+<p>Keep in mind that if the IPTV subscription was provided by the device itself, then the expiration date could be stored in the device itself or their renewal website. If the IPTV subscription was provided by a third party service, then the expiration date is stored in the third party service database or user panel. In both cases, we need to find the device serial number or MAC address to be able to identify the device and the user. I believe that how they are likely to be stored in the memory dump rather than a plain expiration date.</p>
+<h2 id="resources"><a class="markdownIt-Anchor" href="#resources">#</a> Resources</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2F0ZWxsaXRlcy5jby51ay9mb3J1bXMv">https://www.satellites.co.uk/forums/</span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NhdGVsbGl0ZS8=">https://www.reddit.com/r/satellite/</span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudHVuaXNpYS1zYXQuY29tL2ZvcnVtcy8=">https://www.tunisia-sat.com/forums/</span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zYXQtdW5pdmVyc2UuY29tLw==">https://sat-universe.com/</span></li>
+</ul>
+<h2 id="tools"><a class="markdownIt-Anchor" href="#tools">#</a> Tools</h2>
+<p>HexWorkshop / HxD Editor is a good tool to start with. It is a hex editor that can be used to view and edit files in hexadecimal and binary formats. It is a good tool to start with as it can be used to view the memory dump and search for strings. It can also be used to search for patterns and hex values.</p>
+<h2 id="writeup"><a class="markdownIt-Anchor" href="#writeup">#</a> Writeup</h2>
+<p>First, let’s investigate the dump file.</p>
+<p><code>NCRCBootloader</code>  is the start point, which is the bootloader used for these chipsets as indicated in the Hex Editor screen:</p>
+<ul>
+<li>ALI3329</li>
+<li>ALI3606</li>
+<li>ALI3601</li>
+<li>ALI3511</li>
+<li>ALI3510</li>
+<li>ALI3516</li>
+<li>ALI3618</li>
+<li>ALI3821</li>
+</ul>
+<p><img data-src="https://i.imgur.com/vSB9IGX.png" alt=""></p>
+<p>Devices with those chipset have these brands <em>Starsat, Sunplus, Tiger, StarMax, Geant, Mediastar, QMAX, AzAmerica, Samsat and many more…</em></p>
+<p>And all of their built-in subscriptions are part of <strong>Gosat</strong>.</p>
+<p>Now, to actually find the specific brand and model, we need to inspect the firmware update file.</p>
+<p>To clear things up, the memory dump serves for user data mainly the channels and services as I said while the firmware update file will indicate the remote control being used.</p>
+<p>The memory dump is a mapping and can be splitted manually and further investigated. However the firmware is encrypted, you can tell by a first glance, no strings or something in there, and can’t help us much to delve into the remote control unit in use.</p>
+<p>Time to google for a way to decrypt such chipset firmware. Let’s use the keyword  <code>ALI3329</code>  or  <code>ALI3511</code>  as they are the most common chipset used in these devices and combine the search with decrypt or unpack tool.</p>
+<p>For example:</p>
+<p><img data-src="https://i.imgur.com/DfscXB4.png" alt=""></p>
+<p>And in Arabic:</p>
+<p><img data-src="https://i.imgur.com/rdG9k09.png" alt=""></p>
+<p>Using the tool, we determine that the model is SR-2000HD HYPER and the remote control is SR-2000HD HYPER. Hence the brand is Starsat.</p>
+<p><img data-src="https://i.imgur.com/uWfBYaJ.png" alt=""></p>
+<p>The unpack and repack features are used to decrypt and extract parts of the firmware like the bootloader, maincode, user data if any was supplied by the manufacturer, the menu, the remote, and sometimes a softcam (that’s out of our scope today, maybe in another challenge!). And the repack to insert modified parts and RSA encrypt the whole thing again. Like for instance, we can insert the main menu (including themes and applications) or the remote control unit of a different model or brand and repack it to be used with the device we have, as long as they are using the very same chipset. Well this time, rest assured it is the Hyper remote control and when we talk about key code we mean the IR Infrared key code.</p>
+<p>So the whole memory dump thing and the firmware kind of contain similar stuff at least, one being encrypted and the other not.</p>
+<p>See here, the content of the folder when unpacked.</p>
+<p><img data-src="https://i.imgur.com/P8IBsRt.png" alt=""></p>
+<p>So why not, giving the dump a try and unpack it as well, we are chasing the user data part anyway. And the tool might very much help. Otherwise I will show how to proceed manually knowing the offsets and lengths found on a forum.</p>
+<h3 id="finding-the-show"><a class="markdownIt-Anchor" href="#finding-the-show">#</a> Finding the show</h3>
+<p>As we said before, we can deal with this part either using the tool or manually.<br>
+Well, the tool was able to yield this:</p>
+<p><img data-src="https://i.imgur.com/f1fon6N.png" alt=""></p>
+<p>Very nice, we can see  <code>database.sdx</code>  file there!</p>
+<p>Well, to proceed manullay you need to know the offsets and lengths beforehand.<br>
+This is what we meant:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : Bootloader.bin</span><br><span class="line">SIZE : 128,00 KB</span><br><span class="line">CRC : 0x00AF7F6C</span><br><span class="line">offset : 0x00000128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : maincode.bin</span><br><span class="line">SIZE : 3,25 MB</span><br><span class="line">CRC : 0x19E8C348</span><br><span class="line">offset : 0x00020128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : menu.bin</span><br><span class="line">SIZE : 1,38 MB</span><br><span class="line">CRC : 0x10934143</span><br><span class="line">offset : 0x00360128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : Database.sdx</span><br><span class="line">SIZE : 9,80 KB</span><br><span class="line">CRC : 0x00146C71</span><br><span class="line">offset : 0x004C0128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : softcam.bin</span><br><span class="line">SIZE : 42,38 KB</span><br><span class="line">CRC : 0x008D5F15</span><br><span class="line">offset : 0x004C2860</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : sattp.bin</span><br><span class="line">SIZE : 12,54 KB</span><br><span class="line">CRC : 0x00097FDA</span><br><span class="line">offset : 0x004CD1E8</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : Padding.bin</span><br><span class="line">SIZE : 522,06 KB</span><br><span class="line">CRC : 0x040E1F6B</span><br><span class="line">offset : 0x004D040C</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br></pre></td></tr></table></figure>
+<p>Found here: <span class="exturl" data-url="aHR0cHM6Ly93d3cudHVuaXNpYS1zYXQuY29tL2ZvcnVtcy90aHJlYWRzLzMyNDI3NjEvcGFnZS00Nw==">https://www.tunisia-sat.com/forums/threads/3242761/page-47</span></p>
+<p>We know  <code>database.sdx</code>  holds the user data meaning the channels. sattp is another file that holds the different satellites and their frequencies aka transponders.</p>
+<p>When we open the file in a hex editor, We can’t read any useful information out of it. This means that there should be a tool in place to view and edit the channels for the specific chipset family we are dealing with as the file seems highly compressed.</p>
+<p>Here’s a view from hex editor first.</p>
+<p>Starts off like this</p>
+<p><img data-src="https://i.imgur.com/7FHWF6K.png" alt=""></p>
+<p>And ends padded with 0xFF</p>
+<p><img data-src="https://i.imgur.com/xqvWPxc.png" alt=""></p>
+<p>Let’s google a bit…</p>
+<p><img data-src="https://i.imgur.com/P5bXWY4.png" alt=""></p>
+<p>We got this</p>
+<p><img data-src="https://i.imgur.com/hVzUWC9.png" alt=""></p>
+<p>When trying to first open the database, we got this error message</p>
+<p><img data-src="https://i.imgur.com/ASWzJB9.png" alt=""></p>
+<p>And the issue is that the Userdata has a static size as indicated before. As the receiver’s capacity fits a maximum of 6100 channels. So the database file is padded with 0xFF to reach the maximum size. Let’s get rid of the padded data and try again…</p>
+<p><img data-src="https://i.imgur.com/NUIk82u.png" alt=""></p>
+<p>Now, it’s working like charm, and I already see some familiar TV channels on Astra 1 (19.2 East).</p>
+<p>Let’s expand the favorites section</p>
+<p><img data-src="https://i.imgur.com/AmkpQPE.png" alt=""></p>
+<p>And there is Sky Sports Main Event, UK-based sports channel that is part of BSkyB or Sky Group, pay-television channel and availble for satellite subsribers via Eurobird 1, Astra 2 (28.2 East). Sky Sports Main Event broadcasts the biggest events of sports in the UK.</p>
+<p>Now, great work to reach this point, but we are not done yet. We need to find the right show at that past date, meaning at 1:07 AM on February the 1st, 2020.</p>
+<p>Well, Sky TV Guide won’t keep such data for more than a week or two, so we need to find another way.</p>
+<p>Guess you know what we mean, what else than the way back machine!</p>
+<p>Head over to <span class="exturl" data-url="aHR0cDovL2FyY2hpdmUub3Jn">archive.org</span> and submit the link for the Sky TV Guide and try to narrow your search to a date that’s equal or close to the date in question, as shown below!</p>
+<p><img data-src="https://i.imgur.com/B5scqzJ.png" alt=""></p>
+<p>And that is the first part of the flag:  <code>live_rugby_7's</code>  or  <code>live_rugby_7s</code></p>
+<h3 id="finding-the-keycodes"><a class="markdownIt-Anchor" href="#finding-the-keycodes">#</a> Finding the keycodes</h3>
+<p>We know it is Starsat SR-2000HD Hyper’s remote control, well unless you have the same remote control or probably a remote of the same brand and an Arduino card embedded with an IR receiver, you will need to improvise! Like check online there GitHub repos that keep track of IR key codes for different remotes. Or you can use a forum like <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVtb3RlY2VudHJhbC5jb20v">https://www.remotecentral.com/</span> to find the key codes for the remote control.</p>
+<p>However for this part, we will use an Android app like IRplus or any alternatives and pick the device in question from the list then head over to check the keys, we will provide screenshots for what we’ve found. Since it is the simplest and fastest way.</p>
+<p>This is the LIRC protcol of Starsat <span class="exturl" data-url="aHR0cHM6Ly9saXJjLnNvdXJjZWZvcmdlLm5ldC9yZW1vdGVzL3N0YXJzYXQvMTIw">https://lirc.sourceforge.net/remotes/starsat/120</span></p>
+<p>We are looking for NEC, so we found an app for that.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9pcnBsdXMtcmVtb3RlLmdpdGh1Yi5pby8=">net.binarymode.android.irplus</span></p>
+<ol>
+<li>Selecting the remote control from the list:</li>
+</ol>
+<p><img data-src="https://i.imgur.com/3hjuMYS.png" alt=""></p>
+<ol start="2">
+<li>Exporting the remote config and checking the Channel Up arrow and Channel Down arrow</li>
+</ol>
+<p><img data-src="https://i.imgur.com/lsXXO6K.png" alt=""></p>
+<p>And that is the second part of the flag:  <code>00ff30cf_00ff8877</code></p>
+<p>we can make sure that is the correct format using a website like <span class="exturl" data-url="aHR0cHM6Ly93d3cueWFtYWhhLmNvbS95cGFiL2lyaGV4X2NvbnZlcnRlci5hc3A=">https://www.yamaha.com/ypab/irhex_converter.asp</span><br>
+converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché to see the full sendIR command…</p>
+<h3 id="finding-the-expiration-date"><a class="markdownIt-Anchor" href="#finding-the-expiration-date">#</a> Finding the expiration date</h3>
+<p>Now for the fun part, if you dig around the web about Starsat 2000 Hyper you will end up with one official built in service, Apollo that offers IPTV as well as VOD Video on Demand.</p>
+<p>And there is an online service to renew and check your current subscription by just providing the serial number.</p>
+<p><span class="exturl" data-url="aHR0cDovL3d3dy5yZW5ld2JveC5uZXQvaW5kZXgucGhw">www.renewbox.net</span></p>
+<p>The serial number in most cases is a long number like consists of maybe more than 10 digits. And it can’t be in the firmware since it is released to the public to update their devices. So it must be within the memory of the device itself.</p>
+<p>Let’s grep that easily!</p>
+<p><img data-src="https://i.imgur.com/XmWhATI.png" alt=""></p>
+<p>And there it is, the serial number, let’s query the IPTV validity.</p>
+<p><img data-src="https://i.imgur.com/lTGDuFS.png" alt=""></p>
+<p>And the last part of the flag is  <code>20141105</code></p>
+<h1 id="final-words"><a class="markdownIt-Anchor" href="#final-words">#</a> Final Words</h1>
+<p>Flag: <strong>Securinets{live_rugby_7s_00ff30cf_00ff8877_20141105}</strong></p>
+<p>GGs <strong>th3_r0n1ns</strong> for solving this challenge</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-08-07 12:04:02" itemprop="dateModified" datetime="2023-08-07T12:04:02+01:00">2023-08-07</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/06/03/Kubernetes/post/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;imgur.com&#x2F;CL8Xz9l.png" title="Streamlined Application Deployemet using Kubernetes">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>Streamlined Application Deployemet using Kubernetes</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2023/08/06/Writeups/quals23-forensics/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.imgur.com&#x2F;7DVuoG0.png" title="Securinets Quals CTF 23 Forensics Challenges Writeup">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> Writeups</span>
+  <h3>Securinets Quals CTF 23 Forensics Challenges Writeup</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#raf-hide"><span class="toc-number">1.</span> <span class="toc-text"> Raf Hide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#description"><span class="toc-number">1.0.1.</span> <span class="toc-text"> Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extract-all-the-frames-using-ffmpeg"><span class="toc-number">1.0.2.</span> <span class="toc-text"> Extract all the frames using ffmpeg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extract-data-from-each-frame-using-our-solver"><span class="toc-number">1.0.3.</span> <span class="toc-text"> Extract data from each frame using our solver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collect-the-pieces-and-recover-the-orginal-image"><span class="toc-number">1.0.4.</span> <span class="toc-text"> collect the pieces and recover the orginal image</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#couch-potato"><span class="toc-number">2.</span> <span class="toc-text"> Couch Potato</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#attachment"><span class="toc-number">2.1.</span> <span class="toc-text"> Attachment</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#analysis"><span class="toc-number">3.</span> <span class="toc-text"> Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#information-gathering"><span class="toc-number">3.1.</span> <span class="toc-text"> Information Gathering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resources"><span class="toc-number">3.2.</span> <span class="toc-text"> Resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tools"><span class="toc-number">3.3.</span> <span class="toc-text"> Tools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#writeup"><span class="toc-number">3.4.</span> <span class="toc-text"> Writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-show"><span class="toc-number">3.4.1.</span> <span class="toc-text"> Finding the show</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-keycodes"><span class="toc-number">3.4.2.</span> <span class="toc-text"> Finding the keycodes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finding-the-expiration-date"><span class="toc-number">3.4.3.</span> <span class="toc-text"> Finding the expiration date</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final-words"><span class="toc-number">4.</span> <span class="toc-text"> Final Words</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/09/12/Writeups/csaw2022/" rel="bookmark" title="CSAW'2022 Forensics Writeup">CSAW'2022 Forensics Writeup</a></li><li><a href="/2023/03/23/Writeups/ncsc2023/" rel="bookmark" title="NCSC'2023 Writeup Challenges">NCSC'2023 Writeup Challenges</a></li><li><a href="/2023/08/06/Writeups/quals23-forensics/" rel="bookmark" title="Securinets Quals CTF 23 Forensics Challenges Writeup">Securinets Quals CTF 23 Forensics Challenges Writeup</a></li><li class="active"><a href="/2023/08/06/Writeups/quals23-misc/" rel="bookmark" title="Securinets Quals CTF 23 Misc Challenges Writeup">Securinets Quals CTF 23 Misc Challenges Writeup</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/06/03/Kubernetes/post/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/08/06/Writeups/quals23-forensics/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/08/06/Writeups/quals23-misc/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

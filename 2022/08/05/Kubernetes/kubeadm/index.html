@@ -1,0 +1,566 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2022/08/05/Kubernetes/kubeadm/">
+
+
+<meta name="description" content="Kubeadm is a tool used to build Kubernetes (K8s) clusters. Kubeadm performs the actions necessary to get a minimum viable cluster up and running quickly. By design, it cares only about bootstrapping,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting Up Kubernetes with Kubeadm">
+<meta property="og:url" content="http://example.com/2022/08/05/Kubernetes/kubeadm/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="Kubeadm is a tool used to build Kubernetes (K8s) clusters. Kubeadm performs the actions necessary to get a minimum viable cluster up and running quickly. By design, it cares only about bootstrapping,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-05T10:54:12.000Z">
+<meta property="article:modified_time" content="2023-04-29T14:18:39.811Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+
+
+  <title>
+Setting Up Kubernetes with Kubeadm - Kubernetes |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Setting Up Kubernetes with Kubeadm
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-08-05 11:54:12">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-08-05T11:54:12+01:00">2022-08-05</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://i.imgur.com/bhUlMFS.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Kubernetes/" itemprop="item" rel="index" title="In Kubernetes"><span itemprop="name">Kubernetes</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/05/Kubernetes/kubeadm/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p><span class="red">Kubeadm</span> is a tool used to build Kubernetes (K8s) clusters. Kubeadm performs the actions necessary to get a minimum viable cluster up and running quickly. By design, it cares only about bootstrapping, not about provisioning machines (underlying worker and master nodes).</p>
+<div class="note success">
+<p>Knowing how to use kubeadm is required for CKA and CKS exams</p>
+</div>
+<p>We configure a 3 <span class="pinky">Ubuntu 20.04 LTS</span> machines in the same network with the following proprietes:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Hostname</th>
+<th>IP address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Master</td>
+<td>4n6nk8s-master</td>
+<td>192.168.1.18/24</td>
+</tr>
+<tr>
+<td>Worker</td>
+<td>4n6nk8s-worker1</td>
+<td>192.168.1.19/24</td>
+</tr>
+<tr>
+<td>Worker</td>
+<td>4n6nk8s-worker2</td>
+<td>192.168.1.20/24</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Note: Make sure to setup a unique hostname for each host</p>
+</blockquote>
+<h2 id="prepare-the-environments"><a class="markdownIt-Anchor" href="#prepare-the-environments">#</a> Prepare the environments</h2>
+<p>The following Steps must be applied to each node (both master nodes and worker nodes)</p>
+<h3 id="disable-the-swap-memory"><a class="markdownIt-Anchor" href="#disable-the-swap-memory">#</a> Disable the Swap Memory</h3>
+<p>The Kubernetes requires that you disable the swap memory in the host system because the kubernetes scheduler determines the best available node on which to deploy newly created pods. If memory swapping is allowed to occur on a host system, this can lead to performance and stability issues within Kubernetes</p>
+<p>You can disable the swap memory by deleting or commenting the swap entry in  <code>/etc/fstab</code>  manually or using the  <code>sed</code>  command</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master$ sudo swapoff -a &amp;&amp; sudo sed -i <span class="string">&#x27;/ swap / s/^\(.*\)$/#\1/g&#x27;</span> /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>This command disbales the swap memory and comments out the swap entry in  <code>/etc/fstab</code></p>
+<h3 id="configure-or-disable-the-firewall"><a class="markdownIt-Anchor" href="#configure-or-disable-the-firewall">#</a> Configure or Disable the firewall</h3>
+<p>When running Kubernetes in an environment with strict network boundaries, such as on-premises datacenter with physical network firewalls or Virtual Networks in Public Cloud, it is useful to be aware of the ports and protocols used by Kubernetes components.</p>
+<p>The ports used by Master Node:</p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Direction</th>
+<th>Port Range</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>6443</td>
+<td>Kubernetes API server</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>2379-2380</td>
+<td>etcd server client API</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10250</td>
+<td>Kubelet API</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10259</td>
+<td>kube-scheduler</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10257</td>
+<td>kube-controller-manager</td>
+</tr>
+</tbody>
+</table>
+<p>The ports used by Worker Nodes:</p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Direction</th>
+<th>Port Range</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10250</td>
+<td>Kubelet API</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>30000-32767</td>
+<td>NodePort Services</td>
+</tr>
+</tbody>
+</table>
+<p>You can either disable the firewall or allow the ports on each node.</p>
+<h4 id="method-1-add-firewall-rules-to-allow-the-ports-used-by-the-kubernetes-nodes"><a class="markdownIt-Anchor" href="#method-1-add-firewall-rules-to-allow-the-ports-used-by-the-kubernetes-nodes">#</a> Method 1: Add firewall rules to allow the ports used by the Kubernetes nodes</h4>
+<p>Allow the ports used by the master node:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw allow 6443/tcp</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw allow 2379:2380/tcp</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw allow 10250/tcp</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw allow 10259/tcp</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw allow 10257/tcp</span><br></pre></td></tr></table></figure>
+<p>Allow the ports used by the worker nodes:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-worker1:~$ sudo ufw allow 10250/tcp</span><br><span class="line">4n6nk8s@4n6nk8s-worker1:~$ sudo ufw allow 30000:32767/tcp</span><br></pre></td></tr></table></figure>
+<h4 id="method-2-disable-the-firewall"><a class="markdownIt-Anchor" href="#method-2-disable-the-firewall">#</a> Method 2: Disable the firewall</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt command</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw status</span><br><span class="line">Status: active</span><br><span class="line"></span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw <span class="built_in">disable</span></span><br><span class="line">Firewall stopped and disabled on system startup</span><br><span class="line"></span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo ufw status</span><br><span class="line">Status: inactive</span><br></pre></td></tr></table></figure>
+<h3 id="installing-docker-engine"><a class="markdownIt-Anchor" href="#installing-docker-engine">#</a> Installing Docker Engine</h3>
+<p>Kubernetes requires you to install a container runtime to work correctly.There are many available options like containerd, CRI-O, Docker etc</p>
+<p>By default, Kubernetes uses the Container Runtime Interface (CRI) to interface with your chosen container runtime.If you don’t specify a runtime, kubeadm automatically tries to detect an installed container runtime by scanning through a list of known endpoints.</p>
+<p>You must install the Docker Engine on each node!</p>
+<h4 id="1-set-up-the-repository"><a class="markdownIt-Anchor" href="#1-set-up-the-repository">#</a> 1- Set up the repository</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo apt update</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo apt install ca-certificates curl gnupg lsb-release</span><br></pre></td></tr></table></figure>
+<h4 id="2-add-dockers-official-gpg-key"><a class="markdownIt-Anchor" href="#2-add-dockers-official-gpg-key">#</a> 2- Add Docker’s official GPG key</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo <span class="built_in">mkdir</span> -p /etc/apt/keyrings</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br></pre></td></tr></table></figure>
+<h4 id="3-add-the-stable-repository-using-the-following-command"><a class="markdownIt-Anchor" href="#3-add-the-stable-repository-using-the-following-command">#</a> 3- Add the stable repository using the following command:</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ <span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">&quot;deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">  <span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
+<h4 id="4-install-the-docker-container"><a class="markdownIt-Anchor" href="#4-install-the-docker-container">#</a> 4- Install the docker container</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo apt update &amp;&amp; sudo apt install docker-ce docker-ce-cli containerd.io -y</span><br></pre></td></tr></table></figure>
+<h4 id="5-make-sure-that-the-docker-will-work-on-system-startup"><a class="markdownIt-Anchor" href="#5-make-sure-that-the-docker-will-work-on-system-startup">#</a> 5- Make sure that the docker will work on system startup</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo systemctl <span class="built_in">enable</span> --now docker </span><br></pre></td></tr></table></figure>
+<h4 id="6-configuring-cgroup-driver"><a class="markdownIt-Anchor" href="#6-configuring-cgroup-driver">#</a> 6- Configuring Cgroup Driver:</h4>
+<p>The Cgroup Driver must be configured to let the kubelet process work correctly</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ <span class="built_in">cat</span> &lt;&lt;<span class="string">EOF | sudo tee /etc/docker/daemon.json</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;],</span></span><br><span class="line"><span class="string">  &quot;log-driver&quot;: &quot;json-file&quot;,</span></span><br><span class="line"><span class="string">  &quot;log-opts&quot;: &#123;</span></span><br><span class="line"><span class="string">    &quot;max-size&quot;: &quot;100m&quot;</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  &quot;storage-driver&quot;: &quot;overlay2&quot;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<h4 id="7-restart-the-docker-service-to-make-sure-the-new-configuration-is-applied"><a class="markdownIt-Anchor" href="#7-restart-the-docker-service-to-make-sure-the-new-configuration-is-applied">#</a> 7- Restart the docker service to make sure the new configuration is applied</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h3 id="installing-kubernetes-kubeadm-kubelet-and-kubectl"><a class="markdownIt-Anchor" href="#installing-kubernetes-kubeadm-kubelet-and-kubectl">#</a> Installing kubernetes (kubeadm, kubelet, and kubectl):</h3>
+<p>Install the following dependency required by Kubernetes on each node</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo apt install apt-transport-https</span><br></pre></td></tr></table></figure>
+<h4 id="download-the-google-cloud-public-signing-key"><a class="markdownIt-Anchor" href="#download-the-google-cloud-public-signing-key">#</a> Download the Google Cloud public signing key:</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg</span><br></pre></td></tr></table></figure>
+<h4 id="add-the-kubernetes-apt-repository"><a class="markdownIt-Anchor" href="#add-the-kubernetes-apt-repository">#</a> Add the Kubernetes apt repository:</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ <span class="built_in">echo</span> <span class="string">&quot;deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/kubernetes.list</span><br></pre></td></tr></table></figure>
+<h4 id="update-the-apt-package-index-and-install-kubeadm-kubelet-and-kubeclt"><a class="markdownIt-Anchor" href="#update-the-apt-package-index-and-install-kubeadm-kubelet-and-kubeclt">#</a> Update the apt package index and install kubeadm, kubelet, and kubeclt</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo apt update &amp;&amp; sudo apt install -y kubelet=1.23.1-00 kubectl=1.23.1-00 kubeadm=1.23.1-00</span><br></pre></td></tr></table></figure>
+<h2 id="initializing-the-control-plane-node"><a class="markdownIt-Anchor" href="#initializing-the-control-plane-node">#</a> Initializing the control-plane node</h2>
+<p>At this point, we have 3 nodes with docker,  <code>kubeadm</code> ,  <code>kubelet</code> , and  <code>kubectl</code>  installed. Now we must initialize the Kubernetes master, which will manage the whole cluster and the pods running within the cluster  <code>kubeadm init</code>  by specifiy the address of the master node and the ipv4 address pool of the pods</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo kubeadm init --apiserver-advertise-address=192.168.1.18 --pod-network-cidr=10.1.0.0/16</span><br></pre></td></tr></table></figure>
+<p>You should wait a few minutes until the initialization is completed. The first initialization will take a lot of time if your connexion speed is slow (pull the images of the cluster components)</p>
+<h3 id="configuring-kubectl"><a class="markdownIt-Anchor" href="#configuring-kubectl">#</a> Configuring kubectl</h3>
+<p>As known, the  <code>kubectl</code>  is a command line tool for performing actions on your cluster. So we must to configure  <code>kubectl</code> . Run the following command from your master node:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ <span class="built_in">mkdir</span> -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo <span class="built_in">chown</span> $(<span class="built_in">id</span> -u):$(<span class="built_in">id</span> -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+<h3 id="installing-calico-cni"><a class="markdownIt-Anchor" href="#installing-calico-cni">#</a> Installing Calico CNI</h3>
+<p>Calico provides network and network security solutions for containers. Calico is best known for its performance, flexibility and power. Use-cases: Calico can be used within a lot of Kubernetes platforms (kops, Kubespray, docker enterprise, etc.) to block or allow traffic between pods, namespaces</p>
+<h4 id="1-install-tigera-calico-operator"><a class="markdownIt-Anchor" href="#1-install-tigera-calico-operator">#</a> 1- Install Tigera Calico operator</h4>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl create -f <span class="string">&quot;https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml&quot;</span></span><br></pre></td></tr></table></figure>
+<p>The Tigera Operator is a Kubernetes operator which manages the lifecycle of a Calico or Calico Enterprise installation on Kubernetes. Its goal is to make installation, upgrades, and ongoing lifecycle management of Calico and Calico Enterprise as simple and reliable as possible.</p>
+<h4 id="2-download-the-custom-resourcesyaml-manifest-and-change-it"><a class="markdownIt-Anchor" href="#2-download-the-custom-resourcesyaml-manifest-and-change-it">#</a> 2- Download the custom-resources.yaml manifest and change it</h4>
+<p>The Calico has a default pod’s CIDR value. But in our example, we set the   <code>--pod-netwokr-cidr=10.1.0.0/16</code> . So we must change the value of pod network CIDR in  <code>custom-resources.yaml</code></p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ wget  <span class="string">&quot;https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Now we edit this file before create the Calico pods</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># This section includes base Calico installation configuration.</span></span><br><span class="line"><span class="comment"># For more information, see: https://projectcalico.docs.tigera.io/v3.23/reference/installation/api#operator.tigera.io/v1.Installation</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">operator.tigera.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Installation</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># Configures Calico networking.</span></span><br><span class="line">  <span class="attr">calicoNetwork:</span></span><br><span class="line">    <span class="comment"># <span class="doctag">Note:</span> The ipPools section cannot be modified post-install.</span></span><br><span class="line">    <span class="attr">ipPools:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">blockSize:</span> <span class="number">26</span></span><br><span class="line">      <span class="attr">cidr:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.0</span><span class="string">/16</span> <span class="comment">#change this value with yours</span></span><br><span class="line">      <span class="attr">encapsulation:</span> <span class="string">VXLANCrossSubnet</span></span><br><span class="line">      <span class="attr">natOutgoing:</span> <span class="string">Enabled</span></span><br><span class="line">      <span class="attr">nodeSelector:</span> <span class="string">all()</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="comment"># This section configures the Calico API server.</span></span><br><span class="line"><span class="comment"># For more information, see: https://projectcalico.docs.tigera.io/v3.23/reference/installation/api#operator.tigera.io/v1.APIServer</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">operator.tigera.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">APIServer</span> </span><br><span class="line"><span class="attr">metadata:</span> </span><br><span class="line">  <span class="attr">name:</span> <span class="string">default</span> </span><br><span class="line"><span class="attr">spec:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>After Editing the  <code>custom-resources.yaml</code>  file. Run the following command:</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl create -f <span class="string">&quot;custom-resources.yaml&quot;</span> </span><br></pre></td></tr></table></figure>
+<p>Before you can use the cluster, you must wait for the pods required by Calico to be downloaded. You must wait until you find all the pods running and ready!</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl get pods --all-namespaces</span><br><span class="line">NAMESPACE          NAME                                       READY   STATUS    RESTARTS       AGE</span><br><span class="line">calico-apiserver   calico-apiserver-5989576d6d-5nw7n          1/1     Running   1 (4min ago)    4min</span><br><span class="line">calico-apiserver   calico-apiserver-5989576d6d-h677h          1/1     Running   1 (4min ago)    4min</span><br><span class="line">calico-system      calico-kube-controllers-69cfd64db4-9hnh5   1/1     Running   1 (4min ago)    4min</span><br><span class="line">calico-system      calico-node-lshdl                          1/1     Running   1 (4min ago)    4min</span><br><span class="line">calico-system      calico-typha-76dd7c96d7-88826              1/1     Running   1 (4min ago)    4min</span><br><span class="line">kube-system        coredns-64897985d-jkpwh                    1/1     Running   1 (4min ago)    4min</span><br><span class="line">kube-system        coredns-64897985d-zk9wx                    1/1     Running   1 (4min ago)    4min</span><br><span class="line">kube-system        etcd-master                                1/1     Running   1 (4min ago)    4min</span><br><span class="line">kube-system        kube-apiserver-master                      1/1     Running   1 (4min ago)    4min</span><br><span class="line">kube-system        kube-controller-manager-master             1/1     Running   1 (4min ago)    4min</span><br><span class="line">kube-system        kube-proxy-4nf4q                           1/1     Running   1 (4min ago)    4min</span><br><span class="line">kube-system        kube-scheduler-master                      1/1     Running   1 (4min ago)    4min</span><br><span class="line">tigera-operator    tigera-operator-7d8c9d4f67-j5b2g           1/1     Running   2 (103s ago)    4min</span><br></pre></td></tr></table></figure>
+<h2 id="join-the-worker-nodes"><a class="markdownIt-Anchor" href="#join-the-worker-nodes">#</a> Join the worker nodes</h2>
+<p>Now our cluster is ready to work! let’s join the worker nodes to this cluster by getting the token from the master node</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ sudo kubeadm token create --print-join-command</span><br><span class="line">kubeadm <span class="built_in">join</span> 192.168.1.18:6443 --token g4mgtb.e8zgs1c0kpkaj9wt --discovery-token-ca-cert-hash sha256:047628de2a0a43127b7c4774093203631d315451874efc6b63421a4da9bee2ec</span><br></pre></td></tr></table></figure>
+<p>Now let’s move to the worker node and run the following command given by  <code>kubeadm token create</code></p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-worker1:~$ sudo kubeadm <span class="built_in">join</span> 192.168.1.18:6443 --token g4mgtb.e8zgs1c0kpkaj9wt </span><br><span class="line">\--discovery-token-ca-cert-hash sha256:047628de2a0a43127b7c4774093203631d315451874efc6b63421a4da9bee2ec</span><br></pre></td></tr></table></figure>
+<p>The output must be similar to the following</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[preflight] Running pre-flight checks</span><br><span class="line">[preflight] Reading configuration from the cluster...</span><br><span class="line">[preflight] FYI: You can look at this config file with <span class="string">&#x27;kubectl -n kube-system get cm kubeadm-config -o yaml&#x27;</span></span><br><span class="line">W0623 12:45:07.940655   23651 utils.go:69] The recommended value <span class="keyword">for</span> <span class="string">&quot;resolvConf&quot;</span> <span class="keyword">in</span> <span class="string">&quot;KubeletConfiguration&quot;</span> is: /run/systemd/resolve/resolv.conf; the provided value is: /run/systemd/resolve/resolv.conf</span><br><span class="line">[kubelet-start] Writing kubelet configuration to file <span class="string">&quot;/var/lib/kubelet/config.yaml&quot;</span></span><br><span class="line">[kubelet-start] Writing kubelet environment file with flags to file <span class="string">&quot;/var/lib/kubelet/kubeadm-flags.env&quot;</span></span><br><span class="line">[kubelet-start] Starting the kubelet</span><br><span class="line">[kubelet-start] Waiting <span class="keyword">for</span> the kubelet to perform the TLS Bootstrap...</span><br><span class="line"></span><br><span class="line">This node has joined the cluster:</span><br><span class="line">* Certificate signing request was sent to apiserver and a response was received.</span><br><span class="line">* The Kubelet was informed of the new secure connection details.</span><br><span class="line"></span><br><span class="line">Run <span class="string">&#x27;kubectl get nodes&#x27;</span> on the control-plane to see this node <span class="built_in">join</span> the cluster.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Now let’s Check the cluster by running  <code>kubectl get nodes</code>  command on the master node.</p>
+<figure class="highlight bash"><figcaption><span>command line prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@4n6nk8s-master:~$ kubectl get nodes</span><br><span class="line"></span><br><span class="line">NAME              STATUS     ROLES                  AGE    VERSION</span><br><span class="line">4n6nk8s-master    Ready      control-plane,master   40m5s  v1.23.1</span><br><span class="line">4n6nk8s-worker1   Ready      &lt;none&gt;                 3m7s   v1.23.1</span><br><span class="line">4n6nk8s-worker2   Ready      &lt;none&gt;                 2m3s   v1.23.1</span><br></pre></td></tr></table></figure>
+<h2 id="references"><a class="markdownIt-Anchor" href="#references">#</a> References:</h2>
+<div class="links"><div class="item" title="Kubernetes Documentation" style="--block-color:#2296fd;"><span class="exturl image" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3Mvc2V0dXAvcHJvZHVjdGlvbi1lbnZpcm9ubWVudC90b29scy9rdWJlYWRtL2NyZWF0ZS1jbHVzdGVyLWt1YmVhZG0v" data-background-image="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1200px-Kubernetes_logo_without_workmark.svg.png"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3Mvc2V0dXAvcHJvZHVjdGlvbi1lbnZpcm9ubWVudC90b29scy9rdWJlYWRtL2NyZWF0ZS1jbHVzdGVyLWt1YmVhZG0v">Kubernetes Documentation</span>
+          <p class="desc">Creating a cluster with kubeadm</p>
+          </div></div><div class="item" title="Calico Documentation" style="--block-color:#FB7031;"><span class="exturl image" data-url="aHR0cHM6Ly9wcm9qZWN0Y2FsaWNvLmRvY3MudGlnZXJhLmlvL2dldHRpbmctc3RhcnRlZC9rdWJlcm5ldGVzL3NlbGYtbWFuYWdlZC1vbnByZW0vb25wcmVtaXNlcw==" data-background-image="https://projectcalico.docs.tigera.io/images/favicon.png"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9wcm9qZWN0Y2FsaWNvLmRvY3MudGlnZXJhLmlvL2dldHRpbmctc3RhcnRlZC9rdWJlcm5ldGVzL3NlbGYtbWFuYWdlZC1vbnByZW0vb25wcmVtaXNlcw==">Calico Documentation</span>
+          <p class="desc">Install Calico Networking for on-premises deployments</p>
+          </div></div><div class="item" title="Docker Documentation" style="--block-color:#31bffb;"><span class="exturl image" data-url="aHR0cHM6Ly9kb2NzLmRvY2tlci5jb20vZW5naW5lL2luc3RhbGwvdWJ1bnR1Lw==" data-background-image="https://www.docker.com/wp-content/uploads/2022/05/Docker_Temporary_Image_Google_Blue_1080x1080_v1.png"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9kb2NzLmRvY2tlci5jb20vZW5naW5lL2luc3RhbGwvdWJ1bnR1Lw==">Docker Documentation</span>
+          <p class="desc">Install Docker Engine on Ubuntu</p>
+          </div></div></div>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-29 15:18:39" itemprop="dateModified" datetime="2023-04-29T15:18:39+01:00">2023-04-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2022/09/05/CyberDefenders/Phishy/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;cyberdefenders.org&#x2F;media&#x2F;terraform&#x2F;Phishy&#x2F;phishy.png" title="CyberDefenders Writeup  Phishy">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> CyberDefenders</span>
+  <h3>CyberDefenders Writeup  Phishy</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#prepare-the-environments"><span class="toc-number">1.</span> <span class="toc-text"> Prepare the environments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#disable-the-swap-memory"><span class="toc-number">1.1.</span> <span class="toc-text"> Disable the Swap Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#configure-or-disable-the-firewall"><span class="toc-number">1.2.</span> <span class="toc-text"> Configure or Disable the firewall</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#method-1-add-firewall-rules-to-allow-the-ports-used-by-the-kubernetes-nodes"><span class="toc-number">1.2.1.</span> <span class="toc-text"> Method 1: Add firewall rules to allow the ports used by the Kubernetes nodes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#method-2-disable-the-firewall"><span class="toc-number">1.2.2.</span> <span class="toc-text"> Method 2: Disable the firewall</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#installing-docker-engine"><span class="toc-number">1.3.</span> <span class="toc-text"> Installing Docker Engine</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-set-up-the-repository"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 1- Set up the repository</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-add-dockers-official-gpg-key"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 2- Add Docker’s official GPG key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-add-the-stable-repository-using-the-following-command"><span class="toc-number">1.3.3.</span> <span class="toc-text"> 3- Add the stable repository using the following command:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-install-the-docker-container"><span class="toc-number">1.3.4.</span> <span class="toc-text"> 4- Install the docker container</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-make-sure-that-the-docker-will-work-on-system-startup"><span class="toc-number">1.3.5.</span> <span class="toc-text"> 5- Make sure that the docker will work on system startup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-configuring-cgroup-driver"><span class="toc-number">1.3.6.</span> <span class="toc-text"> 6- Configuring Cgroup Driver:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-restart-the-docker-service-to-make-sure-the-new-configuration-is-applied"><span class="toc-number">1.3.7.</span> <span class="toc-text"> 7- Restart the docker service to make sure the new configuration is applied</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#installing-kubernetes-kubeadm-kubelet-and-kubectl"><span class="toc-number">1.4.</span> <span class="toc-text"> Installing kubernetes (kubeadm, kubelet, and kubectl):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#download-the-google-cloud-public-signing-key"><span class="toc-number">1.4.1.</span> <span class="toc-text"> Download the Google Cloud public signing key:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#add-the-kubernetes-apt-repository"><span class="toc-number">1.4.2.</span> <span class="toc-text"> Add the Kubernetes apt repository:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#update-the-apt-package-index-and-install-kubeadm-kubelet-and-kubeclt"><span class="toc-number">1.4.3.</span> <span class="toc-text"> Update the apt package index and install kubeadm, kubelet, and kubeclt</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#initializing-the-control-plane-node"><span class="toc-number">2.</span> <span class="toc-text"> Initializing the control-plane node</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#configuring-kubectl"><span class="toc-number">2.1.</span> <span class="toc-text"> Configuring kubectl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#installing-calico-cni"><span class="toc-number">2.2.</span> <span class="toc-text"> Installing Calico CNI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-install-tigera-calico-operator"><span class="toc-number">2.2.1.</span> <span class="toc-text"> 1- Install Tigera Calico operator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-download-the-custom-resourcesyaml-manifest-and-change-it"><span class="toc-number">2.2.2.</span> <span class="toc-text"> 2- Download the custom-resources.yaml manifest and change it</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#join-the-worker-nodes"><span class="toc-number">3.</span> <span class="toc-text"> Join the worker nodes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">4.</span> <span class="toc-text"> References:</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li class="active"><a href="/2022/08/05/Kubernetes/kubeadm/" rel="bookmark" title="Setting Up Kubernetes with Kubeadm">Setting Up Kubernetes with Kubeadm</a></li><li><a href="/2022/09/06/Kubernetes/configmap-secrets/" rel="bookmark" title="Introduction To Configmap & Secrets">Introduction To Configmap & Secrets</a></li><li><a href="/2022/09/08/Kubernetes/private-docker-k8s/" rel="bookmark" title="Dockerize a website & Pull it privately in k8s">Dockerize a website & Pull it privately in k8s</a></li><li><a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="bookmark" title="Deploy Nginx Ingress in Bare-metal Cluster">Deploy Nginx Ingress in Bare-metal Cluster</a></li><li><a href="/2022/09/10/Kubernetes/nfs-k8s/" rel="bookmark" title="NFS as Remote Storage for Kubernetes">NFS as Remote Storage for Kubernetes</a></li><li><a href="/2023/04/28/Kubernetes/k8s-auth/" rel="bookmark" title="SSO-based authentication mechanism for multi-clusters">SSO-based authentication mechanism for multi-clusters</a></li><li><a href="/2023/06/03/Kubernetes/post/" rel="bookmark" title="Streamlined Application Deployemet using Kubernetes">Streamlined Application Deployemet using Kubernetes</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/08/05/Kubernetes/kubeadm/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

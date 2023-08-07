@@ -1,0 +1,570 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2023/04/28/Kubernetes/k8s-auth/">
+
+
+<meta name="description" content="# Introduction # How it comes As a university student, I was assigned to create an authentication project for a specific system. But instead of choosing a traditional approach like Kerberos, I decided">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSO-based authentication mechanism for multi-clusters">
+<meta property="og:url" content="http://example.com/2023/04/28/Kubernetes/k8s-auth/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="# Introduction # How it comes As a university student, I was assigned to create an authentication project for a specific system. But instead of choosing a traditional approach like Kerberos, I decided">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://imgur.com/a5zaVhH.png">
+<meta property="og:image" content="https://imgur.com/awkZvAb.png">
+<meta property="og:image" content="https://imgur.com/0PK9Sj5.png">
+<meta property="og:image" content="https://imgur.com/F1EVKK3.png">
+<meta property="og:image" content="https://imgur.com/YqhD79J.png">
+<meta property="og:image" content="https://imgur.com/EciPajC.png">
+<meta property="og:image" content="https://imgur.com/10prjzn.png">
+<meta property="og:image" content="https://imgur.com/Yt9FZgD.png">
+<meta property="og:image" content="https://imgur.com/MY7TTOZ.png">
+<meta property="og:image" content="https://imgur.com/yvANfkB.png">
+<meta property="og:image" content="https://imgur.com/MqHeeY1.png">
+<meta property="og:image" content="http://example.com/2023/04/28/Kubernetes/k8s-auth/2023-04-29-15-56-38.png">
+<meta property="og:image" content="https://imgur.com/g5YBB8u.png">
+<meta property="og:image" content="https://imgur.com/MOC7L1o.png">
+<meta property="og:image" content="https://imgur.com/n2S8BQM.png">
+<meta property="article:published_time" content="2023-04-28T10:29:37.000Z">
+<meta property="article:modified_time" content="2023-04-29T17:18:05.763Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/a5zaVhH.png">
+
+
+  <title>
+SSO-based authentication mechanism for multi-clusters - Kubernetes |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">SSO-based authentication mechanism for multi-clusters
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2023-04-28 11:29:37">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-04-28T11:29:37+01:00">2023-04-28</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://i0.wp.com/cms.pingsafe.com/wp-content/uploads/2022/12/KSPM.png?fit=927%2C600&ssl=1">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Kubernetes/" itemprop="item" rel="index" title="In Kubernetes"><span itemprop="name">Kubernetes</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/28/Kubernetes/k8s-auth/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="introduction"><a class="markdownIt-Anchor" href="#introduction">#</a> Introduction</h1>
+<h2 id="how-it-comes"><a class="markdownIt-Anchor" href="#how-it-comes">#</a> How it comes</h2>
+<p>As a university student, I was assigned to create an authentication project for a specific system. But instead of choosing a traditional approach like Kerberos, I decided to spice things up and bring Kubernetes and cloud-native technologies into the mix (Typical Me). After diving into the official documentation, I was hit with a barrage of authentication strategies like X509 client certs, Static Token File, Bootstrap tokens, Service Accounts, OIDC tokens, and more. My head was spinning! Then I stumbled upon some existing authentication tools like Dex, Keycloak, and Pinniped. Terms like OIDC and OAuth2 were thrown around left and right. But I wasn’t intimidated! I accepted the challenge and declared: “It’s implementation time!” And thus, the k8s-auth project was born.</p>
+<h2 id="why-k8s-auth-is-born"><a class="markdownIt-Anchor" href="#why-k8s-auth-is-born">#</a> Why k8s-auth is born</h2>
+<p>Managing access to Kubernetes clusters can be a challenging task, especially in large organizations where multiple teams and users need different levels of permissions. While Kubernetes provides a robust RBAC system, configuring and maintaining it can be time-consuming and error-prone, particularly if you have many clusters to manage.<br>
+It can feel like you’re playing a never-ending game of whack-a-mole, trying to keep up with the constant changes and updates. And let’s be honest, it’s not the most exciting task in the world. Moving from one cluster to another, constantly changing contexts, generating kubeconfig for users, and dealing with permission problems can quickly become a chore.</p>
+<p><img data-src="https://imgur.com/a5zaVhH.png" alt=""></p>
+<h2 id="before-starting"><a class="markdownIt-Anchor" href="#before-starting">#</a> Before Starting</h2>
+<p>Before you start reading this blog post, let’s make sure you’re ready to dive into the k8s-auth server world. First, make sure you have a solid understanding of Kubernetes basics and RBAC, as we’ll be building on those concepts. Don’t worry, we won’t ask you to explain any Kubernetes concept in binary code. We just need you to understand what a service account is, what roles and role bindings mean, and why a service account needs a secret. So, if these concepts are still a mystery to you, go ahead and brush up on your Kubernetes knowledge before jumping in. And if you need a refresher, don’t worry, we won’t judge you. We’ll just send you back to Kubernetes school.</p>
+<h1 id="k8s-auth-the-sso-based-authentication-mechanism-for-multi-clusters"><a class="markdownIt-Anchor" href="#k8s-auth-the-sso-based-authentication-mechanism-for-multi-clusters">#</a> K8S-AUTH : The SSO-Based Authentication Mechanism for Multi-Clusters!</h1>
+<h2 id="what-is-k8s-auth"><a class="markdownIt-Anchor" href="#what-is-k8s-auth">#</a> What is k8s-auth ?</h2>
+<p>K8s-auth is a tool that provides authentication and authorization mechanisms for multiple Kubernetes clusters. With k8s-auth, users can authenticate to multiple clusters using a single set of credentials. This eliminates the need for users to have different credentials for different clusters, simplifying the authentication process. K8s-auth also allows administrators to manage user and group permissions across multiple clusters from a single centralized location, making it easier to maintain security and access control.</p>
+<p><img data-src="https://imgur.com/awkZvAb.png" alt=""></p>
+<h2 id="the-authentication-server"><a class="markdownIt-Anchor" href="#the-authentication-server">#</a> The Authentication server</h2>
+<p>“K8s-Auth Server” is an open-source authentication server designed to simplify the authorization and authentication process for users and groups within specific Kubernetes clusters. With this server, administrators can easily manage access controls for multiple clusters, all from a centralized location.</p>
+<p>With the k8s-auth server, you can say goodbye to the headache of managing RBAC configurations across multiple clusters. Instead, you can focus on the fun part of being an admin - creating users, deleting users, modifying users, creating groups, deleting groups, modifying groups, and more! And the best part? You get to do it all with a single set of credentials, like a master key that unlocks all the doors to the kingdom of Kubernetes.</p>
+<p>But wait, there’s more! With SSO-based access, users can connect to multiple clusters with different permissions based on their role on each cluster, all without having to enter a password a million times. It’s like having a backstage pass to all the coolest Kubernetes events without ever having to wait in line.</p>
+<h2 id="how-this-server-communicate-with-clusters"><a class="markdownIt-Anchor" href="#how-this-server-communicate-with-clusters">#</a> How This Server Communicate with Clusters ?</h2>
+<p>K8s-Auth Server is designed to work seamlessly with K8s-Auth Controller, a cloud-native application that is deployed within the Kubernetes cluster. This controller acts as an agent for the server, facilitating communication between the server and the cluster.</p>
+<p><img data-src="https://imgur.com/0PK9Sj5.png" alt=""></p>
+<p>Before a cluster can be used with K8s-Auth Server, it must be registered with the server by the administrator. When a cluster is registered, a secret token is created, which must be used by the agent/controller deployed within the cluster to verify its existence. Once the agent/controller is verified, a connection between the cluster and the server is opened (web socket) for data communication.</p>
+<p><img data-src="https://imgur.com/F1EVKK3.png" alt=""></p>
+<h2 id="how-to-interact-with-this-server"><a class="markdownIt-Anchor" href="#how-to-interact-with-this-server">#</a> How to interact with this Server</h2>
+<p>K8s-Auth Server comes with a powerful CLI utility that can be used by both administrators and users. The CLI behaves differently based on the user’s role - administrators can create, modify, and delete users, groups, and clusters, while normal users can check the clusters that they are authorized to connect with. Once the users selects the cluster they want to authenticate with, the CLI will automatically generate a kubeconfig file, making it easy for users to connect to the cluster and start working.</p>
+<h2 id="how-users-logs-to-the-server"><a class="markdownIt-Anchor" href="#how-users-logs-to-the-server">#</a> How users logs to the server</h2>
+<p>To connect to any cluster, users must first authenticate with the K8s-Auth Server. Authentication with the server is done using OAuth2 with Google, allowing users to use one set of credentials to connect to multiple clusters with different permissions based on their role on each cluster. This type of authentication can be referred to as SSO-based authentication.</p>
+<h2 id="what-happen-when-user-want-to-authenticate-to-a-cluster"><a class="markdownIt-Anchor" href="#what-happen-when-user-want-to-authenticate-to-a-cluster">#</a> What happen when user want to authenticate to a cluster ?</h2>
+<p>On the user side, when a user logs into the K8s-Auth Server, they can check the clusters they are authorized to access. After selecting the desired cluster, a request is sent to the server, which checks if the user is authorized to connect. If authorized, the server sends a request to the specific agent/controller, which creates the necessary Kubernetes resources, such as service accounts, roles, role bindings, and secrets, allowing the user to connect to the cluster and return the token and ca.crt that allow the automatic generation of the kubeconfig.</p>
+<h2 id="the-agentcontroller-role"><a class="markdownIt-Anchor" href="#the-agentcontroller-role">#</a> The Agent/Controller role</h2>
+<p>The agent/controller also manages the lifecycle of the secret and token, deleting them and all related roles and bindings after they expire or are no longer needed. For example, if an administrator decides to remove a user from a cluster, the agent/controller will delete the secret that holds the user’s token, as well as the service account, roles, and bindings associated with that user.</p>
+<h2 id="before-demo"><a class="markdownIt-Anchor" href="#before-demo">#</a> Before DEMO</h2>
+<div class="note danger">
+<p>Please note that this project is open source and the code is available to anyone interested. It is currently an MVP version that functions effectively, and we plan to add more features in the future.</p>
+</div>
+<div class="note warning">
+<p>Don’t forget that this project is open to contributions from the community! If you find a bug or have a feature request, feel free to open an issue on the project’s GitHub page. And if you’re interested in helping out with the development, pull requests are always welcome! Let’s work together to make this project even better.</p>
+</div>
+<div class="links"><div class="item" title="k8s-auth-server" style="--block-color:#2296fd;"><span class="exturl image" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vaGFtZWQtUmFmcmFmL2s4cy1hdXRoLXNlcnZlcg==" data-background-image="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vaGFtZWQtUmFmcmFmL2s4cy1hdXRoLXNlcnZlcg==">k8s-auth-server</span>
+          <p class="desc">The authentication server</p>
+          </div></div><div class="item" title="k8s-auth-kube" style="--block-color:#de2336;"><span class="exturl image" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vaGFtZWQtUmFmcmFmL2s4cy1hdXRoLWt1YmU=" data-background-image="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vaGFtZWQtUmFmcmFmL2s4cy1hdXRoLWt1YmU=">k8s-auth-kube</span>
+          <p class="desc">The Controller/Agent for k8s-auth</p>
+          </div></div><div class="item" title="k8s-auth-cli" style="--block-color:#02bf1b;"><span class="exturl image" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vaGFtZWQtUmFmcmFmL2s4cy1hdXRoLWNsaQ==" data-background-image="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vaGFtZWQtUmFmcmFmL2s4cy1hdXRoLWNsaQ==">k8s-auth-cli</span>
+          <p class="desc">The CLI utility for k8s-auth</p>
+          </div></div></div>
+<h1 id="the-demo"><a class="markdownIt-Anchor" href="#the-demo">#</a> The DEMO !</h1>
+<p>And the icing on the cake? I am going to show you how to set up and use k8s-auth in a demo that will blow your mind (in a good way, of course). So grab your popcorn and let’s get this Kubernetes party started!</p>
+<p>Ladies and Gentlemen, it’s showtime! Let’s get ready to k8s-authenticate! We’ll be putting the spotlight on three stars of this demo: The Authentication Server, The Agent/Controller, and the Command Line Utility! These babies were born to shine in the Go language (talk about power!) and are all open-source, so you can check them out on my GitHub page. And, to make things even easier, we’ve containerized the authentication server and agent, so you can just pull them like a cold one on a hot summer day. Check out my Docker Hub profile for more juicy details!</p>
+<h2 id="setting-up-authentication-server"><a class="markdownIt-Anchor" href="#setting-up-authentication-server">#</a> Setting up Authentication Server</h2>
+<p>Hold your horses, folks! The authentication server may be containerized, but it’s not going inside Kubernetes! Don’t forget to set up those environment variables for the server - especially the admin email! (He deserve a name and a full name too, don’t they?) And guess what, the admin can log in with Google OAuth2! Just make sure to give the Client ID, Client Secret, and Redirection Link, or else things won’t work too smoothly.</p>
+<blockquote>
+<p>You need to create an OAuth 2.0 Client with the Google API in google cloud platform!</p>
+</blockquote>
+<p><img data-src="https://imgur.com/YqhD79J.png" alt=""></p>
+<ul>
+<li><code>K8S_AUTH_ADMIN_NAME</code> : The administrator name! (My name is default value)</li>
+<li><code>K8S_AUTH_ADMIN_FULLNAME</code> : The administrator name! (My name is default value)</li>
+<li><code>K8S_AUTH_ADMIN_MAIL</code> : The administrator name! (My email is default value)</li>
+<li><code>OAUTH2_CLIENT_ID</code> : The google Oauth2 Client ID (Required)</li>
+<li><code>OAUTH2_CLIENT_SECRET</code> : The google Oauth2 Secret  (Required)</li>
+<li><code>OAUTH2_REDIRECT_URL</code> : The google Oauth2 Redirect URL callback (Required, it must be redirected to /callback endpoint of your server )</li>
+</ul>
+<blockquote>
+<p>Let’s assume that the server is deployed on <span class="exturl" data-url="aHR0cHM6Ly9hdXRoLjRuNm5rOHMudGVjaA==">https://auth.4n6nk8s.tech</span>,<br>
+ <code>OAUTH2_REDIRECT_URL</code>  must be <span class="exturl" data-url="aHR0cHM6Ly9hdXRoLjRuNm5rOHMudGVjaC9jYWxsYmFjaw==">https://auth.4n6nk8s.tech/callback</span></p>
+</blockquote>
+<p>It’s docker time!  <code>mohamedrafraf/k8s-auth-server</code>  is the docker image that you need! Let’s run this server!</p>
+<figure class="highlight bash"><figcaption><span>run server</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name server -it -p 80:8080 -e OAUTH2_CLIENT_ID=xxxx -e OAUTH2_CLIENT_SECRET=xxx ... mohamedrafraf/k8s-auth-server</span><br></pre></td></tr></table></figure>
+<p>Make sure to input all the necessary variables for the server to run smoothly. And once you’ve done that, sit back and relax, and let the server do its thing! Keep your hands off those logs, let them flow in peace!</p>
+<h2 id="interacting-with-server-using-k8s-auth-cli"><a class="markdownIt-Anchor" href="#interacting-with-server-using-k8s-auth-cli">#</a> Interacting with server using k8s-auth CLI</h2>
+<p>It’s CLI installation time, folks! This nifty command line utility is your ticket to the k8s-auth party. With the CLI, you can log in as an admin or regular user and interact with the server based on your permission level.</p>
+<p>But wait, there’s more! For the first time, only the admin with their fancy schmancy email address can access the server. They’ll be the ones registering the cluster, setting up the agent, and creating a connection between the server and the agent. Then, it’s time to have some fun with users, groups, and permissions. Who said authentication couldn’t be funny?</p>
+<p>You can build the command line utility or download it by running:</p>
+<figure class="highlight bash"><figcaption><span>download cli</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/Mohamed-Rafraf/k8s-auth-cli/releases/download/test/k8s-auth</span><br><span class="line">sudo <span class="built_in">chmod</span> +x k8s-auth &amp;&amp; sudo <span class="built_in">mv</span> k8s-auth /usr/bin</span><br></pre></td></tr></table></figure>
+<p>Now, you can use this command line utility just like any other tool in your system!</p>
+<p><img data-src="https://imgur.com/EciPajC.png" alt=""></p>
+<p>Before start playing with this command line you need to know that on each command you need to specify the authentication server that you want to interact with! So either you user  <code>--server</code>  on each command or use  <code>K8S_AUTH_SERVER</code>  environment variable to make it more easy for you! I’ll go with the 2nd option!</p>
+<figure class="highlight bash"><figcaption><span>export env var</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> K8S_AUTH_SEVER=https://auth.4n6nk8s.tech</span><br></pre></td></tr></table></figure>
+<p>Now you need to log in as an adminstrator! It’s not that hard just run  <code>k8s-auth login</code>  and forget to specify  <code>--admin</code>  to login as the super user!</p>
+<p><img data-src="https://imgur.com/10prjzn.png" alt=""></p>
+<p>The utility needs a secret token, which you’ll get from an URL link. This link will take you to Google for authentication and authorization as an admin. Once you’re authorized, you’ll get the secret token to paste and everything will be good to go.</p>
+<p>You’ll get something like this one in case you’re authorized!<br>
+<img data-src="https://imgur.com/Yt9FZgD.png" alt=""></p>
+<p>Copy that thing don’t worry! Once you paste it, the utility will verify the token and let you know if you’re ready for your actions or not!</p>
+<p><img data-src="https://imgur.com/MY7TTOZ.png" alt=""></p>
+<p>Bingo we are ready for action! Now as an admin you can register clusters, create,delete,modify users and groups (and their permissions) inside each cluster!</p>
+<blockquote>
+<p>Let’s assume that you have 2 clusters! You create a user inside cluster1 and you give him permission to list pods on dev namespace. You can add that user to cluster2 with other permission like create secrets on prod namespace</p>
+</blockquote>
+<p>It’s time to register a cluster! You’ll recieve a secret token.</p>
+<p><img data-src="https://imgur.com/yvANfkB.png" alt=""></p>
+<p>And as you see here! The cluster is registered using  <code>k8s-auth create cluster</code>  and you can list registred clusters with  <code>k8s-auth get clusters</code></p>
+<blockquote>
+<p>Keep in mind that registerd cluster have 2 status, not Active when the cluster is not verified yet. The Active status will show you the API SERVER address/hostname</p>
+</blockquote>
+<blockquote>
+<p>Only Admins can see the tokens! Running the same command as a regular user will list you only the clusters that you have access to it (so not all cluster) and without the token!</p>
+</blockquote>
+<p>Let’s take rest now from the CLI. It’s time for kubernetes! Let’s deploy the agent/controller that will communicate with the server!</p>
+<h2 id="deploy-the-agentcontroller-inside-kubernetes"><a class="markdownIt-Anchor" href="#deploy-the-agentcontroller-inside-kubernetes">#</a> Deploy the Agent/Controller inside Kubernetes</h2>
+<p>Deploying the agent is not rocket science! Deploying the agent is not rocket science! (To be honest i didn’t make a helm chart yet, Sadly 😦 ). But if you want to do it the old fashioned way, no worries! It’s still a piece of cake. Just keep in mind that you need to create a namespace called “k8s-auth” in your cluster. This namespace will contain all the service accounts and secrets of the users that authenticate and have a session with the cluster.</p>
+<p>The agent’s mission is to make sure everyone gets what they need! It creates service accounts, roles, and role bindings to make sure users have the right permissions in the cluster. That’s why the agent itself needs a service account and permissions to do its job inside the cluster.</p>
+<p>Let’s create the namespace and the service account for this agent!</p>
+<figure class="highlight yaml"><figcaption><span>create ns & sa</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Namespace</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-auth</span></span><br><span class="line"><span class="attr">spec:</span> &#123;&#125;</span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-auth</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">k8s-auth</span></span><br></pre></td></tr></table></figure>
+<p>This service account need a clusterrole that allow to create roles to anything!  to grant permission for creating pods you must have this permission first! You can’t give permission of create something and you can’t do it!!!</p>
+<p>Next, the service account will need an appropriate permissions to carry out its mission inside the cluster. Specifically, it requires a clusterrole that grants permission to create roles for any resource.</p>
+<p>In kubernetes world, granting permission to create something requires that you have the permission yourself!. For example, you can’t grant permission to create pods if you don’t have permission to create pods even you have permission to create roles!!</p>
+<p>Let’s create the clusterole and the binding!</p>
+<figure class="highlight yaml"><figcaption><span>create cluster role</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-auth</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">apiGroups:</span> [<span class="string">&quot;*&quot;</span>]</span><br><span class="line">  <span class="attr">resources:</span> [<span class="string">&quot;*&quot;</span>]</span><br><span class="line">  <span class="attr">verbs:</span> [<span class="string">&quot;*&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRoleBinding</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-auth</span></span><br><span class="line"><span class="attr">roleRef:</span></span><br><span class="line">  <span class="attr">apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br><span class="line">  <span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-auth</span></span><br><span class="line"><span class="attr">subjects:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-auth</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">k8s-auth</span></span><br></pre></td></tr></table></figure>
+<p>Now it’s time to the last part! we will deploy the agent itself! The agent need to know some information so as expected there is some environement variable!</p>
+<ul>
+<li><code>CLUSTER_NAME</code> : is the same name that you put it inside the authentication server</li>
+<li><code>TOKEN</code> : The generated token from the authentication server</li>
+<li><code>SERVER</code> : The authentication server itself</li>
+<li><code>API_SERVER</code> : This is contains the public hostname for the API SERVER. The agent can detect it correctly when you have a cluster inside Network and the cluster is not exposed in the internet</li>
+</ul>
+<blockquote>
+<p>I used kubeadm clusters in provisionning clusters. I didn’t find a way to find the public hostname! So you need to indicate the api server until it will be fixed!</p>
+</blockquote>
+<figure class="highlight yaml"><figcaption><span>deploy</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">k8s-auth</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-auth</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">k8s-auth</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">k8s-auth</span></span><br><span class="line">  <span class="attr">strategy:</span> &#123;&#125;</span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">k8s-auth</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">serviceAccountName:</span> <span class="string">k8s-auth</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">image:</span> <span class="string">mohamedrafraf/k8s-auth-kube</span> </span><br><span class="line">        <span class="attr">name:</span> <span class="string">k8s-auth-kube</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">CLUSTER_NAME</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">ctf-cluster</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">TOKEN</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">&quot;Z8taw1yFw4lsq7cgSvmZ&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">SERVER</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">&quot;https://auth.4n6nk8s.tech&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">API_SERVER</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">https://172.190.91.84:6443</span></span><br><span class="line">        <span class="attr">resources:</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>After deploying the agent. you can check the clusters with the cli again and you’ll find everything is ok!<br>
+<img data-src="https://imgur.com/MqHeeY1.png" alt=""></p>
+<p>The cluster is on Active status and the api server is not empty now! You can repeat this operation with many clusters and this is how multi-clusters can work together!</p>
+<h2 id="create-users-and-groups"><a class="markdownIt-Anchor" href="#create-users-and-groups">#</a> Create Users and Groups</h2>
+<p>The cluster is now ready for authentication and has been verified to be functioning without any issues. The connection between the cluster and authentication has been established. Now, let’s proceed to creating groups and users.</p>
+<p>Let’s see what  <code>k8s-auth create</code>  can do for us!</p>
+<p><img data-src="2023-04-29-15-56-38.png" alt=""></p>
+<p>Great news! With the  <code>k8s-auth create</code>  command, you can easily create groups and users for your authenticated clusters. To create a group, simply specify the cluster and provide a YAML manifest file containing the roles for that group. For creating a user, you can either assign them to an existing group or provide a YAML manifest file for the user’s roles if they do not belong to any group.</p>
+<p>Let’s define the role for our group that we will create!</p>
+<figure class="highlight yaml"><figcaption><span>group rule</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Role</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">dev</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod-and-secret</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">apiGroups:</span> [<span class="string">&quot;&quot;</span>]</span><br><span class="line">  <span class="attr">resources:</span> [<span class="string">&quot;pods&quot;</span>,<span class="string">&quot;secrets&quot;</span>]</span><br><span class="line">  <span class="attr">verbs:</span> [<span class="string">&quot;list&quot;</span>,<span class="string">&quot;create&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Role</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">prod</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod-list</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">apiGroups:</span> [<span class="string">&quot;&quot;</span>]</span><br><span class="line">  <span class="attr">resources:</span> [<span class="string">&quot;pods&quot;</span>]</span><br><span class="line">  <span class="attr">verbs:</span> [<span class="string">&quot;list&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>The group we’re about to create will be granted permission to create and list pods and secrets in the “dev” namespace, while they will only be able to list pods in the “prod” namespace.</p>
+<blockquote>
+<p>Any user will be belong to this group will have these permissions! You don’t have to repeat the same manifest for each user!. This is why groups exists!</p>
+</blockquote>
+<p>This command will create the group for you</p>
+<figure class="highlight bash"><figcaption><span>command</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k8s-auth create group &lt;name&gt; --cluster=&lt;cluster&gt; --file=&lt;rbac_file&gt;</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://imgur.com/g5YBB8u.png" alt=""></p>
+<p>As you can see here! The group is create successfully and you can see his permission when you forget it using  <code>k8s-auth get permission</code>  command!</p>
+<p>You can discover what you can do with  <code>k8s-auth get</code>  command!! You can a list users too!</p>
+<p><img data-src="https://imgur.com/MOC7L1o.png" alt=""></p>
+<p>Now let’s create a user that belong to this group! So we don’t need to specify any manifest file that define roles!</p>
+<figure class="highlight bash"><figcaption><span>user</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k8s-auth create user --name &lt;name&gt; --fullname &lt;value&gt; --mail &lt;mail&gt; --cluster &lt;cluster&gt; --group &lt;group&gt;</span><br></pre></td></tr></table></figure>
+<p>In case that you want to create a user that don’t belongs to any group and have his own permission you can delete the  <code>--group</code>  and change it with  <code>--file</code>  and specify the yaml file that contains his roles!</p>
+<blockquote>
+<p>No need to worry about naming roles because there won’t be any overlapping between them. The agent takes care of creating roles and bindings in the background, and the names you specify in the manifest won’t be used directly.</p>
+</blockquote>
+<p><img data-src="https://imgur.com/n2S8BQM.png" alt=""></p>
+<p>You can update the permission using the  <code>k8s-auth update permisssion</code>  command! This command can update groups and users permission</p>
+<p>In case you change the permission for a user that belgons to a group. This user will leave that group because he will have his own permissions (different from the group one)</p>
+<blockquote>
+<p>You can’t delete a group if is not empty!</p>
+</blockquote>
+<blockquote>
+<p>When User have an opened session with a cluster and use kubectl normally and you decide to delete that user the session will be closed and he can’t do anything!</p>
+</blockquote>
+<h2 id="authenticate-to-a-cluster"><a class="markdownIt-Anchor" href="#authenticate-to-a-cluster">#</a> Authenticate to a cluster</h2>
+<p>As a regular user you need to login to the authentication server using  <code>k8s-auth login</code>  and you’ll receive a link as the admin login process!</p>
+<p>Then you can list the clusters that you can authenticate with using  <code>k8s-auth get clusters</code>  and keep in your mind that you’ll never see the token of each cluster (Only admins can see tokens)</p>
+<p>Once you decided which cluster you’ll authenticate! run the command  <code>k8s-auth auth</code>  with specifying the cluster name!</p>
+<figure class="highlight bash"><figcaption><span>authenticate</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">k8s-auth auth cluster=ctf-cluster</span><br><span class="line"></span><br><span class="line">To use this cluster run this <span class="built_in">command</span>: <span class="built_in">export</span> KUBECONFIG=<span class="variable">$HOME</span>/.k8s-auth.config</span><br></pre></td></tr></table></figure>
+<p>If you’re authorized, you’ll receive a message like that! What is happening?</p>
+<p>Actually the k8s-auth CLI generate a kubeconfig file for you! run the command that the CLI suggest to you! BOOOM Start Kubectlying !!! xD</p>
+<h2 id="conclusion"><a class="markdownIt-Anchor" href="#conclusion">#</a> Conclusion</h2>
+<p>As highlighted in the blog post, the process of authentication has been simplified with just 3 simple commands - login, auth, and export KUBECONFIG. These commands enable users to easily open a session with any cluster they want, regardless of the number of clusters and different permissions required, using just a single set of credentials. Additionally, the administrator can easily set up agents in the clusters, and manage the permissions and the entire process centrally using a smooth command line interface.</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-29 18:18:05" itemprop="dateModified" datetime="2023-04-29T18:18:05+01:00">2023-04-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/03/23/Writeups/ncsc2023/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;imgur.com&#x2F;LJslRYb.png" title="NCSC&#39;2023 Writeup Challenges">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Writeups</span>
+  <h3>NCSC'2023 Writeup Challenges</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2023/06/03/Kubernetes/post/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;imgur.com&#x2F;CL8Xz9l.png" title="Streamlined Application Deployemet using Kubernetes">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>Streamlined Application Deployemet using Kubernetes</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#introduction"><span class="toc-number">1.</span> <span class="toc-text"> Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#how-it-comes"><span class="toc-number">1.1.</span> <span class="toc-text"> How it comes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-k8s-auth-is-born"><span class="toc-number">1.2.</span> <span class="toc-text"> Why k8s-auth is born</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#before-starting"><span class="toc-number">1.3.</span> <span class="toc-text"> Before Starting</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#k8s-auth-the-sso-based-authentication-mechanism-for-multi-clusters"><span class="toc-number">2.</span> <span class="toc-text"> K8S-AUTH : The SSO-Based Authentication Mechanism for Multi-Clusters!</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-k8s-auth"><span class="toc-number">2.1.</span> <span class="toc-text"> What is k8s-auth ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-authentication-server"><span class="toc-number">2.2.</span> <span class="toc-text"> The Authentication server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-this-server-communicate-with-clusters"><span class="toc-number">2.3.</span> <span class="toc-text"> How This Server Communicate with Clusters ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-interact-with-this-server"><span class="toc-number">2.4.</span> <span class="toc-text"> How to interact with this Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-users-logs-to-the-server"><span class="toc-number">2.5.</span> <span class="toc-text"> How users logs to the server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-happen-when-user-want-to-authenticate-to-a-cluster"><span class="toc-number">2.6.</span> <span class="toc-text"> What happen when user want to authenticate to a cluster ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-agentcontroller-role"><span class="toc-number">2.7.</span> <span class="toc-text"> The Agent&#x2F;Controller role</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#before-demo"><span class="toc-number">2.8.</span> <span class="toc-text"> Before DEMO</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#the-demo"><span class="toc-number">3.</span> <span class="toc-text"> The DEMO !</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#setting-up-authentication-server"><span class="toc-number">3.1.</span> <span class="toc-text"> Setting up Authentication Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interacting-with-server-using-k8s-auth-cli"><span class="toc-number">3.2.</span> <span class="toc-text"> Interacting with server using k8s-auth CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deploy-the-agentcontroller-inside-kubernetes"><span class="toc-number">3.3.</span> <span class="toc-text"> Deploy the Agent&#x2F;Controller inside Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#create-users-and-groups"><span class="toc-number">3.4.</span> <span class="toc-text"> Create Users and Groups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#authenticate-to-a-cluster"><span class="toc-number">3.5.</span> <span class="toc-text"> Authenticate to a cluster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">3.6.</span> <span class="toc-text"> Conclusion</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/08/05/Kubernetes/kubeadm/" rel="bookmark" title="Setting Up Kubernetes with Kubeadm">Setting Up Kubernetes with Kubeadm</a></li><li><a href="/2022/09/06/Kubernetes/configmap-secrets/" rel="bookmark" title="Introduction To Configmap & Secrets">Introduction To Configmap & Secrets</a></li><li><a href="/2022/09/08/Kubernetes/private-docker-k8s/" rel="bookmark" title="Dockerize a website & Pull it privately in k8s">Dockerize a website & Pull it privately in k8s</a></li><li><a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="bookmark" title="Deploy Nginx Ingress in Bare-metal Cluster">Deploy Nginx Ingress in Bare-metal Cluster</a></li><li><a href="/2022/09/10/Kubernetes/nfs-k8s/" rel="bookmark" title="NFS as Remote Storage for Kubernetes">NFS as Remote Storage for Kubernetes</a></li><li class="active"><a href="/2023/04/28/Kubernetes/k8s-auth/" rel="bookmark" title="SSO-based authentication mechanism for multi-clusters">SSO-based authentication mechanism for multi-clusters</a></li><li><a href="/2023/06/03/Kubernetes/post/" rel="bookmark" title="Streamlined Application Deployemet using Kubernetes">Streamlined Application Deployemet using Kubernetes</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/03/23/Writeups/ncsc2023/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/06/03/Kubernetes/post/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/04/28/Kubernetes/k8s-auth/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

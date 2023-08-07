@@ -1,0 +1,456 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="4n6 & k8s" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="4n6 & k8s" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="4n6 & k8s" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2023/06/03/Kubernetes/post/">
+
+
+<meta name="description" content="# Introduction As second-year engineering students, we embarked our academic group project that pushes us beyond our limits. Being self-proclaimed cloud-native and Kubernetes geeks, we decided to vent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Streamlined Application Deployemet using Kubernetes">
+<meta property="og:url" content="http://example.com/2023/06/03/Kubernetes/post/index.html">
+<meta property="og:site_name" content="4n6 &amp; k8s">
+<meta property="og:description" content="# Introduction As second-year engineering students, we embarked our academic group project that pushes us beyond our limits. Being self-proclaimed cloud-native and Kubernetes geeks, we decided to vent">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/fEOyFeQ.png">
+<meta property="og:image" content="https://imgur.com/O5fW0GG.png">
+<meta property="og:image" content="https://imgur.com/KEoSXvr.png">
+<meta property="og:image" content="https://i.imgur.com/WyYpyTw.png">
+<meta property="og:image" content="https://i.imgur.com/zNOA4Lz.png">
+<meta property="og:image" content="https://i.imgur.com/kTZmlxJ.png">
+<meta property="og:image" content="https://i.imgur.com/UomqhLd.png">
+<meta property="article:published_time" content="2023-06-03T16:38:55.000Z">
+<meta property="article:modified_time" content="2023-06-03T18:16:07.464Z">
+<meta property="article:author" content="Raf² &amp; Adam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/fEOyFeQ.png">
+
+
+  <title>
+Streamlined Application Deployemet using Kubernetes - Kubernetes |
+Raf² & Adam = 4n6 & k8s</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Streamlined Application Deployemet using Kubernetes
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2023-06-03 17:38:55">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-06-03T17:38:55+01:00">2023-06-03</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Raf² & Adam</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+          <img src="https://imgur.com/CL8Xz9l.png">
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Kubernetes/" itemprop="item" rel="index" title="In Kubernetes"><span itemprop="name">Kubernetes</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/03/Kubernetes/post/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/tobi.jpg">
+    <meta itemprop="name" content="Raf² & Adam">
+    <meta itemprop="description" content=", We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="4n6 & k8s">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="introduction"><a class="markdownIt-Anchor" href="#introduction">#</a> Introduction</h1>
+<p>As second-year engineering students, we embarked our academic group project that pushes us beyond our limits. Being self-proclaimed cloud-native and Kubernetes geeks, we decided to venture into an unfamiliar territory with an advanced project. Our goal? To unravel the mysteries of Heroku, Vercel, and On-Render, the leading PaaS solutions! And here is the twist, we were running out of time, and neither ChatGPT nor Google can help us. We are mad, and we actually did it in 4 days! Fellow adventurers, let’s get you to feel the glimpse of what we have been through in just 4 days to build our project codenamed Kli8nt for streamlined application deployments into the Kubernetes realm</p>
+<p>Fueled by the increasing demand for a unified platform that encompasses front-end hosting, backend deployment, and database management, our team leveraged our expertise in DevOps, Kubernetes, and web development to establish a robust and scalable solution that is client-friendly and K8s-able, hence the name Kli8nt. It is our way to design a mechanism that’s a proof-of-concept to the leading PaaS solutions</p>
+<h1 id="project-details"><a class="markdownIt-Anchor" href="#project-details">#</a> Project Details  :</h1>
+<h2 id="high-level-architecture"><a class="markdownIt-Anchor" href="#high-level-architecture">#</a> High Level Architecture</h2>
+<p>Our system consists of various interconnected components that work together seamlessly. At the front-end, users interact with the system and provide the necessary information for application deployment. The backbone of our system is the backend, which handles authentication, data storage, and serves as the communication hub with the clusters. It establishes a websocket connection to deliver real-time logs to the user. To facilitate efficient communication between the backend and clusters, we rely on RabbitMQ, a messaging system that ensures reliable information exchange. The clusters themselves take charge of the build and deployment operations, guided by custom controllers to ensure efficiency and accuracy. Lastly, Kafka, our robust data streaming platform, stores and streams application logs from the clusters to the user. Together, these components form a cohesive system that enables smooth and efficient application deployment.</p>
+<p><img data-src="https://i.imgur.com/fEOyFeQ.png" alt=""></p>
+<h2 id="user-interface"><a class="markdownIt-Anchor" href="#user-interface">#</a> User Interface</h2>
+<p>The User Interface serves as the primary interaction point for developers using the<br>
+Kli8nt platform. Designed with simplicity and ease of use in mind, the UI provides<br>
+a seamless experience for users to connect to their GitHub accounts, manage their<br>
+repository specifications, and initiate deployments. We aim to streamline the<br>
+application management process and empower developers to effortlessly deploy<br>
+their applications.</p>
+<p><img data-src="https://imgur.com/O5fW0GG.png" alt=""></p>
+<h2 id="user-authentication"><a class="markdownIt-Anchor" href="#user-authentication">#</a> User Authentication</h2>
+<p>Kli8nt leverages the robust authentication capabilities of GitHub OAuth2 as its primary method for user login and authorization. By utilizing this powerful authentication mechanism, users can grant the platform access to their repositories. With the generated Personal Access Token (PAT) associated with the authenticated user, Kli8nt gains the ability to clone both private and public repositories, utilizing the functionalities provided by the GitHub API. This approach ensures secure and seamless integration with GitHub, allowing users to enjoy a streamlined experience while maintaining the necessary permissions and access controls.</p>
+<p><img data-src="https://imgur.com/KEoSXvr.png" alt=""></p>
+<h2 id="backend-service"><a class="markdownIt-Anchor" href="#backend-service">#</a> Backend Service</h2>
+<p>The backend service is the backbone of the platform, ensuring efficient functionality by handling user requests, processing deployment tasks, managing logs, and facilitating seamless communication between components. It plays a vital role in request handling and routing, ensuring user requests are directed to the appropriate components for further processing. Additionally, it handles user authentication and authorization, ensuring secure access to the platform. Integration with RabbitMQ allows for the handling and queuing of deployment requests, while task scheduling ensures efficient and ordered processing. The backend service also integrates with GitHub’s Deployment Environment, facilitating synchronization and updates for deployments. Logs are streamed and stored using Kafka, with a backend endpoint responsible for streaming logs back to users for monitoring. Database interaction with PostgreSQL allows for data storage and retrieval related to user configurations, deployment records, and other relevant information, ensuring data consistency and integrity through GORM. Overall, the backend service acts as a crucial orchestrator, ensuring the smooth operation and effective management of the platform’s core functionalities.</p>
+<p><img data-src="https://i.imgur.com/WyYpyTw.png" alt=""></p>
+<h2 id="the-messaging-queue-system"><a class="markdownIt-Anchor" href="#the-messaging-queue-system">#</a> The Messaging Queue System</h2>
+<p>To manage and queue deployment requests, we’ve integrated RabbitMQ. Simply put, it is a software where queues are defined, to which applications connect in order to transfer messages. For when a deployment request is received, the backend enqueues the task into a BUILD queue to the Kubernetes BUILD Operator. This ensures that each task is processed in the right order. The Kubernetes DEPLOY Operator in turn enqueus deployment results back here though the INFORM queue.</p>
+<p><img data-src="https://i.imgur.com/zNOA4Lz.png" alt=""></p>
+<h2 id="the-build-and-deploy-kubernetes-custom-controller"><a class="markdownIt-Anchor" href="#the-build-and-deploy-kubernetes-custom-controller">#</a> The Build and Deploy Kubernetes Custom Controller</h2>
+<p>The clusters are responsible for the build and deployment operations. These processes are managed by custom controllers, ensuring efficiency and accuracy in deploying applications.</p>
+<p><img data-src="https://i.imgur.com/kTZmlxJ.png" alt=""></p>
+<h2 id="the-build-kubernetes-custom-controller"><a class="markdownIt-Anchor" href="#the-build-kubernetes-custom-controller">#</a> The Build Kubernetes Custom Controller</h2>
+<p>The build controller plays a critical role in initiating the build process for each application. It acts as a listener for the queue served by RabbitMQ, enabling it to initiate the build process. When a new application is added to the queue, the controller creates an isolated environment specifically for that application. Within this isolated environment, it launches a dedicated build process. This process involves tasks such as cloning the repository and generating a Dockerfile based on the application’s stack and programming language, starting the Kaniko process to initiate the build, which includes compiling the source code, resolving dependencies, and creating a container image then pushing the resulting container image to a private registry.</p>
+<p>After completing the build and push process, the isolated environment is terminated and deleted, in addition, the controller publishes a message to the deployment queue served by RabbitMQ. This queue holds the applications that are scheduled to be deployed by the deploy controller. This ensures a clean and efficient workflow, as each build process operates in its isolated context. By leveraging the build controller’s capabilities, applications can be built and prepared for deployment without interference or conflicts with other ongoing builds</p>
+<h2 id="the-deploy-kubernetes-custom-controller"><a class="markdownIt-Anchor" href="#the-deploy-kubernetes-custom-controller">#</a> The Deploy Kubernetes Custom Controller</h2>
+<p>After the build process concludes and the build controller sends an element to the queue, the deploy controller consumes the queue and initiates the deployment process. This involves creating a deployment object that includes a pod. The application’s Docker image is then pulled and run within this pod. Simultaneously, a cluster IP service is created and associated with the deployment, enabling internal communication within the cluster.</p>
+<p>The deploy controller takes charge of exposing the application externally and adding a TLS/SSL certificate. It achieves this by adding a route rule for the service within the ingress configuration. Additionally, it adds TLS/SSL configuration to the Ingress, allowing the application to be accessed securely via HTTPS. By utilizing Nginx Ingress, the controller ensures that the application is reachable and accessible with the desired HTTPS protocol and has a specific subdomain for the application.</p>
+<p>Once the application is successfully deployed and exposed to the TLS certificate, the deploy controller notifies the backend server that the application is now ready for user access. This communication informs the backend server that the newly deployed application is available and can be utilized by users.</p>
+<h2 id="the-log-streaming-controller"><a class="markdownIt-Anchor" href="#the-log-streaming-controller">#</a> The Log Streaming Controller</h2>
+<p>Another important aspect in such provided service, is that the user would like to have a vision over his application while and after its being prepared and sent to production. To deliver such a feature, we have implemented another controller in go, that’s responsible for listening to Pod’s lifecycle events, made possible thanks to the Shared Informer feature in the Kubernetes API which is a local cache kind of resource made to be consumed. Whenever a new Deployment is up and running, grab its logs and stream them real time to another environment to be stored. This environment being Apache Kafka, an open source distributed message streaming that’s suited for high performance data pipelines. Our Kafka is running in its own managed cluster at Confluent, a KaaS provider with additional cool features that we liked while using them (like a nice user-friendly dashboard, a built-in REST API, etc…). Kafka is going to stream the logs, each application in its own kafka topic or event, directly to the backend, and store them for future requests -so you don’t really have to be there at the right time, whenever you request them you’ll get them and if you are there already you get them live.</p>
+<p><img data-src="https://i.imgur.com/UomqhLd.png" alt=""></p>
+<h1 id="the-conclusion"><a class="markdownIt-Anchor" href="#the-conclusion">#</a> The conclusion</h1>
+<p>Our end-of-year project theoretically proposes and empirically validate a system design able to streamline the process of deploying any mciroservice application living in Github to Kubernetes on Cloud. This project is our gateway to our graduation projects as well as internship opportunities this summer, and would be a great addition to our professional journeys</p>
+<h1 id="meet-the-team"><a class="markdownIt-Anchor" href="#meet-the-team">#</a> Meet the Team</h1>
+<p>Along with the immense support from our supervisor Mr. Bassem Ben Saleh and his esteemed jury.<br>
+We would like to extend a heartfelt thank you to our families and close ones for their support and encouragement during late nights and long hours of work.</p>
+<div class="links"><div class="item" title="Mohamed Rafraf - Raf²" style="--block-color:#2296fd;"><span class="exturl image" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8=" data-background-image="https://media.licdn.com/dms/image/C4D03AQGoi9OLQy5yfg/profile-displayphoto-shrink_800_800/0/1635769397295?e=1691020800&v=beta&t=IOYj31PodnHo-vWlY3lHvfLTCAzBeGPclWqCkdQl1bE"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8=">Mohamed Rafraf - Raf²</span>
+          <p class="desc">Kubernetes Engineer</p>
+          </div></div><div class="item" title="Adam Lahbib - Adm" style="--block-color:#de2336;"><span class="exturl image" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLm1l" data-background-image="https://media.licdn.com/dms/image/D4D03AQEeg7KDib8qCQ/profile-displayphoto-shrink_800_800/0/1682525314941?e=1691020800&v=beta&t=O-T0VjepTffxrdxGNc4jwwPleeh-rt6RWlMF6gol1VQ"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLm1l">Adam Lahbib - Adm</span>
+          <p class="desc">Backend Engineer / DevOps</p>
+          </div></div><div class="item" title="Med Sofiene Barka - NieMand" style="--block-color:#02bf1b;"><span class="exturl image" data-url="aHR0cHM6Ly93d3cuaG1sbmRyLm1lLw==" data-background-image="https://pbs.twimg.com/profile_images/1607462313182756867/WHEAVH9d_400x400.jpg"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly93d3cuaG1sbmRyLm1lLw==">Med Sofiene Barka - NieMand</span>
+          <p class="desc">Software Engineer</p>
+          </div></div><div class="item" title="Skander Soltane - RedNax" style="--block-color:#ff0378;"><span class="exturl image" data-url="aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL3NrYW5kZXItc29sdGFuZQ==" data-background-image="https://media.licdn.com/dms/image/D4D03AQGD3BI1PkShag/profile-displayphoto-shrink_800_800/0/1676590747987?e=1691020800&v=beta&t=Jo1SN1nqWZCCeJ7KyxP1f6NgWUPw4DyMGmkXPQrYvWg"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL3NrYW5kZXItc29sdGFuZQ==">Skander Soltane - RedNax</span>
+          <p class="desc">Software Developer</p>
+          </div></div><div class="item" title="Dr. Bassem Ben Salah" style="--block-color:#de2336;"><span class="exturl image" data-url="aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL2Jhc3NlbS1iZW4tc2FsYWgtMzQ4N2EyNTkv" data-background-image="https://media.licdn.com/dms/image/C4D03AQEuhp7TFHjE3Q/profile-displayphoto-shrink_800_800/0/1549533675903?e=1691020800&v=beta&t=AuBIN0Obuyu-dqcWr2HWZMS9qJNZKzAJiw5KnuVOLSg"></span>
+          <div class="info">
+          <span class="exturl title" data-url="aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL2Jhc3NlbS1iZW4tc2FsYWgtMzQ4N2EyNTkv">Dr. Bassem Ben Salah</span>
+          <p class="desc">Our Supervisor</p>
+          </div></div></div>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-06-03 19:16:07" itemprop="dateModified" datetime="2023-06-03T19:16:07+01:00">2023-06-03</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Mohamed Rafraf:  </strong>Raf² & Adam <i class="ic i-at"><em>@</em></i>4n6 & k8s
+  </li>
+ 
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/04/28/Kubernetes/k8s-auth/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i0.wp.com&#x2F;cms.pingsafe.com&#x2F;wp-content&#x2F;uploads&#x2F;2022&#x2F;12&#x2F;KSPM.png?fit&#x3D;927%2C600&amp;ssl&#x3D;1" title="SSO-based authentication mechanism for multi-clusters">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Kubernetes</span>
+  <h3>SSO-based authentication mechanism for multi-clusters</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2023/08/06/Writeups/quals23-misc/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.imgur.com&#x2F;7DVuoG0.png" title="Securinets Quals CTF 23 Misc Challenges Writeup">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> Writeups</span>
+  <h3>Securinets Quals CTF 23 Misc Challenges Writeup</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#introduction"><span class="toc-number">1.</span> <span class="toc-text"> Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#project-details"><span class="toc-number">2.</span> <span class="toc-text"> Project Details  :</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#high-level-architecture"><span class="toc-number">2.1.</span> <span class="toc-text"> High Level Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#user-interface"><span class="toc-number">2.2.</span> <span class="toc-text"> User Interface</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#user-authentication"><span class="toc-number">2.3.</span> <span class="toc-text"> User Authentication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#backend-service"><span class="toc-number">2.4.</span> <span class="toc-text"> Backend Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-messaging-queue-system"><span class="toc-number">2.5.</span> <span class="toc-text"> The Messaging Queue System</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-build-and-deploy-kubernetes-custom-controller"><span class="toc-number">2.6.</span> <span class="toc-text"> The Build and Deploy Kubernetes Custom Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-build-kubernetes-custom-controller"><span class="toc-number">2.7.</span> <span class="toc-text"> The Build Kubernetes Custom Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-deploy-kubernetes-custom-controller"><span class="toc-number">2.8.</span> <span class="toc-text"> The Deploy Kubernetes Custom Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-log-streaming-controller"><span class="toc-number">2.9.</span> <span class="toc-text"> The Log Streaming Controller</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#the-conclusion"><span class="toc-number">3.</span> <span class="toc-text"> The conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#meet-the-team"><span class="toc-number">4.</span> <span class="toc-text"> Meet the Team</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/08/05/Kubernetes/kubeadm/" rel="bookmark" title="Setting Up Kubernetes with Kubeadm">Setting Up Kubernetes with Kubeadm</a></li><li><a href="/2022/09/06/Kubernetes/configmap-secrets/" rel="bookmark" title="Introduction To Configmap & Secrets">Introduction To Configmap & Secrets</a></li><li><a href="/2022/09/08/Kubernetes/private-docker-k8s/" rel="bookmark" title="Dockerize a website & Pull it privately in k8s">Dockerize a website & Pull it privately in k8s</a></li><li><a href="/2022/09/09/Kubernetes/nginx-ingress/" rel="bookmark" title="Deploy Nginx Ingress in Bare-metal Cluster">Deploy Nginx Ingress in Bare-metal Cluster</a></li><li><a href="/2022/09/10/Kubernetes/nfs-k8s/" rel="bookmark" title="NFS as Remote Storage for Kubernetes">NFS as Remote Storage for Kubernetes</a></li><li><a href="/2023/04/28/Kubernetes/k8s-auth/" rel="bookmark" title="SSO-based authentication mechanism for multi-clusters">SSO-based authentication mechanism for multi-clusters</a></li><li class="active"><a href="/2023/06/03/Kubernetes/post/" rel="bookmark" title="Streamlined Application Deployemet using Kubernetes">Streamlined Application Deployemet using Kubernetes</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Raf² & Adam"
+      data-src="/images/tobi.jpg">
+  <p class="name" itemprop="name">Raf² & Adam</p>
+  <div class="description" itemprop="description">We are a Forensics Duo at SOter14 CTF Team & Network Engineering Students at INSAT. Enjoy our Kubernetes Articles and Write-ups!</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item Adam" data-url="aHR0cHM6Ly9hZGFtbGFoYmliLmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;adamlahbib.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item Raf²" data-url="aHR0cHM6Ly9tb2hhbWVkLXJhZnJhZi5naXRodWIuaW8v" title="https:&#x2F;&#x2F;mohamed-rafraf.github.io&#x2F;"><i class="ic i-address-card"></i></span>
+      <span class="exturl item soteria" data-url="aHR0cHM6Ly9zb3RlcjE0LnRlY2gv" title="https:&#x2F;&#x2F;soter14.tech&#x2F;"><i class="ic i-flag"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/04/28/Kubernetes/k8s-auth/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/08/06/Writeups/quals23-misc/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-4n6 & k8s"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Raf² & Adam @ Raf² & Adam</span>
+  </div>
+  <div class="powered-by">
+     
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/06/03/Kubernetes/post/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

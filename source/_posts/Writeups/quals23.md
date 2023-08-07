@@ -7,7 +7,7 @@ categories:
 - [Writeups]
 ---
 
-# The CTF
+## The CTF
 
 Securinets Quals CTF was this Securinets generation's first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.
 
@@ -19,7 +19,7 @@ Scoreboard:
 
 ![](https://i.imgur.com/eYBMvzh.jpg)
 
-# The Betrayers
+## The Betrayers
 
 ![](https://i.imgur.com/lAWQkqM.png)
 
@@ -588,7 +588,7 @@ Binggo we got the flag! The flag is on the http header
 FLAG: `Securinets{c03cefb79791e431011d0f86de9dd83aee67aebcec946bfefad00cd4807fc9c3}`
 
 
-# Jackpot
+## Jackpot
 
 ![](https://i.imgur.com/GONLlyG.png)
 
@@ -602,12 +602,12 @@ Flag format: Securinets{drug-enforcement-administration-for-the-win-style}
 
 [adm & mida0ui](https://twitter.com/admida0ui)
 
-## Attachment
+### Attachment
 
 Given a disk image, `disk.img`. The disk image is a raw disk image, and can be investigated using FTK Imager.
 [https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing](https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing)
 
-## Writeup
+### Writeup
 
 The disk image is a raw disk image, and can be investigated using FTK Imager. The disk image contains a single partition, which is a Windows XP installation.
 
@@ -768,11 +768,11 @@ Thanks for reading, we hope you enjoyed it, and we will be happy to hear your fe
 
 GGs **itunderground** for solving this challenge
 
-## Idea and Final Words
+### Idea and Final Words
 
 Just wanted to use pagefile.sys, hiberfile.sys, the Metamask thing, and Restore points because nobody used them like this in a CTF. So don't know if that's a great thing or rather will make players frustrated. Yet, tried to make everything as clear as possible for the players to understand and enjoy the challenge as a whole.
 
-# Raf Hide
+## Raf Hide
 
 ![](https://i.imgur.com/QRKzGoO.png)
 
@@ -1323,7 +1323,7 @@ And of course the QRCode is saved! And this is our QRCode!
 > The Final flag is : Securinets{Every_Fr4Me_H4S_HiS_own_S7ory}
 
 
-# Couch Potato
+## Couch Potato
 
 ![](https://i.imgur.com/jHut52F.png)
 
@@ -1339,7 +1339,7 @@ Flag formal: **Securinets{show_name_00UP1234_DOWN1234_YYYYMMDD}**
 
 [adm & mida0ui](https://twitter.com/admida0ui)
 
-## Attachment
+### Attachment
 
 A file called `dump.bin` was provided in a zip. Weighing 8 MB. Dating back to February the 1st, 2020. 1:07 AM.
 
@@ -1347,7 +1347,7 @@ Another file is what seems to be an updated firmware for the device, `Firmware.b
 
 [Download Link](https://drive.google.com/drive/folders/1TGNAOWKZZbCzZuVImklA18IH_cUvtkNy?usp=sharing)
 
-## Analysis
+### Analysis
 
 A Couch potato is a lazy guy that sits in front of the TV screen, indicating that we are dealing with a console, set-top-box STB or Digital Video Recorder DVR and not a PCI card satellite/Tuner card or a computer. The user mentioned that he was watching his favorite channel when he fall asleep which make it more likely an STB, or a receiver for simplicity.
 This also means that the show name we are looking for was broadcasted in his favorite channel.
@@ -1360,7 +1360,7 @@ However, the user could be mistaken as the channels that you can shortlist in th
 
 With all that in mind, we can start our information gathering phase.
 
-## Information Gathering
+### Information Gathering
 
 TL;DR.
 
@@ -1380,18 +1380,18 @@ Each at specific offsets and specific lengths. The user data is the most importa
 
 Keep in mind that if the IPTV subscription was provided by the device itself, then the expiration date could be stored in the device itself or their renewal website. If the IPTV subscription was provided by a third party service, then the expiration date is stored in the third party service database or user panel. In both cases, we need to find the device serial number or MAC address to be able to identify the device and the user. I believe that how they are likely to be stored in the memory dump rather than a plain expiration date.
 
-## Resources
+### Resources
 
 - [https://www.satellites.co.uk/forums/](https://www.satellites.co.uk/forums/)
 - [https://www.reddit.com/r/satellite/](https://www.reddit.com/r/satellite/)
 - [https://www.tunisia-sat.com/forums/](https://www.tunisia-sat.com/forums/)
 - [https://sat-universe.com/](https://sat-universe.com/)
 
-## Tools
+### Tools
 
 HexWorkshop / HxD Editor is a good tool to start with. It is a hex editor that can be used to view and edit files in hexadecimal and binary formats. It is a good tool to start with as it can be used to view the memory dump and search for strings. It can also be used to search for patterns and hex values.
 
-## Writeup
+### Writeup
 
 First, let's investigate the dump file.
 
@@ -1596,7 +1596,7 @@ And there it is, the serial number, let's query the IPTV validity.
 
 And the last part of the flag is `20141105`
 
-## Final Words
+### Final Words
 
 Flag: **Securinets{live_rugby_7s_00ff30cf_00ff8877_20141105}**
 

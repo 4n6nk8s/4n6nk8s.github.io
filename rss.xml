@@ -9,9 +9,9 @@
         <lastBuildDate>Sun, 06 Aug 2023 19:00:00 +0100</lastBuildDate>
         <category>kubernetes</category>
         <item>
-            <guid isPermalink="true">http://example.com/2023/08/06/Writeups/quals23/</guid>
+            <guid isPermalink="true">http://example.com/2023/08/06/Writeups/quals2023/</guid>
             <title>Securinets Quals CTF 23 Forensics &amp; Misc Challenges Writeup</title>
-            <link>http://example.com/2023/08/06/Writeups/quals23/</link>
+            <link>http://example.com/2023/08/06/Writeups/quals2023/</link>
             <pubDate>Sun, 06 Aug 2023 19:00:00 +0100</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;the-ctf&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-ctf&#34;&gt;#&lt;/a&gt; The CTF&lt;/h2&gt;
 &lt;p&gt;Securinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.&lt;/p&gt;

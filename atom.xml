@@ -6,9 +6,9 @@
     <updated>2023-08-06T18:00:00.000Z</updated>
     <category term="kubernetes" />
     <entry>
-        <id>http://example.com/2023/08/06/Writeups/quals23/</id>
+        <id>http://example.com/2023/08/06/Writeups/quals2023/</id>
         <title>Securinets Quals CTF 23 Forensics &amp; Misc Challenges Writeup</title>
-        <link rel="alternate" href="http://example.com/2023/08/06/Writeups/quals23/"/>
+        <link rel="alternate" href="http://example.com/2023/08/06/Writeups/quals2023/"/>
         <content type="html">&lt;h2 id=&#34;the-ctf&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-ctf&#34;&gt;#&lt;/a&gt; The CTF&lt;/h2&gt;
 &lt;p&gt;Securinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.&lt;/p&gt;
 &lt;p&gt;We present four challenging tasks, two forensics involving Containerization and Kubernetes, Hiberfil.sys, Restore Point, and Crypto-currency Wallet, and two Misc involving Steganography and Reverse Engineering a set-top-box firmware and analyzing its memory dump.&lt;/p&gt;
